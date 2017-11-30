@@ -1,0 +1,55 @@
+spring.devtools.restart.enabled: true
+spring.devtools.restart.additional-paths: ${spring.application.name}/src/main/java
+spring.devtools.restart.exclude: WEB-INF/**
+
+logging.level.root: INFO
+logging.level.org.springframework.web: WARN
+logging.level.com.eason: ERROR
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.115:8761/eureka/
+server:
+  port: 8762
+  tomcat:
+        uri-encoding: UTF-8
+zb:
+  file:
+      img:
+#        local:  /root/eason/tools/apache-tomcat-9.0.1/webapps/img/
+        local:  D:/img/
+        remote: http://192.168.0.109:8080/img/
+
+spring:
+  application:
+    name: service-api-zb-impl
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    multipart:
+      max-file-size: 20Mb
+      max-request-size: 20Mb
+
+platfrom:
+  media:
+    host: 192.168.0.127
+    regAccountMap:
+      url: http://${platfrom.media.host}/BetSvr/ssvr/RegAccount
+      username: test
+      password: test
+    rtmpUrl: http://${platfrom.media.host}/BetSvr/ssvr/GetRtmpUrl
+    recRecords: http://${platfrom.media.host}/BetSvr/ssvr/GetRecRecords
+    deleteRecFile: http://${platfrom.media.host}/BetSvr/ssvr/rec/delete
+
+  im:
+    host: 192.168.0.137:8080
+    regAccountMap:
+      url: http://${platfrom.im.host}/MsgServer/apis/auth.php
+      username: 1
+      password: 2
+    imUrl: http://${platfrom.im.host}/MsgServer/apis/address.php
+

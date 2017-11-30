@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="apiclient" />
+        <module name="apiserver" />
+        <module name="config-client" />
+        <module name="config-server" />
+        <module name="eureka-server" />
+        <module name="parent" />
+        <module name="service-api-common" />
+        <module name="service-api-zb" />
+        <module name="service-api-zb-impl" />
+        <module name="service-common" />
+        <module name="service-feign" />
+        <module name="service-ribbon" />
+        <module name="service-zb-api-impl" />
+        <module name="service-zuul" />
+        <module name="zb-api-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiclient" target="1.8" />
+      <module name="apiserver" target="1.8" />
+      <module name="config-client" target="1.8" />
+      <module name="config-server" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="parent" target="1.5" />
+      <module name="service-api-common" target="1.5" />
+      <module name="service-api-zb" target="1.8" />
+      <module name="service-api-zb-impl" target="1.8" />
+      <module name="service-common" target="1.8" />
+      <module name="service-feign" target="1.8" />
+      <module name="service-ribbon" target="1.8" />
+      <module name="service-zb-api-impl" target="1.8" />
+      <module name="service-zuul" target="1.8" />
+      <module name="zb-api-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
