@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface RoomPlanDao extends MongoRepository<ZbTRoomPlan, BigInteger>, PagingAndSortingRepository<ZbTRoomPlan, BigInteger> {
 
-    @Query("{'zbId':{$in:?#{[0]}}}")
-    Page<ZbTRoomPlan> findByZbIds(List<Integer> zbIds, Pageable pageable);
+    @Query("{'userId':{$in:?#{[0]}}}")
+    Page<ZbTRoomPlan> findByUserIds(List<Integer> userIds, Pageable pageable);
     @Query("{'roomType': {$in:?#{[0]}}}")
     Page<ZbTRoomPlan> findByChargedRoom(List<String> roomTypes, Pageable pageable);
     @Query("{'roomType': ?#{[0]}}")

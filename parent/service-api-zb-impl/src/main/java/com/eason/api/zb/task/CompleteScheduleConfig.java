@@ -29,7 +29,7 @@
 //                    //1.添加任务内容(Runnable)
 //                    () -> System.out.println(cron.getCron()+"执行定时任务: " + LocalDateTime.now().toLocalTime()),
 //                    //2.设置执行周期(Trigger)
-//                    triggerContext -> {
+//                    (triggerContext) -> {
 //                        //2.3 返回执行周期(Date)
 //                        return new CronTrigger(cron.getCron()).nextExecutionTime(triggerContext);
 //                    }

@@ -767,4 +767,23 @@ public class ZhuboServiceImpl implements IZhuboService {
         roomStatResponseVo.setRoomTitle(zbTRoom.getRoomTitle());
         return roomStatResponseVo;
     }
+
+    @RequestMapping(value = "/apply", method = RequestMethod.GET)
+    @Override
+    public String apply(Integer userId) throws ServiceException {
+        try {
+            ZbTZhubo zbTZhubo=this.zhuboDao.findByUserId(userId);
+            if (zbTZhubo!=null){
+                throw new ServiceException("用户id(userId="+userId+"已经申请过主播了");
+            }
+            zbTZhubo=new ZbTZhubo();
+            zbTZhubo.setUserId(userId);
+            zbTZhubo.setVipLevel(0);
+            zbTZhubo.setZbStatus(ZbConstant.ZB.status.enable);
+            this.zhuboDao.save(zbTZhubo);
+            return "申请主播成功";
+        } catch (ServiceException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
 }

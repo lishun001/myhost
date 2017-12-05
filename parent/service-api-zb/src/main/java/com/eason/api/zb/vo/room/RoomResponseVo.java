@@ -28,6 +28,7 @@ public class RoomResponseVo implements Serializable {
     private Integer isAttention;    //用户是否关注
     private Integer userLevel;    // 用户等级息
     private Double diamondBalance;    //  用户钻石余额
+    private Integer isCharge;           //是否收费
 //    private List<UserResponseVo> diamondRankList;
 //    private List<UserLevelRankResponseVo> userLevelRankList;
 
@@ -208,5 +209,13 @@ public class RoomResponseVo implements Serializable {
 
     public void setIm(IMResponseVo im) {
         this.im = im;
+    }
+
+    public Integer getIsCharge() {
+        return isCharge;
+    }
+
+    public void setIsCharge(Integer isCharge) {
+        this.isCharge = isCharge;
     }
 }

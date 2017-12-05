@@ -20,6 +20,21 @@ public interface IZhuboService {
 	 * @apiVersion 1.0.0
 	 * @apiGroup zhubo
 	 * @apiPermission Android/IOS
+	 * @api {GET} /zhubo/apply 主播申请
+	 * @apiName apply
+	 *
+	 * @apiDescription
+	 * > 点击用户中心，进行主播申请</br>
+	 * > 使用条件，请先登陆</br>
+	 * @apiSuccess {String} result 申请成功或者失败
+	 *
+	 */
+	public String apply(Integer userId) throws ServiceException;
+
+	/**
+	 * @apiVersion 1.0.0
+	 * @apiGroup zhubo
+	 * @apiPermission Android/IOS
 	 * @api {GET} /zhubo/getZhuboList/{num}  主播列表
 	 * @apiName getZhuboList
 	 *

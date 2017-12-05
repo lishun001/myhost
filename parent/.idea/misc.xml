@@ -4,17 +4,15 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/apiserver/pom.xml" />
-        <option value="$PROJECT_DIR$/apiclient/pom.xml" />
         <option value="$PROJECT_DIR$/service-ribbon/pom.xml" />
         <option value="$PROJECT_DIR$/service-feign/pom.xml" />
         <option value="$PROJECT_DIR$/service-zuul/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/config-client/pom.xml" />
-        <option value="$PROJECT_DIR$/zb-api-service/pom.xml" />
-        <option value="$PROJECT_DIR$/service-common/pom.xml" />
         <option value="$PROJECT_DIR$/service-api-common/pom.xml" />
         <option value="$PROJECT_DIR$/service-api-zb/pom.xml" />
+        <option value="$PROJECT_DIR$/service-api-zb-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/service-scheduler/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

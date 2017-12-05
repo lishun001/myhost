@@ -27,7 +27,7 @@ public class ZbTRoomPlanStat implements Serializable {
 	private Integer roomId;
 
 	@Column(name="activity_time")
-	private Integer activityTime;
+	private Long activityTime;
 
 	private Integer bombScreen_count;
 
@@ -85,11 +85,11 @@ public class ZbTRoomPlanStat implements Serializable {
 		this.roomId = roomId;
 	}
 
-	public Integer getActivityTime() {
+	public Long getActivityTime() {
 		return this.activityTime;
 	}
 
-	public void setActivityTime(Integer activityTime) {
+	public void setActivityTime(Long activityTime) {
 		this.activityTime = activityTime;
 	}
 

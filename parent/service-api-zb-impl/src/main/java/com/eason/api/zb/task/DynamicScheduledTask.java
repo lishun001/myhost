@@ -27,7 +27,7 @@
 //
 //                }
 //                // 定时任务的业务逻辑
-//                System.out.println("动态修改定时任务cron参数，当前时间：" + dateFormat.format(new Date()));
+//                System.out.println(cron+"动态修改定时任务cron参数，当前时间：" + dateFormat.format(new Date()));
 //            }
 //        }, new Trigger() {
 //            @Override

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
@@ -59,7 +60,7 @@ public class IndexControler  {
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo=new ResponseVo(500,e.getMessage());
-            responseVo.setData(new HashMap<>());
+            responseVo.setData(new ArrayList<>());
             return responseVo;
         }
     }
@@ -72,7 +73,7 @@ public class IndexControler  {
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo=new ResponseVo(500,e.getMessage());
-            responseVo.setData(new HashMap<>());
+            responseVo.setData(new ArrayList<>());
             return responseVo;
         }
     }

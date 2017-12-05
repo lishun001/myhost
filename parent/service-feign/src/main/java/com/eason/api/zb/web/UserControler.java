@@ -48,7 +48,7 @@ public class UserControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isTrySee(userId, roomId, isTrySee));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -77,7 +77,7 @@ public class UserControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isAttention(userId, channel, userIds, isAttention));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -90,7 +90,7 @@ public class UserControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.getDetail(userId));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -118,6 +118,35 @@ public class UserControler {
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isBook(userId, zbId, isBook));
+            return responseVo;
+        } catch (Exception e) {
+            ResponseVo responseVo = new ResponseVo(500, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        }
+    }
+
+    @RequestMapping(value = "/{channel}/isBlack/{userIds}/{isBlack}", method = RequestMethod.GET)
+    public ResponseVo isBlack(HttpServletRequest request, @PathVariable Integer channel, @PathVariable String userIds, @PathVariable Boolean isBlack) {
+        try {
+            Integer userId=null;
+            String api_token=request.getHeader("api_token");
+            if (StringUtils.isEmpty(api_token)){
+                api_token = request.getParameter("token");
+            }
+            if (StringUtils.isNotEmpty(api_token)){
+                BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
+                String id = ops.get(api_token);
+                if (id == null) {
+                    throw new ServiceException("token="+api_token+" is error");
+                }else{
+                    userId=Integer.parseInt(id);
+                }
+            }else{
+                throw new ServiceException("token is empty");
+            }
+            ResponseVo responseVo = new ResponseVo(0, "操作成功");
+            responseVo.setData(userServiceImpl.isBlack(userId, channel,userIds, isBlack));
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());

@@ -5,26 +5,21 @@ import com.eason.api.zb.cache.ZbTRoomPlan;
 import com.eason.api.zb.dao.RoomCronDao;
 import com.eason.api.zb.dao.RoomPlanDao;
 import com.eason.api.zb.model.ZbConstant;
-import org.apache.commons.httpclient.util.DateUtil;
-import org.apache.commons.lang.time.DateUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.config.RandomValuePropertySource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -126,19 +121,15 @@ public class RedisTests {
     @Test
     public void testGetRoomPlan() throws  Exception{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date startTime = formatter.parse("2017-11-24 14:46:26");
-        Date overTime = formatter.parse("2017-11-24 18:46:26");
+        Date startTime = formatter.parse("2017-12-2 11:40:26");
+        Date overTime = formatter.parse("2017-12-2 12:39:26");
         Date now=new Date();
-        int result1 = now.compareTo(startTime);// 比开始时间小，未开始
-        System.out.println(result1);
-        int result2 = now.compareTo(overTime);// 比结束时间大，已结束
-        System.out.println(result2);
-        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss");
-
-        System.out.println(overTime.getTime()-overTime.getTime());
-        System.out.println(formatTime(overTime.getTime()-now.getTime()));
-        System.out.println(formatTime(now.getTime()-startTime.getTime()));
-        System.out.println(formatTime(5549257L));
+        int flag=0;
+        if (now.compareTo(startTime)>=0 && now.compareTo(overTime)<=0){
+            flag=1;  //1=收费
+        }
+        System.out.println(flag);
+        System.out.println(now.compareTo(startTime)+":"+now.compareTo(overTime));
     }
 
     /*

@@ -9,10 +9,7 @@ import com.eason.api.zb.dao.*;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.model.FileItemModel;
 import com.eason.api.zb.model.ZbConstant;
-import com.eason.api.zb.po.ZbTRoom;
-import com.eason.api.zb.po.ZbTRoomPlanStat;
-import com.eason.api.zb.po.ZbTUserAttention;
-import com.eason.api.zb.po.ZbTZhubo;
+import com.eason.api.zb.po.*;
 import com.eason.api.zb.vo.platform.IMResponseVo;
 import com.eason.api.zb.vo.platform.MediaResponseVo;
 import com.eason.api.zb.vo.room.IsChargedResponseVo;
@@ -33,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +54,8 @@ public class RoomServiceImpl implements IRoomService {
     private UserPersonalDao userPersonalDao;
     @Autowired
     private UserAttentionDao userAttentionDao;
+    @Autowired
+    private RoomAttributeDao roomAttributeDao;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Value("${zb.file.img.local}")
@@ -174,6 +174,19 @@ public class RoomServiceImpl implements IRoomService {
             IMResponseVo imResponseVo = zbTRoomConf.getImInfo();
             responseVo.setMedia(mediaResponseVo);
             responseVo.setIm(imResponseVo);
+
+            responseVo.setIsCharge(0);  //0=不收费
+            //新增收费房间是否收费字段
+            Map<String,Object> map=zbTRoomPlan.getRoomSet();
+            if (map!=null && !map.isEmpty()){
+                Date startTime=(Date) map.get("startTime");
+                Date overTime=(Date) map.get("overTime");
+                Date now=new Date();
+                if (now.compareTo(startTime)>=0 && now.compareTo(overTime)<=0){
+                    responseVo.setIsCharge(1);  //1=收费
+                }
+            }
+
             return responseVo;
         } catch (Exception e) {
             throw new ServiceException(e);
@@ -208,6 +221,7 @@ public class RoomServiceImpl implements IRoomService {
             //（2）获取缓存该房间场次的信息，收益做账统计，存储到DB
             ZbTRoomPlanStat zbTRoomPlanStat = new ZbTRoomPlanStat();
             zbTRoomPlanStat.setPlanId(zbTRoomPlan.getPlanId());
+            zbTRoomPlanStat.setRoomId(zbTRoomPlan.getRoomId());
             zbTRoomPlanStat.setZbId(zbTRoomPlan.getZbId());
             zbTRoomPlanStat.setRoomTitle(zbTRoomPlan.getRoomTitle());
             zbTRoomPlanStat.setRoomType(zbTRoomPlan.getRoomType());
@@ -219,7 +233,8 @@ public class RoomServiceImpl implements IRoomService {
             //TODO 与LEO讨论没有异常状态2017-11-23
             zbTRoomPlanStat.setIsVideo(ZbConstant.Room.video.disable);
             zbTRoomPlanStat.setRecordStatus(ZbConstant.Room.close.normal);
-            zbTRoomPlanStat.setActivityTime(zbTRoomPlan.getActivityTimeCount());
+            long time=new Date().getTime()-zbTRoomPlan.getOpenTime().getTime();
+            zbTRoomPlanStat.setActivityTime(time);
             zbTRoomPlanStat.setIncomeAmount(zbTRoomPlan.getIncomeAmount());
             zbTRoomPlanStat.setViewCount(zbTRoomPlan.getViewCount());
             zbTRoomPlanStat.setGiftCount(zbTRoomPlan.getGiftCount());
@@ -240,7 +255,7 @@ public class RoomServiceImpl implements IRoomService {
             //（5）返回统计信息
             roomStatResponseVo.setPlanId(zbTRoomPlanStat.getPlanId());
             roomStatResponseVo.setStatId(zbTRoomPlanStat.getRecordId());
-            roomStatResponseVo.setActivityTime(zbTRoomPlan.getActivityTimeCount());
+            roomStatResponseVo.setActivityTime(zbTRoomPlanStat.getActivityTime());
             roomStatResponseVo.setBombScreenCount(zbTRoomPlan.getBombScreen_count());
             roomStatResponseVo.setGiftCount(zbTRoomPlan.getGiftCount());
             roomStatResponseVo.setIncomeAmount(zbTRoomPlan.getIncomeAmount());
@@ -253,6 +268,13 @@ public class RoomServiceImpl implements IRoomService {
         }
     }
 
+    /**
+     * 2017/12/2 讨论，新增收费房间是否收费字段
+     * @param userId
+     * @param roomId
+     * @return
+     * @throws ServiceException
+     */
     @RequestMapping(value = "/{roomId}/isCharged", method = RequestMethod.GET)
     @Override
     public IsChargedResponseVo isCharged(Integer userId, @PathVariable(value = "roomId") Integer roomId) throws ServiceException {
@@ -304,6 +326,17 @@ public class RoomServiceImpl implements IRoomService {
                 }
                 responseVo.setIsTrySee(null);
                 responseVo.setAllowTime(null);
+            }
+            responseVo.setIsCharge(0);  //0=不收费
+            //新增收费房间是否收费字段
+            Map<String,Object> map=zbTRoomPlan.getRoomSet();
+            if (map!=null && !map.isEmpty()){
+                Date startTime=(Date) map.get("startTime");
+                Date overTime=(Date) map.get("overTime");
+                Date now=new Date();
+                if (now.compareTo(startTime)>=0 && now.compareTo(overTime)<=0){
+                    responseVo.setIsCharge(1);  //1=收费
+                }
             }
             return responseVo;
         } catch (IOException e) {
@@ -380,12 +413,23 @@ public class RoomServiceImpl implements IRoomService {
         }
     }
 
+    /**
+     * （1）优先先从ROOM表里面拿
+     * （2）没有从房间属性表里面拿
+     * @param userId
+     * @return
+     * @throws ServiceException
+     */
     @RequestMapping(value = "/getRoomWaterMarkImg", method = RequestMethod.GET)
     @Override
     public String getRoomWaterMarkImg(Integer userId) throws ServiceException {
         try {
             ZbTRoom zbTRoom=this.roomDao.findByZbUserId(userId);
-            return zbTRoom.getRoomWatermark();
+            if(StringUtils.isNotEmpty(zbTRoom.getRoomWatermark()) && !"".equals(zbTRoom.getRoomWatermark())){
+                return zbTRoom.getRoomWatermark();
+            }
+            ZbTRoomAttribute zbTRoomAttribute=this.roomAttributeDao.findByAttributeKey("room_watermark");
+            return zbTRoomAttribute.getAttributeValue();
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }

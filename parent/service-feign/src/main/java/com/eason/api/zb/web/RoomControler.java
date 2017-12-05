@@ -45,7 +45,7 @@ public class RoomControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.isCharged(userId, roomId));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -58,7 +58,7 @@ public class RoomControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.getRoomSet(roomType));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -121,7 +121,7 @@ public class RoomControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.enterRoom(userId, roomId));
             return responseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;

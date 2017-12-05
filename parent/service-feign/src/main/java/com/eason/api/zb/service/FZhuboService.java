@@ -44,4 +44,7 @@ public interface FZhuboService extends IZhuboService {
 
     @RequestMapping(value = "/zhubo/getStat/{planId}", method = RequestMethod.GET)
     RoomStatResponseVo getStat(@RequestParam(value = "userId") Integer userId, @PathVariable(value = "planId") Integer planId) throws ServiceException;
+
+    @RequestMapping(value = "/zhubo/apply", method = RequestMethod.GET)
+    String apply(@RequestParam(value = "userId") Integer userId) throws ServiceException;
 }

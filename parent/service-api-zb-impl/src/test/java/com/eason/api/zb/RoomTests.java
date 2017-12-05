@@ -3,16 +3,21 @@ package com.eason.api.zb;
 import com.eason.api.zb.cache.ZbTUserPersonal;
 import com.eason.api.zb.cache.ZbTUserTicket;
 import com.eason.api.zb.dao.RoomDao;
+import com.eason.api.zb.dao.RoomRecrecordDao;
 import com.eason.api.zb.dao.UserPersonalDao;
 import com.eason.api.zb.dao.UserTicketDao;
 import com.eason.api.zb.model.SequenceId;
 import com.eason.api.zb.model.ZbConstant;
+import com.eason.api.zb.po.ZbTRecrecordsLog;
 import com.eason.api.zb.po.ZbTRoom;
 import com.eason.api.zb.service.impl.ZhuboServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.FileCopyUtils;
@@ -21,7 +26,9 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,6 +39,8 @@ public class RoomTests {
 	private UserTicketDao userTicketDao;
 	@Autowired
 	private UserPersonalDao userPersonalDao;
+	@Autowired
+	private RoomRecrecordDao roomRecrecordDao;
 	@Autowired
 	private ZhuboServiceImpl zhuboServiceImpl;
 	@Resource
@@ -47,13 +56,17 @@ public class RoomTests {
 		room.setIsVideo(ZbConstant.Room.video.enable);
 		room.setOrderField(1);
 		room.setCreate_Time(new Timestamp(System.currentTimeMillis()));
-		roomDao.save(room);
+//		roomDao.save(room);
 	}
 
 	@Test
 	public void findRoom() {
-		ZbTUserTicket ticket=userTicketDao.findByPlanIdAndUserId(1,1);
-		System.out.println(ticket);
+//		PageRequest pageable = new PageRequest(0, 10);
+		List<Integer> list=new ArrayList<>();
+		list.add(6470);
+		list.add(6473);
+		List<ZbTRecrecordsLog> page= roomRecrecordDao.findAllByZbIds(list);
+		System.out.println(page);
 	}
 
 	@Test

@@ -57,6 +57,20 @@ public interface IUserService {
      * @apiVersion 1.0.0
      * @apiGroup user
      * @apiPermission Android/IOS
+     * @api {GET} /user/{channel}/isBlack/{userIds}/{isBlack} 拉黑/取消拉黑
+     * @apiName isBlack
+     * @apiDescription > 用户拉黑主播，或者用户拉黑用户，拉黑与未拉黑来回切换</br>
+     * > isBlack=true,false </br>
+     * >channel= (1=房间、2=个人中心、3=私信、4=收藏推荐)</br>
+     * >支持一键关注格式：userIds=1,2,3 用英文逗号,隔开
+     * @apiSuccess {String} result	四种情况：拉黑成功，已经拉黑，取消成功，并未拉黑
+     */
+    public String isBlack(Integer userId, Integer channel,String userIds, Boolean isBlack) throws ServiceException;
+
+    /**
+     * @apiVersion 1.0.0
+     * @apiGroup user
+     * @apiPermission Android/IOS
      * @api {GET} /user/getDetail 用户详情
      * @apiName getDetail
      * @apiDescription > 用户详情</br>

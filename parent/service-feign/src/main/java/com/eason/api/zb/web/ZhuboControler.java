@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
@@ -25,6 +26,35 @@ public class ZhuboControler {
     private FZhuboService zhuboServiceImpl;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @RequestMapping(value = "/apply", method = RequestMethod.GET)
+    public ResponseVo apply(HttpServletRequest request) {
+        try {
+            Integer userId=null;
+            String api_token=request.getHeader("api_token");
+            if (StringUtils.isEmpty(api_token)){
+                api_token = request.getParameter("token");
+            }
+            if (StringUtils.isNotEmpty(api_token)){
+                BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
+                String id = ops.get(api_token);
+                if (id == null) {
+                    throw new ServiceException("token="+api_token+" is error");
+                }else{
+                    userId=Integer.parseInt(id);
+                }
+            }else{
+                throw new ServiceException("token is empty");
+            }
+            ResponseVo responseVo = new ResponseVo(0, "操作成功");
+            responseVo.setData(zhuboServiceImpl.apply(userId));
+            return responseVo;
+        } catch (Exception e) {
+            ResponseVo responseVo = new ResponseVo(500, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        }
+    }
 
     @RequestMapping(value = "/getZhuboList/{num}", method = RequestMethod.GET)
     public ResponseVo getZhuboList(HttpServletRequest request,@PathVariable Integer num) {
@@ -46,7 +76,7 @@ public class ZhuboControler {
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
-            responseVo.setData(new HashMap<>());
+            responseVo.setData(new ArrayList<>());
             return responseVo;
         }
     }
@@ -60,7 +90,7 @@ public class ZhuboControler {
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
-            responseVo.setData(new HashMap<>());
+            responseVo.setData(new ArrayList<>());
             return responseVo;
         }
     }
@@ -73,7 +103,7 @@ public class ZhuboControler {
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
-            responseVo.setData(new HashMap<>());
+            responseVo.setData(new ArrayList<>());
             return responseVo;
         }
     }
@@ -217,7 +247,6 @@ public class ZhuboControler {
             }else{
                 throw new ServiceException("token is empty");
             }
-            log.info(request.getRequestURI()+"—>userId="+userId+",token="+api_token);
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getReadyPlayInfo(userId,api_token));
             return responseVo;
@@ -247,7 +276,6 @@ public class ZhuboControler {
             } else {
                 throw new ServiceException("token is empty");
             }
-            log.info(request.getRequestURI() + "—>userId=" + userId + ",token=" + api_token);
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getStat(userId, planId));
             return responseVo;

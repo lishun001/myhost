@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class RoomStatResponseVo implements Serializable {
     private Integer statId;
     private Integer planId;
-    private Integer activityTime;
+    private Long activityTime;
     private Integer incomeAmount;
     private Integer attentionCount;
     private Integer viewCount;
@@ -30,11 +30,11 @@ public class RoomStatResponseVo implements Serializable {
         this.statId = statId;
     }
 
-    public Integer getActivityTime() {
+    public Long getActivityTime() {
         return activityTime;
     }
 
-    public void setActivityTime(Integer activityTime) {
+    public void setActivityTime(Long activityTime) {
         this.activityTime = activityTime;
     }
 

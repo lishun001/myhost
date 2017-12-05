@@ -59,4 +59,9 @@ public class FZhuboServiceImpl implements FZhuboService {
     public RoomStatResponseVo getStat(Integer userId, Integer planId) throws ServiceException {
         return null;
     }
+
+    @Override
+    public String apply(Integer userId) throws ServiceException {
+        return null;
+    }
 }

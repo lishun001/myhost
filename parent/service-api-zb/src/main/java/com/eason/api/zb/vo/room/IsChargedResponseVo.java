@@ -9,6 +9,7 @@ public class IsChargedResponseVo implements Serializable {
     private String roomType;   //房间类型
     private Integer userId;
     private Integer isTrySee;
+    private Integer isCharge;
     private Integer allowTime;
     private Integer ticketStatus;
     private Integer selectPrice;
@@ -95,5 +96,13 @@ public class IsChargedResponseVo implements Serializable {
 
     public void setPersonalStatus(Integer personalStatus) {
         this.personalStatus = personalStatus;
+    }
+
+    public Integer getIsCharge() {
+        return isCharge;
+    }
+
+    public void setIsCharge(Integer isCharge) {
+        this.isCharge = isCharge;
     }
 }

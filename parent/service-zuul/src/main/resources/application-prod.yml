@@ -25,6 +25,9 @@ zuul:
     api:
       path: /api/**
       serviceId: service-feign
+    task:
+      path: /task/**
+      serviceId: service-scheduler
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 ribbon:

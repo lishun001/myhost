@@ -12,6 +12,7 @@
         <module>service-api-zb</module>
         <module>service-api-common</module>
         <module>service-api-zb-impl</module>
+        <module>service-scheduler</module>
         <module>service-feign</module>
         <module>service-ribbon</module>
         <module>service-zuul</module>
@@ -19,5 +20,4 @@
         <module>config-client</module>
         <module>eureka-server</module>
     </modules>
-
 </project>

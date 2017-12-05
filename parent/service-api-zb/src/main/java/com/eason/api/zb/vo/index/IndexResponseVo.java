@@ -18,6 +18,8 @@ public class IndexResponseVo implements Serializable {
     private String roomBackgroundImg;     // 房间背景图片
     private Integer roomStatus;     // 直播状态： 1=直播中，2=未开播，3=回放中
     private Timestamp startTime;     //房间开播时间
+    private String playUrl;                 //回放地址
+    private Integer isCharge;           //是否收费
 
     public IndexResponseVo() {
     }
@@ -35,20 +37,12 @@ public class IndexResponseVo implements Serializable {
         this.startTime = startTime;
     }
 
-    public String getZbHeadImg() {
-        return zbHeadImg;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setZbHeadImg(String zbHeadImg) {
-        this.zbHeadImg = zbHeadImg;
-    }
-
-    public Integer getZbLevel() {
-        return zbLevel;
-    }
-
-    public void setZbLevel(Integer zbLevel) {
-        this.zbLevel = zbLevel;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public Integer getRoomPlanId() {
@@ -57,22 +51,6 @@ public class IndexResponseVo implements Serializable {
 
     public void setRoomPlanId(Integer roomPlanId) {
         this.roomPlanId = roomPlanId;
-    }
-
-    public Integer getOnlineUser() {
-        return onlineUser;
-    }
-
-    public void setOnlineUser(Integer onlineUser) {
-        this.onlineUser = onlineUser;
-    }
-
-    public Integer getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
     }
 
     public Integer getZbId() {
@@ -91,6 +69,22 @@ public class IndexResponseVo implements Serializable {
         this.zbNickName = zbNickName;
     }
 
+    public String getZbHeadImg() {
+        return zbHeadImg;
+    }
+
+    public void setZbHeadImg(String zbHeadImg) {
+        this.zbHeadImg = zbHeadImg;
+    }
+
+    public Integer getZbLevel() {
+        return zbLevel;
+    }
+
+    public void setZbLevel(Integer zbLevel) {
+        this.zbLevel = zbLevel;
+    }
+
     public String getRoomTitle() {
         return roomTitle;
     }
@@ -105,6 +99,14 @@ public class IndexResponseVo implements Serializable {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public Integer getOnlineUser() {
+        return onlineUser;
+    }
+
+    public void setOnlineUser(Integer onlineUser) {
+        this.onlineUser = onlineUser;
     }
 
     public Integer getMachineUser() {
@@ -127,7 +129,7 @@ public class IndexResponseVo implements Serializable {
         return roomStatus;
     }
 
-    public void setRoomStatus(Integer zbStatus) {
+    public void setRoomStatus(Integer roomStatus) {
         this.roomStatus = roomStatus;
     }
 
@@ -139,4 +141,19 @@ public class IndexResponseVo implements Serializable {
         this.startTime = startTime;
     }
 
+    public String getPlayUrl() {
+        return playUrl;
+    }
+
+    public void setPlayUrl(String playUrl) {
+        this.playUrl = playUrl;
+    }
+
+    public Integer getIsCharge() {
+        return isCharge;
+    }
+
+    public void setIsCharge(Integer isCharge) {
+        this.isCharge = isCharge;
+    }
 }

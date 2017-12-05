@@ -16,7 +16,7 @@ public interface ZbConstant  {
         }
 
          interface Room{
-              //0=创建，1=直播中，2=未开播，3=回放中
+              //0=创建，1=直播中，2=未开播，3=回放中;
              interface status{
                   int room_new=0;
                  int room_ing=1;

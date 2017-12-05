@@ -32,6 +32,11 @@ public class FUserServiceImpl implements FUserService {
     }
 
     @Override
+    public String isBlack(Integer userId, Integer channel, String userIds, Boolean isBlack) throws ServiceException {
+        return null;
+    }
+
+    @Override
     public UserResponseVo getDetail(Integer userId) throws ServiceException {
         return null;
     }

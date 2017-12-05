@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/service-api-zb-impl/service-api-zb-impl.iml" filepath="$PROJECT_DIR$/service-api-zb-impl/service-api-zb-impl.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-feign/service-feign.iml" filepath="$PROJECT_DIR$/service-feign/service-feign.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-ribbon/service-ribbon.iml" filepath="$PROJECT_DIR$/service-ribbon/service-ribbon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-scheduler/service-scheduler.iml" filepath="$PROJECT_DIR$/service-scheduler/service-scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-zuul/service-zuul.iml" filepath="$PROJECT_DIR$/service-zuul/service-zuul.iml" />
     </modules>
   </component>

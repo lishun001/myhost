@@ -3,12 +3,10 @@ package com.eason.api.zb.service.impl;
 import com.eason.api.zb.IUserService;
 import com.eason.api.zb.cache.ZbTRoomPlan;
 import com.eason.api.zb.cache.ZbTUserPersonal;
-import com.eason.api.zb.dao.RoomPlanDao;
-import com.eason.api.zb.dao.UserAttentionDao;
-import com.eason.api.zb.dao.UserPersonalDao;
-import com.eason.api.zb.dao.ZhuboDao;
+import com.eason.api.zb.dao.*;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.po.ZbTUserAttention;
+import com.eason.api.zb.po.ZbTUserBlacklist;
 import com.eason.api.zb.po.ZbTZhubo;
 import com.eason.api.zb.vo.user.TrySeeResponseVo;
 import com.eason.api.zb.vo.user.UserResponseVo;
@@ -40,6 +38,8 @@ public class UserServiceImpl implements IUserService {
     private RoomPlanDao roomPlanDao;
     @Autowired
     private UserPersonalDao userPersonalDao;
+    @Autowired
+    private UserBlackDao userBlackDao;
     @Autowired
     private RedisTemplate stringRedisTemplate;
     @Autowired
@@ -202,16 +202,22 @@ public class UserServiceImpl implements IUserService {
                         userAttentionDao.saveAndFlush(zbTUserAttention2);
 
                         //（5）以user_attention_{userId} 为key=list，存储到redis缓存
-                        String key = "user_attention_" + userId;
-                        stringRedisTemplate10.opsForSet().add(key, String.valueOf(ud));
+//                        String key = "user_attention_" + userId;
+//                        stringRedisTemplate10.opsForSet().add(key, String.valueOf(ud));
+                        //（5.2）与morgan沟通，以被关注的人为key存储
+                        String key = "user_attention_" + ud;
+                        stringRedisTemplate10.opsForSet().add(key, String.valueOf(userId));
                     }
                 });
                 return "用户userIds=" + userIds + "关注成功";
             } else {
                 userIdList.forEach(ud -> {
                     userAttentionDao.deleteByAIdAndFId(userId, ud);
-                    String key = "user_attention_" + userId;
-                    stringRedisTemplate10.opsForSet().remove(key, String.valueOf(ud));
+//                    String key = "user_attention_" + userId;
+//                    stringRedisTemplate10.opsForSet().remove(key, String.valueOf(ud));
+                    //（5.2）与morgan沟通，以被关注的人为key存储
+                    String key = "user_attention_" + ud;
+                    stringRedisTemplate10.opsForSet().remove(key, String.valueOf(userId));
                 });
                 return "用户userIds=" + userIds + "取消成功";
             }
@@ -267,7 +273,66 @@ public class UserServiceImpl implements IUserService {
                 return "userId=" + userId + "预约zbId=" + zbId + "并未预约";
             }
         }
+    }
 
+    /**
+     * 用户API - 拉黑/取消拉黑
+     * （1）主播参数验证
+     * （2）isBlack=true，拉黑，插入缓存记录
+     * （3）isBlack=false，取消拉黑，删除缓存记录
+     *
+     * @param userId
+     * @param userIds
+     * @param isBlack
+     * @return
+     */
+    @RequestMapping(value = "/{channel}/isBlack/{userIds}/{isBlack}", method = RequestMethod.GET)
+    @Override
+    public String isBlack(Integer userId,@PathVariable(value = "channel") Integer channel, @PathVariable(value = "userIds") String userIds, @PathVariable(value = "isBlack") Boolean isBlack) throws ServiceException {
+        try {
+            if (channel != 1 && channel != 2 && channel != 3 && channel != 4) {
+                throw new ServiceException("channel渠道号错误（1=房间、2=个人中心、3=私信、4=收藏推荐）");
+            }
+            String[] idArrays = userIds.split(",");
+            List<Integer> userIdList = new ArrayList<>();
+            for (String id : idArrays) {
+                Integer ud = null;
+                try {
+                    ud = Integer.parseInt(id);
+                    int count = this.userAttentionDao.findUserById(ud);
+                    if (count == 0) {
+                        throw new ServiceException("用户id(userId=" + ud + ")不存在");
+                    } else {
+                        userIdList.add(ud);
+                    }
+                } catch (Exception e) {
+                    throw new ServiceException("用户id(userId=" + id + ")不存在");
+                }
+            }
+
+            if (isBlack) {
+                userIdList.forEach(ud -> {
+                    ZbTUserBlacklist zbTUserBlacklist= this.userBlackDao.findByUserIdAndBlacklistUserId(userId,ud);
+                    if (zbTUserBlacklist == null) {
+                        zbTUserBlacklist = new ZbTUserBlacklist();
+                        zbTUserBlacklist.setUserId(userId);
+                        zbTUserBlacklist.setBlacklistUserId(ud);
+                        zbTUserBlacklist.setBlackTime(new Timestamp(System.currentTimeMillis()));
+                        zbTUserBlacklist.setChannel(channel);
+                        this.userBlackDao.saveAndFlush(zbTUserBlacklist);
+                    }
+                });
+                return "用户userIds=" + userIds + "拉黑成功";
+            } else {
+                userIdList.forEach(ud -> {
+                    userBlackDao.deleteByUserIdAndBlacklistUserId(userId,ud);
+                });
+                return "用户userIds=" + userIds + "取消拉黑成功";
+            }
+
+        } catch (ServiceException e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/user/getDetail", method = RequestMethod.GET)

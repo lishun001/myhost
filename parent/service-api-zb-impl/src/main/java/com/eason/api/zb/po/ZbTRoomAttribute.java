@@ -34,9 +34,6 @@ public class ZbTRoomAttribute implements Serializable {
 
 	private String remark;
 
-	@Column(name="room_type")
-	private String roomType;
-
 	@Column(name="update_time")
 	private Timestamp updateTime;
 
@@ -92,14 +89,6 @@ public class ZbTRoomAttribute implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public String getRoomType() {
-		return this.roomType;
-	}
-
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
 	}
 
 	public Timestamp getUpdateTime() {
