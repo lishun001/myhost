@@ -27,8 +27,6 @@ public class RedisTests {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
-    RedisConnectionFactory r;
-    @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
     private RoomPlanDao roomPlanDao;
@@ -121,7 +119,7 @@ public class RedisTests {
     @Test
     public void testGetRoomPlan() throws  Exception{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date startTime = formatter.parse("2017-12-2 11:40:26");
+        Date startTime = formatter.parse("2017-12-12 11:40:26");
         Date overTime = formatter.parse("2017-12-2 12:39:26");
         Date now=new Date();
         int flag=0;
@@ -129,7 +127,7 @@ public class RedisTests {
             flag=1;  //1=收费
         }
         System.out.println(flag);
-        System.out.println(now.compareTo(startTime)+":"+now.compareTo(overTime));
+        System.out.println(now.compareTo(startTime));
     }
 
     /*

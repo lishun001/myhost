@@ -22,3 +22,5 @@ zb:
   port: 8769
   api:
     resetTrySee: http://${zb.host}:${zb.port}/api/task/resetTrySee?token=eason
+
+quartz.config:  quartz-dev.properties

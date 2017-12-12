@@ -52,7 +52,6 @@ public class GiftControler {
     public ResponseVo sendGift(Integer userId, @PathVariable Integer zbId, @RequestBody SendGiftRequestVo sendGiftRequestVo) {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
-            System.out.println("-----SendGiftResponseVo-----userId=" + userId + "---zbId" + zbId);
             responseVo.setData(giftServiceImpl.sendGift(userId, zbId, sendGiftRequestVo));
             return responseVo;
         } catch (Exception e) {
@@ -66,7 +65,6 @@ public class GiftControler {
     public ResponseVo sendBombScreen(Integer userId, @PathVariable Integer zbId, @RequestBody SendBombScreenRequestVo sendBombScreenRequestVo) {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
-            System.out.println("-----SendGiftResponseVo-----userId=" + userId + "---zbId" + zbId);
             responseVo.setData(giftServiceImpl.sendBombScreen(userId, zbId, sendBombScreenRequestVo));
             return responseVo;
         } catch (Exception e) {

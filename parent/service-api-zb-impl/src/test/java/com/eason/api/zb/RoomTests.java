@@ -11,6 +11,7 @@ import com.eason.api.zb.model.ZbConstant;
 import com.eason.api.zb.po.ZbTRecrecordsLog;
 import com.eason.api.zb.po.ZbTRoom;
 import com.eason.api.zb.service.impl.ZhuboServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +64,10 @@ public class RoomTests {
 	public void findRoom() {
 //		PageRequest pageable = new PageRequest(0, 10);
 		List<Integer> list=new ArrayList<>();
-		list.add(6470);
+		list.add(6430);
 		list.add(6473);
+		String s=StringUtils.join(list,",");
+		System.out.println(s);
 		List<ZbTRecrecordsLog> page= roomRecrecordDao.findAllByZbIds(list);
 		System.out.println(page);
 	}

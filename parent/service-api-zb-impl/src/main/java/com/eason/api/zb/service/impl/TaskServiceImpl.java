@@ -28,7 +28,7 @@ public class TaskServiceImpl implements ITaskService {
             String time=DateFormatUtils.format(new Date(),DateFormatUtils.ISO_DATETIME_FORMAT.getPattern());
             return  time+ "——用户试看时间全部恢复成功";
         } catch (Exception e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 }

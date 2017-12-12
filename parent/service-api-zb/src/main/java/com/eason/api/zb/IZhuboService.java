@@ -35,7 +35,7 @@ public interface IZhuboService {
 	 * @apiVersion 1.0.0
 	 * @apiGroup zhubo
 	 * @apiPermission Android/IOS
-	 * @api {GET} /zhubo/getZhuboList/{num}  主播列表
+	 * @api {GET} /zhubo/getZhuboList/{num}  主播推荐列表
 	 * @apiName getZhuboList
 	 *
 	 * @apiDescription

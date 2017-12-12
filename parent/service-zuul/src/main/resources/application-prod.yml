@@ -4,7 +4,7 @@ endpoints.shutdown.sensitive: false
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.0.109:8761/eureka/
+      defaultZone: http://192.168.0.138:8761/eureka/
 server:
   port: 8769
 

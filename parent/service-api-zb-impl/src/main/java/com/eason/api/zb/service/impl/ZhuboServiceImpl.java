@@ -22,7 +22,6 @@ import com.eason.api.zb.vo.zhubo.ReadyPlayResponseVo;
 import com.eason.api.zb.vo.zhubo.StartPlayRequestVo;
 import com.eason.api.zb.vo.zhubo.StartPlayResponseVo;
 import com.eason.api.zb.vo.zhubo.ZhuboResponseVo;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
@@ -31,7 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -51,6 +49,8 @@ public class ZhuboServiceImpl implements IZhuboService {
     private RoomDao roomDao;
     @Autowired
     private ZhuboDao zhuboDao;
+    @Autowired
+    private UcUserDao ucUserDao;
     @Autowired
     private UserAttentionDao userAttentionDao;
     @Autowired
@@ -92,6 +92,7 @@ public class ZhuboServiceImpl implements IZhuboService {
                     responseVo.setIsAttention(0); //0 =未关注，1=已关注
                     ZbTRoomPlan zbTRoomPlan=this.roomPlanDao.findByZbId(indexResponseVo.getZbId());
                     responseVo.setZbSignature(zbTRoomPlan.getZbSignature());
+                    responseVo.setUserId(zbTRoomPlan.getUserId());
                     responseVo.setZbBackgroundImg(zbTRoomPlan.getRoomBgPic());
                     int attentionUserTotal = this.userAttentionDao.findATotalByFId(zbTRoomPlan.getUserId());
                     responseVo.setAttentionUserTotal(attentionUserTotal);
@@ -102,8 +103,6 @@ public class ZhuboServiceImpl implements IZhuboService {
                 });
             } else { //已登陆，拿已关注的列表
                 //（2）如果有登陆，没有主播关注的列表，显示热门推荐的主播，如果有关联主播，在调index列表去拿关注的主播房间
-                List<ZbTUserAttention> zbTUserAttentionList = userAttentionDao.findAllByAId(userId);
-                if (zbTUserAttentionList.isEmpty()) {
                     PageModel<IndexResponseVo> pageModel = indexServiceImpl.getIndexList(userId, "1", 0, num);
                     pageModel.getRows().forEach(indexResponseVo -> {
                         ZhuboResponseVo responseVo = new ZhuboResponseVo();
@@ -114,6 +113,7 @@ public class ZhuboServiceImpl implements IZhuboService {
                         responseVo.setIsAttention(0); //0 =未关注，1=已关注
                         ZbTRoomPlan zbTRoomPlan=this.roomPlanDao.findByZbId(indexResponseVo.getZbId());
                         responseVo.setZbSignature(zbTRoomPlan.getZbSignature());
+                        responseVo.setUserId(zbTRoomPlan.getUserId());
                         responseVo.setZbBackgroundImg(zbTRoomPlan.getRoomBgPic());
                         int attentionUserTotal = this.userAttentionDao.findATotalByFId(zbTRoomPlan.getUserId());
                         responseVo.setAttentionUserTotal(attentionUserTotal);
@@ -122,9 +122,6 @@ public class ZhuboServiceImpl implements IZhuboService {
                         responseVo.setCostTotal(this.zhuboDao.getCostTotal(zbTRoomPlan.getUserId()));
                         list.add(responseVo);
                     });
-                } else {
-                    throw new ServiceException("当前用户userId=" + userId + "已关注" + zbTUserAttentionList.size() + "名主播");
-                }
             }
 
         } catch (ServiceException e) {
@@ -139,11 +136,11 @@ public class ZhuboServiceImpl implements IZhuboService {
     public ZhuboResponseVo getZbDetail(Integer userId, @PathVariable(value = "zbId") Integer zbId) throws ServiceException {
         ZbTZhubo zbTZhubo = this.zhuboDao.getOne(zbId);
         if (zbTZhubo == null) {
-            throw new ServiceException("主播(zbId=" + zbId + ")不存在");
+            throw new ServiceException("主播不存在");
         }
         ZbTRoomPlan zbTRoomPlan = this.roomPlanDao.findByZbId(zbId);
         if (zbTRoomPlan == null) {
-            throw new ServiceException("主播(zbId=" + zbId + ")并未开播");
+            throw new ServiceException("主播并未开播");
         }
         ZhuboResponseVo responseVo = new ZhuboResponseVo();
         responseVo.setZbId(zbTRoomPlan.getZbId());
@@ -241,35 +238,52 @@ public class ZhuboServiceImpl implements IZhuboService {
         //（1）验证参数：是否合法
         ZbTZhubo zbTZhubo = this.zhuboDao.findByUserId(userId);
         if (zbTZhubo == null || zbTZhubo.getZbId() == null) {
-            throw new ServiceException("主播(userId=" + userId + ")不存在，请您先申请主播");
+            throw new ServiceException("主播不存在，请您先申请主播");
         }
         Integer zbId = zbTZhubo.getZbId();
+        ReadyPlayResponseVo responseVo = new ReadyPlayResponseVo();
         //（2）获取IM与Madia地址：
         ZbTRoomConf zbTRoomConf = this.roomConfDao.findByZbId(zbId);
+
         if (zbTRoomConf == null) {
             zbTRoomConf = new ZbTRoomConf();
+            zbTRoomConf.setZbId(zbId);
+            zbTRoomConf.setUserId(userId);
         }
-        zbTRoomConf.setZbId(zbId);
-        zbTRoomConf.setUserId(userId);
-
-        ReadyPlayResponseVo responseVo = new ReadyPlayResponseVo();
         MediaResponseVo mediaResponseVo = null;
         IMResponseVo imResponseVo = null;
-        try {
-            mediaResponseVo = platformServiceImpl.getMedia(zbId, token);
-            zbTRoomConf.setMediaInfo(mediaResponseVo);
-        } catch (ServiceException e) {
-            logger.error("room-media-exception", e.getMessage());
+        if (zbTRoomConf.getMediaInfo()==null){
+            try {
+                String media_access_token=platformManager.getMediaAccessToken();
+                Map<String,Object> rtmpMap=platformManager.getRtmpUrl(zbId,media_access_token,token);
+                if (rtmpMap!=null){
+                    mediaResponseVo=new MediaResponseVo((String) rtmpMap.get("type"), (String) rtmpMap.get("url"), media_access_token);
+                    zbTRoomConf.setMediaInfo(mediaResponseVo);
+                }else {
+                    throw new ServiceException("无法获取media流媒体地址");
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
         }
-        try {
-            imResponseVo = platformServiceImpl.getIM(zbId, token);
-            zbTRoomConf.setImInfo(imResponseVo);
-        } catch (ServiceException e) {
-            logger.error("room-im-exception", e.getMessage());
+        if (zbTRoomConf.getImInfo()==null){
+            try {
+                String im_access_token=platformManager.getImAccessToken();
+                Map<String,Object> imMap=platformManager.getImUrl(zbId,im_access_token,token);
+                if (imMap!=null){
+                    imResponseVo=new IMResponseVo("1", (String) imMap.get("ip"),(Integer) imMap.get("port"), im_access_token);
+                    zbTRoomConf.setImInfo(imResponseVo);
+                    this.roomConfDao.save(zbTRoomConf);
+                }else {
+                    throw new ServiceException("无法获取IM服务器地址");
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
         }
 
-        responseVo.setMedia(mediaResponseVo);
-        responseVo.setIm(imResponseVo);
+        responseVo.setMedia(zbTRoomConf.getMediaInfo());
+        responseVo.setIm(zbTRoomConf.getImInfo());
 
         //（3）验证房间状态：
         ZbTRoomPlan zbTRoomPlan = this.roomPlanDao.findByZbId(zbId);
@@ -348,6 +362,10 @@ public class ZhuboServiceImpl implements IZhuboService {
         if (ZbConstant.ZB.status.disable == status) {
             throw new ServiceException("直播已经被禁播，请联系房管");
         }
+        Integer isTicket=zbTZhubo.getTicketState();
+        Integer isTime=zbTZhubo.getTimeState();
+        Integer isPersonal=zbTZhubo.getPersonalState();
+        Integer isGame=zbTZhubo.getGameState();
         //（5）获取房间属性：TODO 重做设计表
         ZbTRoomTypeSet zbTRoomTypeSet = roomTypeSetDao.findByRoomType(ZbConstant.Room.Type.ticket.name());
         Set<Integer> ticketAT = new TreeSet<>();
@@ -368,7 +386,11 @@ public class ZhuboServiceImpl implements IZhuboService {
         ticketConf.put("startTime", new Timestamp(System.currentTimeMillis()));//当前类型直播开始的时间
         ticketConf.put("activityTimeList", StringUtils.join(ticketAT, ","));
         ticketConf.put("priceList", StringUtils.join(ticketPR, ","));
-        responseVo.setTicketConf(ticketConf);
+        if (isTicket==1){
+            responseVo.setTicketConf(ticketConf);
+        }else {
+            responseVo.setTicketConf(new HashMap<>());
+        }
 
         ZbTRoomTypeSet zbTRoomTypeSet2 = roomTypeSetDao.findByRoomType(ZbConstant.Room.Type.time.name());
 
@@ -391,7 +413,11 @@ public class ZhuboServiceImpl implements IZhuboService {
         timeConf.put("activityTimeList", StringUtils.join(timeAT, ","));
         timeConf.put("priceList", StringUtils.join(timePR, ","));
         timeConf.put("timeInterval", zbTRoomTypeSet2.getTimeInterval());
-        responseVo.setTimeConf(timeConf);
+        if (isTime==1){
+            responseVo.setTimeConf(timeConf);
+        }else {
+            responseVo.setTimeConf(new HashMap<>());
+        }
 
         ZbTRoomTypeSet zbTRoomTypeSet3 = roomTypeSetDao.findByRoomType(ZbConstant.Room.Type.time.name());
 
@@ -405,7 +431,16 @@ public class ZhuboServiceImpl implements IZhuboService {
         Map<String, Object> personalConf = new HashMap<>();
         personalConf.put("startTime", new Timestamp(System.currentTimeMillis()));//当前类型直播开始的时间
         personalConf.put("activityTimeList", StringUtils.join(personalAT, ","));
-        responseVo.setPersonalConf(personalConf);
+        if (isPersonal==1){
+            responseVo.setPersonalConf(personalConf);
+        }else {
+            responseVo.setPersonalConf(new HashMap<>());
+        }
+        if (isGame==1){
+            responseVo.setGameConf(new HashMap<>());
+        }else {
+            responseVo.setGameConf(new HashMap<>());
+        }
 
         //（6.A）维护表：如果无房间，创建房间，status=0（创建中）初始化房间zbId,status,createTime
         ZbTRoom zbTRoom = this.roomDao.findByZbId(zbId);
@@ -472,64 +507,64 @@ public class ZhuboServiceImpl implements IZhuboService {
         //（1）验证参数：是否合法
         ZbTZhubo zbTZhubo = this.zhuboDao.findByUserId(userId);
         if (zbTZhubo == null || zbTZhubo.getZbId() == null) {
-            throw new ServiceException("主播id(userId=" + userId + ")不存在，请您先申请主播");
+            throw new ServiceException("主播不存在，请您先申请主播");
         }
         Integer zbId = zbTZhubo.getZbId();
         ZbTRoom zbTRoom = this.roomDao.findByZbId(zbId);
         if (zbTRoom == null) {
-            throw new ServiceException("主播id(zbId=" + zbId + ")的房间不存在");
+            throw new ServiceException("主播的房间不存在");
         }
 
         String roomType = startPlayRequestVo.getRoomType();
         if (StringUtils.isEmpty(roomType)) {
-            throw new ServiceException("房间类型(roomType=" + roomType + ")不能为空");
+            throw new ServiceException("房间类型不能为空");
         }
         try {
             ZbConstant.Room.Type.valueOf(roomType);
         } catch (IllegalArgumentException e) {
-            throw new ServiceException("房间类型(roomType=" + roomType + ")只能包含" + Arrays.toString(ZbConstant.Room.Type.values()));
+            throw new ServiceException("房间类型错误");
         }
         if (ZbConstant.Room.Type.game.name().equals(roomType)) {
-            throw new ServiceException("房间类型(roomType=" + roomType + ")尽请期待");
+            throw new ServiceException("房间尽请期待");
         }
 
         String roomTitle = startPlayRequestVo.getRoomTitle();
         if (StringUtils.isEmpty(roomTitle)) {
-            throw new ServiceException("房间标题(roomTitle=" + roomTitle + ")不能为空");
+            throw new ServiceException("房间标题不能为空");
         }
         if (roomTitle.length() > 10) {
-            throw new ServiceException("房间标题(roomTitle=" + roomTitle + ")最多10个汉字");
+            throw new ServiceException("房间标题最多10个汉字");
         }
         if (ZbConstant.Room.Type.ticket.name().equals(roomType) || ZbConstant.Room.Type.time.name().equals(roomType)) {
             if (startPlayRequestVo.getStartTime() == null) {
-                throw new ServiceException("开始时间(startTime)不能为空");
+                throw new ServiceException("开始时间不能为空");
             }
             Integer activityTime = startPlayRequestVo.getActivityTime();
             if (activityTime == null) {
-                throw new ServiceException("持续时间(activityTime=" + activityTime + ")不能为空");
+                throw new ServiceException("持续时间不能为空");
             }
             Integer price = startPlayRequestVo.getPrice();
             if (price == null) {
-                throw new ServiceException("单价(price=" + price + ")不能为空");
+                throw new ServiceException("单价不能为空");
             }
         }
         ZbTUserPersonal zbTUserPersonal = null;
         if (ZbConstant.Room.Type.personal.name().equals(roomType)) {
             Timestamp startTime = new Timestamp(startPlayRequestVo.getStartTime());
             if (startPlayRequestVo.getStartTime() == null) {
-                throw new ServiceException("开始时间(startTime=" + startTime + ")不能为空或者格式错误，请传Long类型的时间戳");
+                throw new ServiceException("开始时间不能为空或者格式错误，请传Long类型的时间戳");
             }
             Integer activityTime = startPlayRequestVo.getActivityTime();
             if (activityTime == null) {
-                throw new ServiceException("持续时间(activityTime=" + activityTime + ")不能为空");
+                throw new ServiceException("持续时间不能为空");
             }
             Integer userClientId = startPlayRequestVo.getUserId();
             if (userClientId == null) {
-                throw new ServiceException("贵宾用户(userId=" + userClientId + ")不能为空");
+                throw new ServiceException("贵宾用户不能为空");
             }
             zbTUserPersonal = this.userPersonalDao.findByUserIdAndZbId(userClientId, zbId);
             if (zbTUserPersonal == null) {
-                throw new ServiceException("贵宾用户(userId=" + userClientId + ")可能没有提前预约主播");
+                throw new ServiceException("贵宾用户可能没有提前预约主播");
             }
         }
         //（2）验证房间状态：
@@ -582,23 +617,23 @@ public class ZhuboServiceImpl implements IZhuboService {
         zbTRoomPlan.setActivityTimeCount(0);
 
         //TODO 需要Qvod系统拿用户昵称、等级、主播头像
-        String userDetail = (String) stringRedisTemplate.opsForHash().get("user_detail_info", userId + "");
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> resultMap = null;
-        try {
-            resultMap = objectMapper.readValue(userDetail, Map.class);
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        String nickName = (String) resultMap.get("nickname");
-        String avatar = (String) resultMap.get("avatar");
-        Integer level = zbTZhubo.getVipLevel(); //不是主播用户的等级，是主播的等级
-        String signature = (String) resultMap.get("signature");
-
-        zbTRoomPlan.setZbNickname(nickName);
-        zbTRoomPlan.setZbLevel(level);
-        zbTRoomPlan.setZbHeadImg(avatar);
-        zbTRoomPlan.setZbSignature(signature);
+//        String userDetail = (String) stringRedisTemplate.opsForHash().get("user_detail_info", userId + "");
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, Object> resultMap = null;
+//        try {
+//            resultMap = objectMapper.readValue(userDetail, Map.class);
+//        } catch (IOException e) {
+//            e.getMessage();
+//        }
+//        String nickName = (String) resultMap.get("nickname");
+//        String avatar = (String) resultMap.get("avatar");
+//        Integer level = zbTZhubo.getVipLevel(); //不是主播用户的等级，是主播的等级
+//        String signature = (String) resultMap.get("signature");
+        ZbUcUser ucUser=this.ucUserDao.findOne(userId);
+        zbTRoomPlan.setZbNickname(ucUser.getNickname());
+        zbTRoomPlan.setZbLevel(ucUser.getLevel()*1);
+        zbTRoomPlan.setZbHeadImg(ucUser.getAvatar());
+        zbTRoomPlan.setZbSignature(ucUser.getSignature());
         //(3)创建房间配置信息，先获取配置信息，一并存入
         if (ZbConstant.Room.Type.ticket.name().equals(roomType)) {
             ZbTRoomTypeSet zbTRoomTypeSet = roomTypeSetDao.findByRoomType(ZbConstant.Room.Type.ticket.name());
@@ -616,10 +651,10 @@ public class ZhuboServiceImpl implements IZhuboService {
             ticketPR.add(zbTRoomTypeSet.getPrice04());
             ticketPR.add(zbTRoomTypeSet.getPrice05());
             if (!ticketAT.contains(startPlayRequestVo.getActivityTime())) {
-                throw new ServiceException("参数有误，持续时间" + ticketAT + "不包含" + startPlayRequestVo.getActivityTime());
+                throw new ServiceException("持续时间参数有误");
             }
             if (!ticketPR.contains(startPlayRequestVo.getPrice())) {
-                throw new ServiceException("参数有误，门票价格" + ticketPR + "不包含" + startPlayRequestVo.getPrice());
+                throw new ServiceException("门票价格参数有误");
             }
 
             Map<String, Object> map = new HashMap<>();
@@ -649,10 +684,10 @@ public class ZhuboServiceImpl implements IZhuboService {
             timePR.add(zbTRoomTypeSet2.getPrice04());
             timePR.add(zbTRoomTypeSet2.getPrice05());
             if (!timeAT.contains(startPlayRequestVo.getActivityTime())) {
-                throw new ServiceException("参数有误，持续时间" + timeAT + "不包含" + startPlayRequestVo.getActivityTime());
+                throw new ServiceException("持续时间参数有误");
             }
             if (!timePR.contains(startPlayRequestVo.getPrice())) {
-                throw new ServiceException("参数有误，时常价格" + timePR + "不包含" + startPlayRequestVo.getPrice());
+                throw new ServiceException("门票价格参数有误");
             }
 
             Map<String, Object> map = new HashMap<>();
@@ -677,7 +712,7 @@ public class ZhuboServiceImpl implements IZhuboService {
             personalAT.add(zbTRoomTypeSet3.getTime05());
 
             if (!personalAT.contains(startPlayRequestVo.getActivityTime())) {
-                throw new ServiceException("参数有误，持续时间" + personalAT + "不包含" + startPlayRequestVo.getActivityTime());
+                throw new ServiceException("持续时间参数有误");
             }
 
             Map<String, Object> map = new HashMap<>();
@@ -722,8 +757,8 @@ public class ZhuboServiceImpl implements IZhuboService {
             zbTRoomPlanStat.setIsVideo(ZbConstant.Room.video.disable);
             this.roomPlanStatDao.save(zbTRoomPlanStat);
             //（2）调Media接口删除视频
-            ZbTRoomConf zbTRoomConf=this.roomConfDao.findByZbId(zbTRoomPlanStat.getZbId());
-            this.platformManager.deleteRecFile(zbTRoomConf.getZbId(),zbTRoomConf.getMediaInfo().getUrl());
+//            ZbTRoomConf zbTRoomConf=this.roomConfDao.findByZbId(zbTRoomPlanStat.getZbId());
+//            this.platformManager.deleteRecFile(zbTRoomConf.getZbId(),zbTRoomConf.getMediaInfo().getUrl());
             return "退出成功";
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
@@ -774,7 +809,7 @@ public class ZhuboServiceImpl implements IZhuboService {
         try {
             ZbTZhubo zbTZhubo=this.zhuboDao.findByUserId(userId);
             if (zbTZhubo!=null){
-                throw new ServiceException("用户id(userId="+userId+"已经申请过主播了");
+                throw new ServiceException("用户已经申请过主播了");
             }
             zbTZhubo=new ZbTZhubo();
             zbTZhubo.setUserId(userId);

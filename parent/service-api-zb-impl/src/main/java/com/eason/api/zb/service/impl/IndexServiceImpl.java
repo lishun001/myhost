@@ -10,6 +10,7 @@ import com.eason.api.zb.po.*;
 import com.eason.api.zb.vo.index.BannerResponseVo;
 import com.eason.api.zb.vo.index.IndexResponseVo;
 import com.eason.api.zb.vo.index.MsgNotificationResponseVo;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,9 @@ public class IndexServiceImpl implements IIndexService {
     @Autowired
     private RoomPlanStatDao roomPlanStatDao;
     @Autowired
-    private ZhuboDao zhuboDao;
+    private UcUserDao ucUserDao;
+    @Autowired
+    private RoomDao roomDao;
     @Autowired
     private UserAttentionDao userAttentionDao;
     @Autowired
@@ -69,11 +72,11 @@ public class IndexServiceImpl implements IIndexService {
                 PageRequest pageable = new PageRequest(position, pageSize, Sort.Direction.DESC, "incomeAmount");
                 page=  roomPlanDao.findByUserIds(ids,pageable);
                 //直播间已经显示完全,新增回放
-                int total=(position+1)*pageSize;
-                if (total>=page.getTotalElements()){
-//                    logList= roomRecrecordDao.findAllByZbIds(ids); //TODO ids是用户id
+                if (!page.hasNext()){
+                    if (!ids.isEmpty() && page.getNumberOfElements()!=0){
+                        logList= roomRecrecordDao.findAllByZbIds(ids); //TODO ids是用户id
+                    }
                 }
-
             }else if ("3".equals(category)){ //最新=3
                 Pageable pageable = new PageRequest(position, pageSize, Sort.Direction.DESC, "openTime");
                 page=  roomPlanDao.findAll(pageable);
@@ -93,9 +96,10 @@ public class IndexServiceImpl implements IIndexService {
             pageModel.setTotal(page.getTotalPages());
             page.getContent().forEach(zbTRoomPlan ->{
                 //需要Qvod系统拿主播昵称
-                String nickName=zbTRoomPlan.getZbNickname();
-                String avatar=zbTRoomPlan.getZbHeadImg();
-                Integer level=zbTRoomPlan.getZbLevel();
+                ZbUcUser zbUcUser=this.ucUserDao.findByZbId(zbTRoomPlan.getZbId());
+                String nickName=zbUcUser.getNickname();
+                String avatar=zbUcUser.getAvatar();
+                Integer level=zbUcUser.getLevel()*1;
 
                 IndexResponseVo indexResponseVo=new IndexResponseVo(zbTRoomPlan.getRoomId(),zbTRoomPlan.getZbId(),nickName,zbTRoomPlan.getRoomTitle(),
                         zbTRoomPlan.getRoomType(),zbTRoomPlan.getOnlineUser(),zbTRoomPlan.getMachineUser(),zbTRoomPlan.getRoomBgPic(),
@@ -120,22 +124,29 @@ public class IndexServiceImpl implements IIndexService {
             });
             if ("2".equals(category) && !logList.isEmpty()){
                 logList.forEach(zbTRecrecordsLog -> {
-                    //TODO 数据待完善
+                    //TODO 录播视频数据待完善
                     ZbTRoomPlanStat zbTRoomPlanStat=this.roomPlanStatDao.findByPlanId(zbTRecrecordsLog.getPlanId());
-                    IndexResponseVo indexResponseVo=new IndexResponseVo(zbTRoomPlanStat.getRoomId(),zbTRoomPlanStat.getZbId(),"",zbTRoomPlanStat.getRoomTitle(),
-                            zbTRoomPlanStat.getRoomType(),0,0,"",
+                    ZbTRoom zbTRoom=this.roomDao.findByZbId(zbTRoomPlanStat.getZbId());
+                    ZbUcUser zbUcUser=this.ucUserDao.findByZbId(zbTRoomPlanStat.getZbId());
+                    IndexResponseVo indexResponseVo=new IndexResponseVo(zbTRoomPlanStat.getRoomId(),zbTRoomPlanStat.getZbId(),zbUcUser.getNickname(),zbTRoomPlanStat.getRoomTitle(),
+                            zbTRoomPlanStat.getRoomType(),0,0,zbTRoom.getRoomBgPic(),
                             ZbConstant.Room.status.room_redio,new Timestamp(zbTRoomPlanStat.getOpenTime().getTime()));
                     indexResponseVo.setRoomPlanId(zbTRoomPlanStat.getPlanId());
-                    indexResponseVo.setZbHeadImg("");
-                    indexResponseVo.setZbLevel(0);//需要Qvod系统拿用户等级
+                    indexResponseVo.setZbHeadImg(zbUcUser.getAvatar());
+                    indexResponseVo.setZbLevel(zbUcUser.getLevel()*1);//需要Qvod系统拿用户等级
+                    indexResponseVo.setRoomStatus(ZbConstant.Room.status.room_redio); //回放中的状态
+                    indexResponseVo.setPlayUrl(zbTRecrecordsLog.getPlayUrl());
+                    indexResponseVo.setIsCharge(0);  //0=不收费
                     list.add(indexResponseVo);
                 });
+                //TODO 视频回放分页待确定
+                pageModel.setTotal(1);
             }
             pageModel.setRows(list);
             return pageModel;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -151,7 +162,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -167,7 +178,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 }

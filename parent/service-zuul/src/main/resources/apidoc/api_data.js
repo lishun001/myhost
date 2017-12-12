@@ -2295,7 +2295,7 @@ define({ "api": [
     ],
     "type": "GET",
     "url": "/zhubo/getZhuboList/{num}",
-    "title": "主播列表",
+    "title": "主播推荐列表",
     "name": "getZhuboList",
     "description": "<blockquote> <p>点击收藏，没有关注列表，显示热门推荐主播</br> 如果没有登陆，显示热门推荐主播</br> 如果有登陆，显示已关注的主播</br></p> </blockquote>",
     "success": {

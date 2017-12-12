@@ -3,6 +3,7 @@ package com.eason.task.scheduler.factory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,8 @@ public class SchedulerFactory {
 
     @Autowired
     private MyJobFactory myJobFactory;  //自定义的factory
+    @Value("${quartz.config}")
+    private String quartzConfig;
 
     @Bean(name = "schedulerFactoryBean")
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) throws IOException {
@@ -31,7 +34,7 @@ public class SchedulerFactory {
     @Bean
     public Properties quartzProperties() throws IOException {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setLocation(new ClassPathResource("/quartz.properties"));
+        propertiesFactoryBean.setLocation(new ClassPathResource(quartzConfig));
         return propertiesFactoryBean.getObject();
     }
 
