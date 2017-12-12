@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.115:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+    api:
+      path: /api/**
+      serviceId: service-api-zb-impl
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign

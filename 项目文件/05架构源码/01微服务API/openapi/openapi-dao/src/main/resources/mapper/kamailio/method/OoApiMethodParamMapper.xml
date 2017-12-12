@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuwu.openoo.dao.mapper.kamailio.method.OoApiMethodParamMapper">
+
+	<resultMap id="OoApiMethodParamBaseResult" type="ooApiMethodParamModel">
+    	<result column="ID" property="id"/>
+    	<result column="METHOD_ID" property="methodId"/>
+    	<result column="PARAM_NAME" property="paramName"/>
+    	<result column="PARAM_TYPE" property="paramType"/>
+    	<result column="IS_NECESSARY" property="isNecessary"/>
+    	<result column="EXAMPLE" property="example"/>
+    	<result column="DEFAULT_VALUE" property="defaultValue"/>
+    	<result column="PARAM_DESCRIPTION" property="paramDescription"/>
+    	<result column="PARAM_CLASS" property="paramClass"/>
+    	<result column="IS_OBJECT" property="isObject"/>
+    	<result column="CREATE_TIME" property="createTime"/>
+	</resultMap>
+	
+	<!-- 请在此添加自定义方法（开始） -->
+	<!-- 请在此添加自定义方法（结束） -->
+	
+	<select id="getObjectById" parameterType="Long" resultMap="OoApiMethodParamBaseResult" >
+		SELECT ID,METHOD_ID,PARAM_NAME,PARAM_TYPE,IS_NECESSARY,EXAMPLE,DEFAULT_VALUE,PARAM_DESCRIPTION,PARAM_CLASS,IS_OBJECT,CREATE_TIME FROM API_METHOD_PARAM WHERE ID = #{id}
+	</select>
+	
+	<select id="getObjectByModel" parameterType="ooApiMethodParamModel" resultMap="OoApiMethodParamBaseResult" >
+		SELECT ID,METHOD_ID,PARAM_NAME,PARAM_TYPE,IS_NECESSARY,EXAMPLE,DEFAULT_VALUE,PARAM_DESCRIPTION,PARAM_CLASS,IS_OBJECT,CREATE_TIME 
+		FROM API_METHOD_PARAM 
+		<where>
+			<if test="id != null">
+				AND ID = #{id}
+			</if>
+			<if test="methodId != null">
+				AND METHOD_ID = #{methodId}
+			</if>
+			<if test="paramName != null">
+				AND PARAM_NAME = #{paramName}
+			</if>
+			<if test="paramType != null">
+				AND PARAM_TYPE = #{paramType}
+			</if>
+			<if test="isNecessary != null">
+				AND IS_NECESSARY = #{isNecessary}
+			</if>
+			<if test="example != null">
+				AND EXAMPLE = #{example}
+			</if>
+			<if test="defaultValue != null">
+				AND DEFAULT_VALUE = #{defaultValue}
+			</if>
+			<if test="paramDescription != null">
+				AND PARAM_DESCRIPTION = #{paramDescription}
+			</if>
+			<if test="paramClass != null">
+				AND PARAM_CLASS = #{paramClass}
+			</if>
+			<if test="isObject != null">
+				AND IS_OBJECT = #{isObject}
+			</if>
+			<if test="createTime != null">
+				AND CREATE_TIME = #{createTime}
+			</if>
+		</where>	
+	</select>
+	
+	<select id="getListByModel" parameterType="ooApiMethodParamModel" resultMap="OoApiMethodParamBaseResult" >
+		SELECT ID,METHOD_ID,PARAM_NAME,PARAM_TYPE,IS_NECESSARY,EXAMPLE,DEFAULT_VALUE,PARAM_DESCRIPTION,PARAM_CLASS,IS_OBJECT,CREATE_TIME 
+		FROM API_METHOD_PARAM 
+		<where>
+			<if test="id != null">
+				AND ID = #{id}
+			</if>
+			<if test="methodId != null">
+				AND METHOD_ID = #{methodId}
+			</if>
+			<if test="paramName != null">
+				AND PARAM_NAME = #{paramName}
+			</if>
+			<if test="paramType != null">
+				AND PARAM_TYPE = #{paramType}
+			</if>
+			<if test="isNecessary != null">
+				AND IS_NECESSARY = #{isNecessary}
+			</if>
+			<if test="example != null">
+				AND EXAMPLE = #{example}
+			</if>
+			<if test="defaultValue != null">
+				AND DEFAULT_VALUE = #{defaultValue}
+			</if>
+			<if test="paramDescription != null">
+				AND PARAM_DESCRIPTION = #{paramDescription}
+			</if>
+			<if test="paramClass != null">
+				AND PARAM_CLASS = #{paramClass}
+			</if>
+			<if test="isObject != null">
+				AND IS_OBJECT = #{isObject}
+			</if>
+			<if test="createTime != null">
+				AND CREATE_TIME = #{createTime}
+			</if>
+		</where>	
+	</select>
+	
+	<insert id="insertModel" parameterType="ooApiMethodParamModel">
+		INSERT INTO API_METHOD_PARAM(
+				ID,
+				METHOD_ID,
+				PARAM_NAME,
+				PARAM_TYPE,
+				IS_NECESSARY,
+				EXAMPLE,
+				DEFAULT_VALUE,
+				PARAM_DESCRIPTION,
+				PARAM_CLASS,
+				IS_OBJECT,
+				CREATE_TIME
+			) VALUES ( 
+				#{id},
+				#{methodId},
+				#{paramName},
+				#{paramType},
+				#{isNecessary},
+				#{example},
+				#{defaultValue},
+				#{paramDescription},
+				#{paramClass},
+				#{isObject},
+				#{createTime}
+			)
+	</insert>
+
+	<update id="updateModelById" parameterType="ooApiMethodParamModel">
+		UPDATE 
+			API_METHOD_PARAM
+		<set>
+			<if test="methodId != null">
+				METHOD_ID = #{methodId},
+			</if>
+			<if test="paramName != null">
+				PARAM_NAME = #{paramName},
+			</if>
+			<if test="paramType != null">
+				PARAM_TYPE = #{paramType},
+			</if>
+			<if test="isNecessary != null">
+				IS_NECESSARY = #{isNecessary},
+			</if>
+			<if test="example != null">
+				EXAMPLE = #{example},
+			</if>
+			<if test="defaultValue != null">
+				DEFAULT_VALUE = #{defaultValue},
+			</if>
+			<if test="paramDescription != null">
+				PARAM_DESCRIPTION = #{paramDescription},
+			</if>
+			<if test="paramClass != null">
+				PARAM_CLASS = #{paramClass},
+			</if>
+			<if test="isObject != null">
+				IS_OBJECT = #{isObject},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime}
+			</if>
+		</set>
+		WHERE 
+			ID = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="Long" >
+		DELETE FROM API_METHOD_PARAM WHERE ID = #{id}
+	</delete>
+
+	<delete id="deleteAll" >
+		DELETE FROM API_METHOD_PARAM
+	</delete>
+	
+</mapper>

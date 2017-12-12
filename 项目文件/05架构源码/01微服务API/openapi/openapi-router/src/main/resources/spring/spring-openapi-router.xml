@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+	http://cxf.apache.org/bindings/soap http://cxf.apache.org/schema/bindings/soap.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
+
+	<!-- router service impl -->
+	<bean id="openApiVisitRouter" class="com.jiuwu.openoo.openapi.router.impl.OpenApiVisitRouterImpl" scope="prototype" autowire="byName" />
+
+	<!-- router invoke path -->
+	<jaxrs:server id="openApiVisitRouterRest" address="/rest">
+		<jaxrs:serviceBeans>
+			<ref bean="openApiVisitRouter" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+	<bean id="openApiSystemParamFilterBean" class="com.jiuwu.openoo.openapi.filter.OpenApiSystemParamFilterBean" scope="prototype" autowire="byName" />
+
+	<bean id="logOperatorService" class="com.jiuwu.openoo.openapi.service.LogOperatorServiceImpl" scope="prototype" autowire="byName" />
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message/exception</value>
+				<value>message/config</value>
+				<value>message/BH_config</value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

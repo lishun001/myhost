@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- API方法 -->
+<mapper namespace="com.jiuwu.openoo.dao.mapper.kamailio.method.MethodMapper">
+	<resultMap id="methodTypeMap" type="model.ApiMethod.ApiMethodType">
+		<result property="id" column="ID" />
+		<result property="cateCnName" column="CATE_CN_NAME" />
+		<result property="cateDescription" column="CATE_DESCRIPTION" />
+	</resultMap>
+	
+	<resultMap id="methodMap" type="model.ApiMethod.ApiMethod">
+		<result property="id" column="ID" />
+		<result property="methodType" column="METHOD_TYPE" />
+		<result property="method" column="METHOD" />
+		<result property="methodName" column="METHOD_NAME" />
+		<result property="methodMemo" column="METHOD_MEMO" />
+		<result property="invokeMinMaxNum" column="INVOKE_MIN_MAX_NUM" />
+		<result property="invokeDayMaxNum" column="INVOKE_DAY_MAX_NUM" />
+		<result property="authLevel" column="AUTH_LEVEL" />
+		<result property="isUpdated" column="IS_UPDATED" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="updateTime" column="UPDATE_TIME" />
+		<result property="isExtras" column="IS_EXTRAS" />
+		<result property="isOpen" column="IS_OPEN" />
+		<result property="cateDescription" column="CATE_DESCRIPTION" />
+	</resultMap>
+	
+	<select id="getMethodTypeList" resultMap="methodTypeMap">
+		select ID,CATE_EN_NAME,CATE_CN_NAME,CATE_DESCRIPTION,IS_DELETED from API_METHOD_CATEGORY
+	</select>
+	
+	<select id="getMethodById" resultMap="methodMap">
+		select ID,METHOD_TYPE,METHOD,METHOD_NAME,METHOD_MEMO,INVOKE_MIN_MAX_NUM,INVOKE_DAY_MAX_NUM,AUTH_LEVEL,IS_UPDATED,XML_RESULT,JSON_RESULT,CREATE_TIME,UPDATE_TIME,UPDATE_BY,CREATE_BY,IS_EXTRAS,IS_OPEN from API_METHOD where id=#{id}
+	</select>
+	<select id="methodTotalRecord" resultType="int">
+      select count(1) from API_METHOD where 1=1
+   </select>
+   	<select id="methodConditionTotalRecord" resultType="int" parameterType="java.util.HashMap">
+		 select count(1) from API_METHOD   where 1=1
+	<if test="methodName !=null and methodName !='' ">  
+     	and METHOD_NAME like CONCAT('%',#{methodName},'%')
+     </if>
+     <if test="apiInterface !=null and apiInterface !='' ">  
+     	and method like CONCAT('%',#{apiInterface},'%')
+     </if>
+	</select>
+	
+	<select id="methodPageSelect" resultMap="methodMap" parameterType="java.util.HashMap">
+		<!-- select m.*,c.CATE_DESCRIPTION  from API_METHOD m , API_METHOD_CATEGORY c
+		 where m.METHOD_TYPE=c.ID order by c.id desc  -->
+		 select m.ID,m.METHOD_TYPE,m.METHOD,m.METHOD_NAME,m.METHOD_MEMO,m.INVOKE_MIN_MAX_NUM,m.INVOKE_DAY_MAX_NUM,m.AUTH_LEVEL,m.IS_UPDATED,m.XML_RESULT,m.JSON_RESULT,m.CREATE_TIME,m.UPDATE_TIME,m.UPDATE_BY,m.CREATE_BY,m.IS_EXTRAS,m.IS_OPEN,c.CATE_DESCRIPTION from API_METHOD m left join  API_METHOD_CATEGORY c on m.METHOD_TYPE=c.ID  
+		  limit #{startRow},10
+	</select>
+	
+	<select id="methodPageSelectByCondition" resultMap="methodMap" parameterType="java.util.HashMap">
+		select m.ID,m.METHOD_TYPE,m.METHOD,m.METHOD_NAME,m.METHOD_MEMO,m.INVOKE_MIN_MAX_NUM,m.INVOKE_DAY_MAX_NUM,m.AUTH_LEVEL,m.IS_UPDATED,m.XML_RESULT,m.JSON_RESULT,m.CREATE_TIME,m.UPDATE_TIME,m.UPDATE_BY,m.CREATE_BY,m.IS_EXTRAS,m.IS_OPEN,c.CATE_DESCRIPTION  from API_METHOD m , API_METHOD_CATEGORY c
+		 where m.METHOD_TYPE=c.ID 
+		 <if test="apiInterface != null and apiInterface !=''">
+		   and   METHOD LIKE CONCAT('%',#{apiInterface},'%')
+		 </if>
+		 
+		<if test="methodName != null and methodName !=''">
+		   and   METHOD_NAME LIKE CONCAT('%',#{methodName},'%')
+		 </if>
+		 limit #{startRow},10
+	</select>
+	
+	<update id="updateMethod" parameterType="model.ApiMethod.ApiMethod">
+		update API_METHOD 
+		 <set>  
+            <if test="methodType != null">  
+                METHOD_TYPE = #{methodType},  
+            </if>  
+            <if test="method != null">  
+                METHOD = #{method},  
+            </if>  
+            <if test="methodName != null">  
+                METHOD_NAME = #{methodName},  
+            </if>  
+            <if test="methodMemo != null">  
+                METHOD_MEMO = #{methodMemo},  
+            </if>
+           <if test="invokeMinMaxNum != null">  
+                INVOKE_MIN_MAX_NUM = #{invokeMinMaxNum}, 
+            </if>  
+            <if test="invokeDayMaxNum != null">  
+                INVOKE_DAY_MAX_NUM = #{invokeDayMaxNum}, 
+            </if>  
+            <if test="isUpdated != null">  
+                IS_UPDATED = #{isUpdated},  
+            </if>  
+            <if test="authLevel != null">  
+                AUTH_LEVEL = #{authLevel},  
+            </if>
+             <if test="updateTime != null">  
+                UPDATE_TIME = #{updateTime},  
+            </if>  
+           <if test="isExtras != null">  
+                IS_EXTRAS = #{isExtras} , 
+            </if>  
+           <if test="isOpen != null">  
+                IS_OPEN = #{isOpen}  
+            </if>  
+        </set>  
+        where id = #{id}  
+	</update>
+	
+	<insert id="saveMethod" parameterType="method">
+	insert into API_METHOD(METHOD_TYPE,METHOD,METHOD_NAME,METHOD_MEMO,INVOKE_MIN_MAX_NUM,
+	INVOKE_DAY_MAX_NUM,AUTH_LEVEL,IS_UPDATED,CREATE_TIME,IS_OPEN,IS_EXTRAS) 
+	values(#{methodType},#{method},#{methodName},#{methodMemo},#{invokeMinMaxNum},#{invokeDayMaxNum},#{authLevel},#{isUpdated},#{createTime},#{isOpen},#{isExtras})
+		
+	</insert>
+	
+	<delete id="deleteMethodById" parameterType="int">
+		delete from API_METHOD where id=#{ID}
+	</delete>
+	
+
+  
+  
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiuwu.openoo.dao.mapper.kamailio.method.OoApiAccessLogMapper">
+
+	<resultMap id="OoApiAccessLogBaseResult" type="ooApiAccessLogModel">
+    	<result column="ID" property="id"/>
+    	<result column="USER_ID" property="userId"/>
+    	<result column="INVOKE_METHOD" property="invokeMethod"/>
+    	<result column="METHOD_VER" property="methodVer"/>
+    	<result column="RESULT_TYPE" property="resultType"/>
+    	<result column="RESULT_CODE" property="resultCode"/>
+    	<result column="EXCEPTION" property="exception"/>
+    	<result column="DEVICE_MANUFACTURER" property="deviceManufacturer"/>
+    	<result column="DEVICE_MODEL" property="deviceModel"/>
+    	<result column="SYSTEM_VER" property="systemVer"/>
+    	<result column="APP_VER" property="appVer"/>
+    	<result column="VISIT_DATE" property="visitDate"/>
+    	<result column="IP" property="ip"/>
+    	<result column="INVOKE_PARAM" property="invokeParam"/>
+    	<result column="VISIT_TIME_COST" property="visitTimeCost"/>
+	</resultMap>
+	
+	<!-- 请在此添加自定义方法（开始） -->
+	<update id="addPartition" parameterType="ooApiAccessLogModel">
+		ALTER TABLE API_ACCESS_LOG  ADD PARTITION (PARTITION ${partitionName} VALUES LESS THAN (to_days(${partitionValue})));
+	</update>
+	
+	<select id="getApiLogPage" parameterType="java.util.HashMap" resultMap="OoApiAccessLogBaseResult">
+	   SELECT ID,USER_ID,INVOKE_METHOD,METHOD_VER,RESULT_TYPE,RESULT_CODE,RESULT_MSG,EXCEPTION,DEVICE_MANUFACTURER,DEVICE_MODEL,SYSTEM_VER,APP_VER,VISIT_DATE,IP,INVOKE_PARAM,VISIT_TIME_COST
+           FROM API_ACCESS_LOG  WHERE 1=1
+	   <if test="logModel!=null and logModel.userId!=null">
+          AND USER_ID = #{logModel.userId}
+       </if>
+       <if test="logModel!=null and logModel.invokeMethod!=null and logModel.invokeMethod!=''">
+          AND INVOKE_METHOD = #{logModel.invokeMethod}
+       </if>
+       <if test="logModel!=null and logModel.resultType!=null">
+          AND RESULT_TYPE = #{logModel.resultType}
+       </if>
+        <if test="logModel!=null and logModel.deviceManufacturer!=null and logModel.deviceManufacturer!=''">
+          AND DEVICE_MANUFACTURER = #{logModel.deviceManufacturer}
+       </if>
+        <if test="logModel!=null and logModel.beginTime!=null">
+          AND VISIT_DATE  &gt;= #{logModel.beginTime}
+       </if>
+        <if test="logModel!=null and logModel.endTime!=null">
+          AND VISIT_DATE  &lt;= #{logModel.endTime}
+       </if>
+	</select>
+	<select id="getCountByCiteria" parameterType="java.util.HashMap" resultType="Integer">
+	   SELECT count(1) FROM API_ACCESS_LOG  WHERE 1=1
+	  <if test="logModel!=null and logModel.userId!=null">
+          AND USER_ID = #{logModel.userId}
+       </if>
+       <if test="logModel!=null and logModel.invokeMethod!=null and logModel.invokeMethod!=''">
+          AND INVOKE_METHOD = #{logModel.invokeMethod}
+       </if>
+       <if test="logModel!=null and logModel.resultType!=null">
+          AND RESULT_TYPE = #{logModel.resultType}
+       </if>
+        <if test="logModel!=null and logModel.deviceManufacturer!=null and logModel.deviceManufacturer!=''">
+          AND DEVICE_MANUFACTURER = #{logModel.deviceManufacturer}
+       </if>
+        <if test="logModel!=null and logModel.beginTime!=null">
+          AND VISIT_DATE  &gt;= #{logModel.beginTime}
+       </if>
+        <if test="logModel!=null and logModel.endTime!=null">
+          AND VISIT_DATE  &lt;= #{logModel.endTime}
+       </if>
+	</select>
+
+	<update id="deletePartition" parameterType="ooApiAccessLogModel">
+		ALTER TABLE API_ACCESS_LOG  DROP PARTITION ${partitionName};
+	</update>
+
+	<!-- 请在此添加自定义方法（结束） -->
+	
+	<select id="getObjectById" parameterType="Long" resultMap="OoApiAccessLogBaseResult" >
+		SELECT ID,USER_ID,INVOKE_METHOD,METHOD_VER,RESULT_TYPE,RESULT_CODE,RESULT_MSG,EXCEPTION,DEVICE_MANUFACTURER,DEVICE_MODEL,SYSTEM_VER,APP_VER,VISIT_DATE,IP,INVOKE_PARAM,VISIT_TIME_COST
+          FROM API_ACCESS_LOG  WHERE ID = #{id}
+	</select>
+	
+	<select id="getObjectByModel" parameterType="ooApiAccessLogModel" resultMap="OoApiAccessLogBaseResult" >
+		SELECT ID,USER_ID,INVOKE_METHOD,METHOD_VER,RESULT_TYPE,RESULT_CODE,RESULT_MSG,EXCEPTION,DEVICE_MANUFACTURER,DEVICE_MODEL,SYSTEM_VER,APP_VER,VISIT_DATE,IP,INVOKE_PARAM,VISIT_TIME_COST
+		FROM API_ACCESS_LOG  
+		<where>
+			<if test="id != null">
+				AND ID = #{id}
+			</if>
+			<if test="userId != null">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="invokeMethod != null">
+				AND INVOKE_METHOD = #{invokeMethod}
+			</if>
+			<if test="methodVer != null">
+				AND METHOD_VER = #{methodVer}
+			</if>
+			<if test="resultType != null">
+				AND RESULT_TYPE = #{resultType}
+			</if>
+			<if test="resultCode != null">
+				AND RESULT_CODE = #{resultCode}
+			</if>
+			<if test="deviceManufacturer != null">
+				AND DEVICE_MANUFACTURER = #{deviceManufacturer}
+			</if>
+			<if test="deviceModel != null">
+				AND DEVICE_MODEL = #{deviceModel}
+			</if>
+			<if test="systemVer != null">
+				AND SYSTEM_VER = #{systemVer}
+			</if>
+			<if test="appVer != null">
+				AND APP_VER = #{appVer}
+			</if>
+			<if test="visitDate != null">
+				AND VISIT_DATE = #{visitDate}
+			</if>
+			<if test="ip != null">
+				AND IP = #{ip}
+			</if>
+			<if test="invokeParam != null">
+				AND INVOKE_PARAM = #{invokeParam}
+			</if>
+			<if test="visitTimeCost != null">
+				AND VISIT_TIME_COST = #{visitTimeCost}
+			</if>
+		</where>	
+	</select>
+	
+	<select id="getListByModel" parameterType="ooApiAccessLogModel" resultMap="OoApiAccessLogBaseResult" >
+		SELECT ID,USER_ID,INVOKE_METHOD,METHOD_VER,RESULT_TYPE,RESULT_CODE,RESULT_MSG,EXCEPTION,DEVICE_MANUFACTURER,DEVICE_MODEL,SYSTEM_VER,APP_VER,VISIT_DATE,IP,INVOKE_PARAM,VISIT_TIME_COST
+		FROM API_ACCESS_LOG  
+		<where>
+			<if test="id != null">
+				AND ID = #{id}
+			</if>
+			<if test="userId != null">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="invokeMethod != null">
+				AND INVOKE_METHOD = #{invokeMethod}
+			</if>
+			<if test="methodVer != null">
+				AND METHOD_VER = #{methodVer}
+			</if>
+			<if test="resultType != null">
+				AND RESULT_TYPE = #{resultType}
+			</if>
+			<if test="resultCode != null">
+				AND RESULT_CODE = #{resultCode}
+			</if>
+			<if test="deviceManufacturer != null">
+				AND DEVICE_MANUFACTURER = #{deviceManufacturer}
+			</if>
+			<if test="deviceModel != null">
+				AND DEVICE_MODEL = #{deviceModel}
+			</if>
+			<if test="systemVer != null">
+				AND SYSTEM_VER = #{systemVer}
+			</if>
+			<if test="appVer != null">
+				AND APP_VER = #{appVer}
+			</if>
+			<if test="fromDate != null">
+				AND VISIT_DATE <![CDATA[ >=]]> date_format(#{fromDate},'%Y-%c-%d %H:%i:%S') 
+			</if>
+			<if test="toDate != null">
+				AND VISIT_DATE  <![CDATA[ <]]> date_format(#{toDate},'%Y-%c-%d %H:%i:%S') 
+			</if>
+			<if test="ip != null">
+				AND IP = #{ip}
+			</if>
+			<if test="invokeParam != null">
+				AND INVOKE_PARAM = #{invokeParam}
+			</if>
+			<if test="visitTimeCost != null">
+				AND VISIT_TIME_COST = #{visitTimeCost}
+			</if>
+		</where>	
+	</select>
+	
+	<insert id="insertModel" parameterType="ooApiAccessLogModel" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO API_ACCESS_LOG (
+				ID,
+				USER_ID,
+				INVOKE_METHOD,
+				METHOD_VER,
+				RESULT_TYPE,
+				RESULT_CODE,
+				RESULT_MSG,
+				EXCEPTION,
+				DEVICE_MANUFACTURER,
+				DEVICE_MODEL,
+				SYSTEM_VER,
+				APP_VER,
+				VISIT_DATE,
+				IP,
+				INVOKE_PARAM,
+				VISIT_TIME_COST
+			) VALUES ( 
+				#{id},
+				#{userId},
+				#{invokeMethod},
+				#{methodVer},
+				#{resultType},
+				#{resultCode},
+				#{resultMsg},
+				#{exception},
+				#{deviceManufacturer},
+				#{deviceModel},
+				#{systemVer},
+				#{appVer},
+				#{visitDate},
+				#{ip},
+				#{invokeParam},
+				#{visitTimeCost}
+			)
+	</insert>
+
+	<update id="updateModelById" parameterType="ooApiAccessLogModel">
+		UPDATE 
+			API_ACCESS_LOG 
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId},
+			</if>
+			<if test="invokeMethod != null">
+				INVOKE_METHOD = #{invokeMethod},
+			</if>
+			<if test="methodVer != null">
+				METHOD_VER = #{methodVer},
+			</if>
+			<if test="resultType != null">
+				RESULT_TYPE = #{resultType},
+			</if>
+			<if test="resultCode != null">
+				RESULT_CODE = #{resultCode},
+			</if>
+			<if test="deviceManufacturer != null">
+				DEVICE_MANUFACTURER = #{deviceManufacturer},
+			</if>
+			<if test="deviceModel != null">
+				DEVICE_MODEL = #{deviceModel},
+			</if>
+			<if test="systemVer != null">
+				SYSTEM_VER = #{systemVer},
+			</if>
+			<if test="appVer != null">
+				APP_VER = #{appVer},
+			</if>
+			<if test="visitDate != null">
+				VISIT_DATE = #{visitDate},
+			</if>
+			<if test="ip != null">
+				IP = #{ip},
+			</if>
+			<if test="invokeParam != null">
+				INVOKE_PARAM = #{invokeParam},
+			</if>
+			<if test="visitTimeCost != null">
+				VISIT_TIME_COST = #{visitTimeCost}
+			</if>
+		</set>
+		WHERE 
+			ID = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="Long" >
+		DELETE FROM API_ACCESS_LOG  WHERE ID = #{id}
+	</delete>
+	
+</mapper>
