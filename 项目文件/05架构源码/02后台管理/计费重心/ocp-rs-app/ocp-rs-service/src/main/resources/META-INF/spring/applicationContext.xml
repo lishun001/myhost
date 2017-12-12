@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"  
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+   
+    <context:annotation-config />
+    
+    <context:component-scan base-package="com.rs.ocp.service" />
+    
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+        <property name="host" value="smtp.exmail.qq.com" />  
+        <property name="username" value="service@rshui.cn" />  
+        <property name="password" value="rshui123456" />  
+        <property name="javaMailProperties">  
+            <props>  
+                <prop key="mail.smtp.auth">true</prop>  
+                <prop key="mail.smtp.timeout">25000</prop>  
+            </props>  
+        </property>  
+    </bean> 
+    
+    <bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="service@rshui.cn"/>
+    </bean>
+    
+    <bean id="mailSenderService" class="com.rs.ocp.service.MailSenderService">
+        <property name="javaMailSender" ref="javaMailSender"/>
+        <property name="simpleMailMessage" ref="simpleMailMessage"/>
+        <property name="user_propties" value="E:/user_mails.properties"/>
+    </bean>
+</beans>
