@@ -146,7 +146,7 @@ public class IndexServiceImpl implements IIndexService {
             return pageModel;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 
@@ -162,7 +162,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 
@@ -178,7 +178,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 }

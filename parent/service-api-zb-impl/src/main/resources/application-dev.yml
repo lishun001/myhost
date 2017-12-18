@@ -2,10 +2,6 @@ spring.devtools.restart.enabled: true
 spring.devtools.restart.additional-paths: ${spring.application.name}/src/main/java
 spring.devtools.restart.exclude: WEB-INF/**
 
-spring.jpa.database:  mysql
-spring.jpa.show-sql:  false
-
-
 logging.level.root: INFO
 logging.level.org.springframework.web: WARN
 logging.level.com.eason: ERROR

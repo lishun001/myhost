@@ -35,12 +35,12 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token=" + api_token + " is error");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.isCharged(userId, roomId));
@@ -78,12 +78,12 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token="+api_token+" is error");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             responseVo = new ResponseVo(0, "操作成功");
             FileItemModel fileImg = new FileItemModel();
@@ -110,12 +110,12 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token=" + api_token + " is error");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
@@ -153,12 +153,12 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token=" + api_token + " is error");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");

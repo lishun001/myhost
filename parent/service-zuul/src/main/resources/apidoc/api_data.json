@@ -57,7 +57,7 @@
     "groupTitle": "礼物API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/gift/getList"
+        "url": "http://192.168.0.138:8769/api/gift/getList"
       }
     ]
   },
@@ -118,7 +118,7 @@
     "groupTitle": "礼物API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/gift/sendBombScreen/{zbId}"
+        "url": "http://192.168.0.138:8769/api/gift/sendBombScreen/{zbId}"
       }
     ]
   },
@@ -186,7 +186,7 @@
     "groupTitle": "礼物API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/gift/sendGift/{zbId}"
+        "url": "http://192.168.0.138:8769/api/gift/sendGift/{zbId}"
       }
     ]
   },
@@ -243,7 +243,7 @@
     "groupTitle": "直播首页API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/index/{category}/getBannerList"
+        "url": "http://192.168.0.138:8769/api/index/{category}/getBannerList"
       }
     ]
   },
@@ -377,7 +377,7 @@
     "groupTitle": "直播首页API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/index/{category}/getIndexList/{position}/{pageSize}"
+        "url": "http://192.168.0.138:8769/api/index/{category}/getIndexList/{position}/{pageSize}"
       }
     ]
   },
@@ -420,7 +420,7 @@
     "groupTitle": "直播首页API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/index/{category}/getMsgNotificationList"
+        "url": "http://192.168.0.138:8769/api/index/{category}/getMsgNotificationList"
       }
     ]
   },
@@ -475,7 +475,7 @@
     "groupTitle": "三方平台API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/platform/im/get/{zbId}"
+        "url": "http://192.168.0.138:8769/api/platform/im/get/{zbId}"
       }
     ]
   },
@@ -523,7 +523,7 @@
     "groupTitle": "三方平台API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/platform/media/get/{zbId}"
+        "url": "http://192.168.0.138:8769/api/platform/media/get/{zbId}"
       }
     ]
   },
@@ -613,7 +613,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/{roomId}/backRoom/{userId}"
+        "url": "http://192.168.0.138:8769/api/room/{roomId}/backRoom/{userId}"
       }
     ]
   },
@@ -913,7 +913,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/{roomId}/enterRoom"
+        "url": "http://192.168.0.138:8769/api/room/{roomId}/enterRoom"
       }
     ]
   },
@@ -1049,7 +1049,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/{roomType}/getRoomSet"
+        "url": "http://192.168.0.138:8769/api/room/{roomType}/getRoomSet"
       }
     ]
   },
@@ -1083,7 +1083,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/getRoomWaterMarkImg"
+        "url": "http://192.168.0.138:8769/api/room/getRoomWaterMarkImg"
       }
     ]
   },
@@ -1282,7 +1282,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/{roomId}/isCharged"
+        "url": "http://192.168.0.138:8769/api/room/{roomId}/isCharged"
       }
     ]
   },
@@ -1329,7 +1329,7 @@
     "groupTitle": "房间API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/room/{roomId}/setRoomBackgroundImg"
+        "url": "http://192.168.0.138:8769/api/room/{roomId}/setRoomBackgroundImg"
       }
     ]
   },
@@ -1363,7 +1363,7 @@
     "groupTitle": "任务API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/task/resetTrySee"
+        "url": "http://192.168.0.138:8769/api/task/resetTrySee"
       }
     ]
   },
@@ -1446,7 +1446,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/user/getDetail"
+        "url": "http://192.168.0.138:8769/api/user/getDetail"
       }
     ]
   },
@@ -1480,7 +1480,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/user/{channel}/isAttention/{userIds}/{isAttention}"
+        "url": "http://192.168.0.138:8769/api/user/{channel}/isAttention/{userIds}/{isAttention}"
       }
     ]
   },
@@ -1514,7 +1514,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/user/{channel}/isBlack/{userIds}/{isBlack}"
+        "url": "http://192.168.0.138:8769/api/user/{channel}/isBlack/{userIds}/{isBlack}"
       }
     ]
   },
@@ -1548,7 +1548,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/user/isBook/{zbId}/{isBook}"
+        "url": "http://192.168.0.138:8769/api/user/isBook/{zbId}/{isBook}"
       }
     ]
   },
@@ -1610,7 +1610,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/user/isTrySee/{roomId}/{isTrySee}"
+        "url": "http://192.168.0.138:8769/api/user/isTrySee/{roomId}/{isTrySee}"
       }
     ]
   },
@@ -1644,7 +1644,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/apply"
+        "url": "http://192.168.0.138:8769/api/zhubo/apply"
       }
     ]
   },
@@ -1713,7 +1713,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/{zbId}/getAttentionUserList"
+        "url": "http://192.168.0.138:8769/api/zhubo/{zbId}/getAttentionUserList"
       }
     ]
   },
@@ -1796,7 +1796,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/{zbId}/getGiftUserList/{category}"
+        "url": "http://192.168.0.138:8769/api/zhubo/{zbId}/getGiftUserList/{category}"
       }
     ]
   },
@@ -2080,7 +2080,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/getReadyPlayInfo"
+        "url": "http://192.168.0.138:8769/api/zhubo/getReadyPlayInfo"
       }
     ]
   },
@@ -2170,7 +2170,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/getStat/{planId}"
+        "url": "http://192.168.0.138:8769/api/zhubo/getStat/{planId}"
       }
     ]
   },
@@ -2281,7 +2281,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/getZbDetail/{zbId}"
+        "url": "http://192.168.0.138:8769/api/zhubo/getZbDetail/{zbId}"
       }
     ]
   },
@@ -2343,7 +2343,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/getZhuboList/{num}"
+        "url": "http://192.168.0.138:8769/api/zhubo/getZhuboList/{num}"
       }
     ]
   },
@@ -2377,7 +2377,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/overPlay/{planId}"
+        "url": "http://192.168.0.138:8769/api/zhubo/overPlay/{planId}"
       }
     ]
   },
@@ -2411,7 +2411,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/saveVideo/{planId}"
+        "url": "http://192.168.0.138:8769/api/zhubo/saveVideo/{planId}"
       }
     ]
   },
@@ -2598,7 +2598,7 @@
     "groupTitle": "主播API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.109:8769/api/zhubo/startPlay"
+        "url": "http://192.168.0.138:8769/api/zhubo/startPlay"
       }
     ]
   }

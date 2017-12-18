@@ -38,12 +38,12 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token="+api_token+" is error");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isTrySee(userId, roomId, isTrySee));
@@ -67,12 +67,12 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token="+api_token+" is error");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isAttention(userId, channel, userIds, isAttention));
@@ -109,12 +109,12 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token="+api_token+" is error");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isBook(userId, zbId, isBook));
@@ -138,12 +138,12 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                    throw new ServiceException("token="+api_token+" is error");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("您未登陆");
+                throw new ServiceException("token is empty");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isBlack(userId, channel,userIds, isBlack));
