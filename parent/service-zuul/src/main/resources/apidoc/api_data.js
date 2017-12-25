@@ -575,6 +575,20 @@ define({ "api": [
             "group": "Success 200",
             "type": "Integer",
             "optional": false,
+            "field": "onlineUser",
+            "description": "<p>房间当前在线用户</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "machineUser",
+            "description": "<p>房间机器人用户</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
             "field": "incomeAmount",
             "description": "<p>累计收益</p>"
           },
@@ -673,7 +687,7 @@ define({ "api": [
             "type": "Integer",
             "optional": false,
             "field": "machineUser",
-            "description": "<p>房间用户</p>"
+            "description": "<p>房间机器人用户</p>"
           },
           {
             "group": "Success 200",
@@ -1462,7 +1476,7 @@ define({ "api": [
     "url": "/user/{channel}/isAttention/{userIds}/{isAttention}",
     "title": "关注/取消关注",
     "name": "isAttention",
-    "description": "<blockquote> <p>用户关注主播，或者用户关注用户，关注与未关注来回切换</br> isAttention=true,false </br> channel= (1=房间、2=个人中心、3=私信、4=收藏推荐)</br> 支持一键关注格式：userIds=1,2,3 用英文逗号,隔开</p> </blockquote>",
+    "description": "<blockquote> <p>用户关注主播，或者用户关注用户，关注与未关注来回切换</br> isAttention=true,false </br> channel= (1=房间、2=个人中心、3=私信、4=收藏推荐)</br> 支持一键关注格式：userIds=1,2,3 用英文逗号,隔开 </br></p> </blockquote>",
     "success": {
       "fields": {
         "Success 200": [
@@ -1496,7 +1510,7 @@ define({ "api": [
     "url": "/user/{channel}/isBlack/{userIds}/{isBlack}",
     "title": "拉黑/取消拉黑",
     "name": "isBlack",
-    "description": "<blockquote> <p>用户拉黑主播，或者用户拉黑用户，拉黑与未拉黑来回切换</br> isBlack=true,false </br> channel= (1=房间、2=个人中心、3=私信、4=收藏推荐)</br> 支持一键关注格式：userIds=1,2,3 用英文逗号,隔开</p> </blockquote>",
+    "description": "<blockquote> <p>用户拉黑主播，或者用户拉黑用户，拉黑与未拉黑来回切换</br> isBlack=true,false </br> ture 代表 拉黑用户，userIds是用户id false 代表 取消拉黑，userIds是用户id channel= (1=房间、2=个人中心、3=私信、4=收藏推荐)</br> 支持一键关注格式：userIds=1,2,3 用英文逗号,隔开</p> </blockquote>",
     "success": {
       "fields": {
         "Success 200": [
@@ -1530,7 +1544,7 @@ define({ "api": [
     "url": "/user/isBook/{zbId}/{isBook}",
     "title": "预约/取消预约",
     "name": "isBook",
-    "description": "<blockquote> <p>用户提前预约主播，进行私密userId传递，主播可以根据userId进行私密直播</br> isBook=true,false </br></p> </blockquote>",
+    "description": "<blockquote> <p>用户提前预约主播，进行私密userId传递，主播可以根据userId进行私密直播</br> isBook=true,false </br> true代表 需要预约，zbId是主播id false代表 取消预约，zbId是主播id</p> </blockquote>",
     "success": {
       "fields": {
         "Success 200": [
@@ -1564,7 +1578,7 @@ define({ "api": [
     "url": "/user/isTrySee/{roomId}/{isTrySee}",
     "title": "开始/结束试看",
     "name": "isTrySee",
-    "description": "<blockquote> <p>判断当前VIP用户是否能试看，如果可以开始试看</br> isTrySee=true,false</br></p> </blockquote>",
+    "description": "<blockquote> <p>判断当前VIP用户是否能试看，如果可以开始试看</br> isTrySee=true,false</br> ture是开始试看，就等同于你点击开始试看的按钮，返给你isTrysee=0代表能够试看，1代表不能试看 </br> false是结束试看，就等同于你点击结束试看的按钮，表示你试看时间已经全部看完了 </br> 并不是你点击试看，就代表试看结束的；你需要调用结束试看的这个动作，服务器才知道已经试看结束了 </br></p> </blockquote>",
     "success": {
       "fields": {
         "Success 200": [
@@ -2127,6 +2141,20 @@ define({ "api": [
             "optional": false,
             "field": "activityTime",
             "description": "<p>直播时长</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "onlineUser",
+            "description": "<p>房间当前在线用户</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "machineUser",
+            "description": "<p>房间机器人用户</p>"
           },
           {
             "group": "Success 200",

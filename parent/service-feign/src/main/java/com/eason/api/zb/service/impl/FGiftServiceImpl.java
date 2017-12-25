@@ -12,16 +12,16 @@ public class FGiftServiceImpl implements FGiftService {
 
     @Override
     public List<GiftResponseVo> getList(Integer userId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public SendGiftResponseVo sendGift(Integer userId, Integer zbId, SendGiftRequestVo vo) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public SendBombScreenResponseVo sendBombScreen(Integer userId, Integer zbId, SendBombScreenRequestVo vo) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }

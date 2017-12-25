@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,7 +103,7 @@ public class RoomServiceImpl implements IRoomService {
             //（2）验证房间状态：
             ZbTRoomPlan zbTRoomPlan = roomPlanDao.findByRoomId(roomId);
             if (zbTRoomPlan == null) {
-                throw new ServiceException("房间ID(roomId=" + roomId + ")还未开播");
+                throw new ServiceException("房间还未开播");
             }
             //（3）获取直播统计数据缓存: 热门排行，砖石数，礼物数，观看人数等
             responseVo.setPlanId(zbTRoomPlan.getPlanId());
@@ -192,7 +193,7 @@ public class RoomServiceImpl implements IRoomService {
 
             return responseVo;
         } catch (Exception e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -201,7 +202,7 @@ public class RoomServiceImpl implements IRoomService {
      * 主播主动结束退出直播
      * （1）房间id验证，当前房间是否在直播中
      * （2）获取缓存该房间场次的信息，收益做账统计，存储到DB
-     * （3）清除该房间场次信息缓存，清楚该场次的门票、预约等信息
+     * （3）清除该房间场次信息缓存，清楚该场次的门票、预约，清除media+im缓存信息
      * （4）更改房间状态status=1（直播中）—>2（未开播）
      * （5）返回统计信息
      * @param userId
@@ -216,10 +217,10 @@ public class RoomServiceImpl implements IRoomService {
             //（1）房间id验证，当前房间是否在直播中
             ZbTRoomPlan zbTRoomPlan = this.roomPlanDao.findByRoomId(roomId);
             if (zbTRoomPlan == null) {
-                throw new ServiceException("房间ID(roomId=" + roomId + ")当前房间还未开播");
+                throw new ServiceException("当前房间还未开播");
             }
             if (!userId.equals(zbTRoomPlan.getUserId())) {
-                throw new ServiceException("房间ID(userId=" + userId + ")不是当前房间的主播");
+                throw new ServiceException("您不是当前房间的主播");
             }
             //（2）获取缓存该房间场次的信息，收益做账统计，存储到DB
             ZbTRoomPlanStat zbTRoomPlanStat = new ZbTRoomPlanStat();
@@ -228,9 +229,18 @@ public class RoomServiceImpl implements IRoomService {
             zbTRoomPlanStat.setZbId(zbTRoomPlan.getZbId());
             zbTRoomPlanStat.setRoomTitle(zbTRoomPlan.getRoomTitle());
             zbTRoomPlanStat.setRoomType(zbTRoomPlan.getRoomType());
+            Map<String, Object> map=null;
             if (zbTRoomPlan.getRoomSet() != null) {
-                zbTRoomPlanStat.setZbRoomConf(zbTRoomPlan.getRoomSet().toString());
+                map=zbTRoomPlan.getRoomSet();
+            }else{
+                map=new HashMap<>();
             }
+            map.put("onlineUser",zbTRoomPlan.getOnlineUser());
+            map.put("machineUser",zbTRoomPlan.getMachineUser());
+            map.put("watchCount",zbTRoomPlan.getWatchCount());
+            ObjectMapper objectMapper = new ObjectMapper();
+            String conf=objectMapper.writeValueAsString(map);
+            zbTRoomPlanStat.setZbRoomConf(conf);
             zbTRoomPlanStat.setOpenTime(new Timestamp(zbTRoomPlan.getOpenTime().getTime()));
             zbTRoomPlanStat.setCloseTime(new Timestamp(System.currentTimeMillis()));
             //TODO 与LEO讨论没有异常状态2017-11-23
@@ -244,15 +254,20 @@ public class RoomServiceImpl implements IRoomService {
             zbTRoomPlanStat.setBombScreen_count(zbTRoomPlan.getBombScreen_count());
             zbTRoomPlanStat.setCreate_Time(new Timestamp(System.currentTimeMillis()));
             this.roomPlanStatDao.save(zbTRoomPlanStat);
-            //（3）清除该房间场次信息缓存，清楚该场次的门票、预约等信息
+            //（3.1）清除该房间场次信息缓存，清楚该场次的门票、预约
             if (ZbConstant.Room.Type.personal.name().equals(zbTRoomPlan.getRoomType())) {
                 List<ZbTUserPersonal> zbTUserPersonal = userPersonalDao.findByZbId(zbTRoomPlan.getZbId());
                 zbTUserPersonal.forEach(zbTUserPersonal1 -> {
                     this.userPersonalDao.delete(zbTUserPersonal1);
                 });
             }
-
             this.roomPlanDao.delete(zbTRoomPlan);
+            //（3.2）清除media+im缓存信息
+            ZbTRoomConf zbTRoomConf=this.roomConfDao.findByRoomId(roomId);
+            if (zbTRoomConf!=null){
+                this.roomConfDao.delete(zbTRoomConf);
+            }
+
             //（4）更改房间状态status=1（直播中）—>2（未开播）
             this.roomDao.updateRoomStatusAndAndRoomTitle(zbTRoomPlan.getRoomId(), ZbConstant.Room.status.room_closed, zbTRoomPlan.getRoomTitle());
             //（5）返回统计信息
@@ -261,12 +276,15 @@ public class RoomServiceImpl implements IRoomService {
             roomStatResponseVo.setActivityTime(zbTRoomPlanStat.getActivityTime());
             roomStatResponseVo.setBombScreenCount(zbTRoomPlan.getBombScreen_count());
             roomStatResponseVo.setGiftCount(zbTRoomPlan.getGiftCount());
+            roomStatResponseVo.setOnlineUser(zbTRoomPlan.getOnlineUser());
+            roomStatResponseVo.setMachineUser(zbTRoomPlan.getMachineUser());
+            roomStatResponseVo.setWatchCount(zbTRoomPlan.getWatchCount());
             roomStatResponseVo.setIncomeAmount(zbTRoomPlan.getIncomeAmount());
             roomStatResponseVo.setViewCount(zbTRoomPlan.getViewCount());
             Integer attentionUser=this.userAttentionDao.findATotalByFId(zbTRoomPlan.getUserId());
             roomStatResponseVo.setAttentionCount(attentionUser);
             return roomStatResponseVo;
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
     }
@@ -284,7 +302,7 @@ public class RoomServiceImpl implements IRoomService {
         try {
             ZbTRoomPlan zbTRoomPlan = roomPlanDao.findByRoomId(roomId);
             if (zbTRoomPlan == null) {
-                throw new ServiceException("抱歉，房间" + roomId + "还未开播");
+                throw new ServiceException("抱歉，房间还未开播");
             }
             IsChargedResponseVo responseVo = new IsChargedResponseVo();
             responseVo.setRoomId(zbTRoomPlan.getRoomId());
@@ -295,13 +313,22 @@ public class RoomServiceImpl implements IRoomService {
             String userTrySee = ops.get(userId + "");
             responseVo.setUserId(userId);
             if (StringUtils.isEmpty(userTrySee)) {
+                ZbUcUser zbUcUser=ucUserDao.findOne(userId);
                 responseVo.setIsTrySee(0);
+                if (zbUcUser.getVip()==0){
+//                    throw new ServiceException("您不是VIP用户");
+                    responseVo.setIsTrySee(1);
+                }
+                if (new Date().compareTo(zbUcUser.getExVipTime())>=0){
+//                    throw new ServiceException("您的试看时间过期");
+                    responseVo.setIsTrySee(1);
+                }
                 //TODO 会员试看时间，随等级的变化而变化
                 responseVo.setAllowTime(30);
             } else {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, Object> trySeeMap = objectMapper.readValue(userTrySee, Map.class);
-                responseVo.setIsTrySee((Integer) trySeeMap.get("isTrySee"));
+                responseVo.setIsTrySee(1);
                 responseVo.setAllowTime((Integer) trySeeMap.get("allowTime"));
             }
 
@@ -317,7 +344,7 @@ public class RoomServiceImpl implements IRoomService {
 
             if (ZbConstant.Room.Type.time.name().equals(zbTRoomPlan.getRoomType())) {
                 responseVo.setSelectPrice((Integer) zbTRoomPlan.getRoomSet().get("selectPrice"));
-                responseVo.setTimeInterval((Integer) zbTRoomPlan.getRoomSet().get("selectPrice"));
+                responseVo.setTimeInterval((Integer) zbTRoomPlan.getRoomSet().get("timeInterval"));
             }
 
             if (ZbConstant.Room.Type.personal.name().equals(zbTRoomPlan.getRoomType())) {
@@ -343,7 +370,7 @@ public class RoomServiceImpl implements IRoomService {
             }
             return responseVo;
         } catch (IOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -393,14 +420,14 @@ public class RoomServiceImpl implements IRoomService {
         try {
             ZbTZhubo zbTZhubo = this.zhuboDao.findByUserId(userId);
             if (zbTZhubo == null) {
-                throw new ServiceException("房间(userId=" + userId + ")不是主播");
+                throw new ServiceException("您不是主播");
             }
             ZbTRoom zbTRoom = this.roomDao.findByZbId(zbTZhubo.getZbId());
             if (zbTRoom == null) {
-                throw new ServiceException("房间(userId=" + userId + ")没有创建直播房间");
+                throw new ServiceException("您没有创建直播房间");
             }
             if (zbTRoom.getRoomId() != roomId) {
-                throw new ServiceException("房间(userId=" + userId + ")当前用户的直播间是(roomId=" + zbTRoom.getRoomId() + "),不是(roomId=" + roomId + ")");
+                throw new ServiceException("您的直播间不是这个房间");
             }
             FileCopyUtils.copy(fileImg.getContent(), new File(fileImgLocal + fileImg.getFileName()));
             String pic = fileImgRemote + fileImg.getFileName();

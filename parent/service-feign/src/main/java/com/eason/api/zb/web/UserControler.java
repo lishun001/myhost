@@ -5,6 +5,7 @@ import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.service.FUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
@@ -38,15 +39,23 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isTrySee(userId, roomId, isTrySee));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -67,15 +76,23 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isAttention(userId, channel, userIds, isAttention));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -89,6 +106,14 @@ public class UserControler {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.getDetail(userId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -109,15 +134,23 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isBook(userId, zbId, isBook));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -138,15 +171,23 @@ public class UserControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(userServiceImpl.isBlack(userId, channel,userIds, isBlack));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());

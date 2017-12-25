@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectDictionaryState">
-    <dictionary name="User" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/service-ribbon/pom.xml" />
+        <option value="$PROJECT_DIR$/service-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/service-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/config-client/pom.xml" />
+        <option value="$PROJECT_DIR$/service-api-common/pom.xml" />
+        <option value="$PROJECT_DIR$/service-api-zb/pom.xml" />
+        <option value="$PROJECT_DIR$/service-api-zb-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/service-api-wx-impl/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/branches" />
+                  <option value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/service-scheduler">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/trunk/service-scheduler/branches" />
+                  <option value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/trunk/service-scheduler/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://desktop-ked4ar2/svn/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/05%E6%9E%B6%E6%9E%84%E6%BA%90%E7%A0%81/01%E5%BE%AE%E6%9C%8D%E5%8A%A1API/parent/trunk/service-scheduler/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="mySupportsUserInfoFilter" value="true" />
   </component>
 </project>

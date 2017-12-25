@@ -1,0 +1,494 @@
+2017-12-18 13:20:51,890 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@139e8069: startup date [Mon Dec 18 13:20:51 CST 2017]; root of context hierarchy
+2017-12-18 13:20:52,090 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:20:52,160 - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$86229459] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:20:53,530 - Fetching config from server at: http://localhost:8888
+2017-12-18 13:20:55,115 - Located environment: name=service-api-zb-impl, profiles=[dev], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:20:55,116 - Located property source: CompositePropertySource [name='configService', propertySources=[MapPropertySource {name='configClient'}, MapPropertySource {name='http://118.193.190.240/qvodgitadmin/zb_api_server.git/parent/config-service/zb/service-api-zb-impl-dev.yml'}]]
+2017-12-18 13:20:56,424 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:20:56,481 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:20:56,482 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:20:56,486 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:20:56,488 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:20:56,489 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:20:56,516 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:20:56,558 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:20:56,560 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:20:56,560 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:20:56,561 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:20:56,561 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:20:56,562 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:20:56,562 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:20:56,562 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:20:56,562 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:20:56,563 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:20:56,564 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:20:56,564 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:20:56,564 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:20:56,578 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:20:56,622 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:20:56,622 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:20:56,622 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:20:56,622 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:20:56,623 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:20:56,623 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:20:56,623 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:20:56,623 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:20:56,624 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:20:56,626 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:20:56,626 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:20:56,628 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:20:56,628 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:20:56,635 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:20:56,635 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:20:56,636 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:20:56,636 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:20:56,636 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:20:56,911 - BeanFactory id=38cf49b2-a6fc-34e0-be08-44674348ae2d
+2017-12-18 13:20:56,946 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:20:57,075 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6a08915c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:20:57,144 - Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$9c35379d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:20:57,152 - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$86229459] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:20:57,596 - Starting service [Tomcat]
+2017-12-18 13:20:57,597 - Starting Servlet Engine: Apache Tomcat/8.5.23
+2017-12-18 13:20:57,691 - Initializing Spring embedded WebApplicationContext
+2017-12-18 13:20:58,506 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:20:58,516 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-18 13:20:58,566 - HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-18 13:20:58,567 - HHH000206: hibernate.properties not found
+2017-12-18 13:20:58,568 - HHH000021: Bytecode provider name : javassist
+2017-12-18 13:20:58,601 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-18 13:20:58,693 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-18 13:20:59,062 - HHH000397: Using ASTQueryTranslatorFactory
+2017-12-18 13:20:59,149 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:20:59,634 - Cluster created with settings {hosts=[192.168.0.109:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2017-12-18 13:20:59,756 - Opened connection [connectionId{localValue:1, serverValue:5265}] to 192.168.0.109:27017
+2017-12-18 13:20:59,758 - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.109:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 10]}, minWireVersion=0, maxWireVersion=5, maxDocumentSize=16777216, roundTripTimeNanos=719929}
+2017-12-18 13:20:59,862 - Opened connection [connectionId{localValue:2, serverValue:5266}] to 192.168.0.109:27017
+2017-12-18 13:21:01,214 - Cannot determine local hostname
+2017-12-18 13:21:01,500 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:21:01,501 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:21:01,505 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:21:01,506 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:21:03,219 - SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@372ae784: startup date [Mon Dec 18 13:20:55 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@139e8069] and template loader path [classpath:/templates/]
+2017-12-18 13:21:03,632 - Registering beans for JMX exposure on startup
+2017-12-18 13:21:03,640 - Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-12-18 13:21:03,645 - Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-12-18 13:21:03,645 - Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:21:03,646 - Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:21:03,646 - Bean with name 'serviceRegistryEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:21:03,647 - Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-12-18 13:21:03,649 - Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-12-18 13:21:03,659 - Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-12-18 13:21:03,667 - Located managed bean 'serviceRegistryEndpoint': registering with JMX server as MBean [org.springframework.cloud.client.serviceregistry.endpoint:name=serviceRegistryEndpoint,type=ServiceRegistryEndpoint]
+2017-12-18 13:21:03,671 - Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-12-18 13:21:03,680 - Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=372ae784,type=ConfigurationPropertiesRebinder]
+2017-12-18 13:21:03,684 - Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-12-18 13:21:04,031 - Starting beans in phase 0
+2017-12-18 13:21:04,037 - Setting initial instance status as: STARTING
+2017-12-18 13:21:04,067 - Initializing Eureka in region us-east-1
+2017-12-18 13:21:04,113 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 13:21:04,113 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 13:21:04,189 - Using XML encoding codec XStreamXml
+2017-12-18 13:21:04,189 - Using XML decoding codec XStreamXml
+2017-12-18 13:21:04,394 - Resolving eureka endpoints via configuration
+2017-12-18 13:21:04,426 - Disable delta property : false
+2017-12-18 13:21:04,427 - Single vip registry refresh property : null
+2017-12-18 13:21:04,427 - Force full registry fetch : false
+2017-12-18 13:21:04,427 - Application is null : false
+2017-12-18 13:21:04,427 - Registered Applications size is zero : true
+2017-12-18 13:21:04,427 - Application version is -1: true
+2017-12-18 13:21:04,427 - Getting all instance registry info from the eureka server
+2017-12-18 13:21:04,521 - The response status is 200
+2017-12-18 13:21:04,522 - Starting heartbeat executor: renew interval is: 30
+2017-12-18 13:21:04,525 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2017-12-18 13:21:04,527 - Discovery Client initialized at timestamp 1513574464526 with initial instances count: 4
+2017-12-18 13:21:04,542 - Registering application service-api-zb-impl with eureka with status UP
+2017-12-18 13:21:04,543 - Saw local status change event StatusChangeEvent [timestamp=1513574464543, current=UP, previous=STARTING]
+2017-12-18 13:21:04,545 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762: registering service...
+2017-12-18 13:21:04,573 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762 - registration status: 204
+2017-12-18 13:21:04,631 - Updating port to 8762
+2017-12-18 13:21:04,826 - Fetching config from server at: http://localhost:8888
+2017-12-18 13:21:06,309 - Located environment: name=service-api-zb-impl, profiles=[dev], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:22:36,656 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-12-18 13:24:08,205 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@74200d2d: startup date [Mon Dec 18 13:24:08 CST 2017]; root of context hierarchy
+2017-12-18 13:24:08,386 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:24:08,455 - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$a1d935ca] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:24:09,809 - Fetching config from server at: http://localhost:8888
+2017-12-18 13:24:11,573 - Located environment: name=service-api-zb-impl, profiles=[test], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:24:11,574 - Located property source: CompositePropertySource [name='configService', propertySources=[MapPropertySource {name='configClient'}, MapPropertySource {name='http://118.193.190.240/qvodgitadmin/zb_api_server.git/parent/config-service/zb/service-api-zb-impl-test.yml'}]]
+2017-12-18 13:24:12,819 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:24:12,875 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:24:12,877 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:24:12,881 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:24:12,883 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:24:12,884 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:24:12,913 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:24:12,963 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:24:12,964 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:24:12,965 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:24:12,965 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:24:12,966 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:24:12,966 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:24:12,966 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:24:12,966 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:24:12,967 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:24:12,968 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:24:12,968 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:24:12,968 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:24:12,968 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:24:12,982 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:24:13,023 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:24:13,023 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:24:13,023 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:24:13,024 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:24:13,024 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:24:13,024 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:24:13,025 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:24:13,025 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:24:13,025 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:24:13,027 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:24:13,027 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:24:13,029 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:24:13,029 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:24:13,029 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:24:13,029 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:24:13,029 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:24:13,030 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:24:13,030 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:24:13,270 - BeanFactory id=645573d8-c9e6-378e-aca6-d54227784a39
+2017-12-18 13:24:13,296 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:24:13,408 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$85bf32cd] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:24:13,475 - Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$b7ebd90e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:24:13,484 - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$a1d935ca] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:24:13,922 - Starting service [Tomcat]
+2017-12-18 13:24:13,923 - Starting Servlet Engine: Apache Tomcat/8.5.23
+2017-12-18 13:24:14,009 - Initializing Spring embedded WebApplicationContext
+2017-12-18 13:24:14,752 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:24:14,762 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-18 13:24:14,812 - HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-18 13:24:14,814 - HHH000206: hibernate.properties not found
+2017-12-18 13:24:14,814 - HHH000021: Bytecode provider name : javassist
+2017-12-18 13:24:14,849 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-18 13:24:14,941 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-18 13:24:15,310 - HHH000397: Using ASTQueryTranslatorFactory
+2017-12-18 13:24:15,392 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:24:15,832 - Cluster created with settings {hosts=[192.168.0.109:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2017-12-18 13:24:15,933 - Opened connection [connectionId{localValue:1, serverValue:5267}] to 192.168.0.109:27017
+2017-12-18 13:24:15,935 - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.109:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 10]}, minWireVersion=0, maxWireVersion=5, maxDocumentSize=16777216, roundTripTimeNanos=886329}
+2017-12-18 13:24:16,041 - Opened connection [connectionId{localValue:2, serverValue:5268}] to 192.168.0.109:27017
+2017-12-18 13:24:17,375 - Cannot determine local hostname
+2017-12-18 13:24:17,648 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:24:17,649 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:24:17,653 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:24:17,654 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:24:19,186 - SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5dbd2f59: startup date [Mon Dec 18 13:24:11 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@74200d2d] and template loader path [classpath:/templates/]
+2017-12-18 13:24:19,543 - Registering beans for JMX exposure on startup
+2017-12-18 13:24:19,552 - Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-12-18 13:24:19,556 - Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-12-18 13:24:19,556 - Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:24:19,557 - Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:24:19,557 - Bean with name 'serviceRegistryEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:24:19,559 - Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-12-18 13:24:19,560 - Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-12-18 13:24:19,571 - Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-12-18 13:24:19,578 - Located managed bean 'serviceRegistryEndpoint': registering with JMX server as MBean [org.springframework.cloud.client.serviceregistry.endpoint:name=serviceRegistryEndpoint,type=ServiceRegistryEndpoint]
+2017-12-18 13:24:19,583 - Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-12-18 13:24:19,592 - Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=5dbd2f59,type=ConfigurationPropertiesRebinder]
+2017-12-18 13:24:19,596 - Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-12-18 13:24:19,926 - Starting beans in phase 0
+2017-12-18 13:24:19,932 - Setting initial instance status as: STARTING
+2017-12-18 13:24:19,961 - Initializing Eureka in region us-east-1
+2017-12-18 13:24:20,004 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 13:24:20,005 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 13:24:20,077 - Using XML encoding codec XStreamXml
+2017-12-18 13:24:20,077 - Using XML decoding codec XStreamXml
+2017-12-18 13:24:20,247 - Resolving eureka endpoints via configuration
+2017-12-18 13:24:20,280 - Disable delta property : false
+2017-12-18 13:24:20,281 - Single vip registry refresh property : null
+2017-12-18 13:24:20,281 - Force full registry fetch : false
+2017-12-18 13:24:20,281 - Application is null : false
+2017-12-18 13:24:20,281 - Registered Applications size is zero : true
+2017-12-18 13:24:20,281 - Application version is -1: true
+2017-12-18 13:24:20,281 - Getting all instance registry info from the eureka server
+2017-12-18 13:24:20,375 - The response status is 200
+2017-12-18 13:24:20,377 - Starting heartbeat executor: renew interval is: 30
+2017-12-18 13:24:20,380 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2017-12-18 13:24:20,382 - Discovery Client initialized at timestamp 1513574660382 with initial instances count: 4
+2017-12-18 13:24:20,399 - Registering application service-api-zb-impl with eureka with status UP
+2017-12-18 13:24:20,400 - Saw local status change event StatusChangeEvent [timestamp=1513574660400, current=UP, previous=STARTING]
+2017-12-18 13:24:20,401 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762: registering service...
+2017-12-18 13:24:20,431 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762 - registration status: 204
+2017-12-18 13:24:20,492 - Updating port to 8762
+2017-12-18 13:24:20,858 - Fetching config from server at: http://localhost:8888
+2017-12-18 13:24:22,464 - Located environment: name=service-api-zb-impl, profiles=[test], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:59:27,951 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@728752dd: startup date [Mon Dec 18 13:59:27 CST 2017]; root of context hierarchy
+2017-12-18 13:59:28,241 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:59:28,279 - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$6407dd76] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:59:29,491 - Cannot determine local hostname
+2017-12-18 13:59:29,589 - Setting initial instance status as: STARTING
+2017-12-18 13:59:29,657 - Initializing Eureka in region us-east-1
+2017-12-18 13:59:29,841 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 13:59:29,841 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 13:59:29,908 - Using XML encoding codec XStreamXml
+2017-12-18 13:59:29,908 - Using XML decoding codec XStreamXml
+2017-12-18 13:59:30,078 - Resolving eureka endpoints via configuration
+2017-12-18 13:59:30,109 - Disable delta property : false
+2017-12-18 13:59:30,110 - Single vip registry refresh property : null
+2017-12-18 13:59:30,110 - Force full registry fetch : false
+2017-12-18 13:59:30,110 - Application is null : false
+2017-12-18 13:59:30,110 - Registered Applications size is zero : true
+2017-12-18 13:59:30,111 - Application version is -1: true
+2017-12-18 13:59:30,112 - Getting all instance registry info from the eureka server
+2017-12-18 13:59:30,236 - The response status is 200
+2017-12-18 13:59:30,238 - Not registering with Eureka server per configuration
+2017-12-18 13:59:30,240 - Discovery Client initialized at timestamp 1513576770240 with initial instances count: 4
+2017-12-18 13:59:31,547 - Fetching config from server at: http://localhost:8760/
+2017-12-18 13:59:33,141 - Located environment: name=service-api-zb-impl, profiles=[test], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:59:33,142 - Located property source: CompositePropertySource [name='configService', propertySources=[MapPropertySource {name='configClient'}, MapPropertySource {name='http://118.193.190.240/qvodgitadmin/zb_api_server.git/parent/config-service/zb/service-api-zb-impl-test.yml'}]]
+2017-12-18 13:59:34,398 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:59:34,448 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:59:34,449 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:59:34,452 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:59:34,454 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:59:34,455 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:59:34,479 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:59:34,518 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:59:34,519 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:59:34,519 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:59:34,519 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:59:34,520 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:59:34,520 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:59:34,520 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:59:34,521 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:59:34,521 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:59:34,522 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:59:34,522 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:59:34,522 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:59:34,523 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:59:34,534 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 13:59:34,571 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 13:59:34,572 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 13:59:34,572 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 13:59:34,572 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 13:59:34,572 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 13:59:34,572 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 13:59:34,573 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 13:59:34,573 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 13:59:34,573 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 13:59:34,577 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 13:59:34,577 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 13:59:34,578 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 13:59:34,579 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 13:59:34,579 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 13:59:34,579 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 13:59:34,579 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 13:59:34,580 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 13:59:34,580 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 13:59:34,787 - BeanFactory id=8c51e9d8-a7ae-38dd-971b-118b9f7122cc
+2017-12-18 13:59:34,810 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:59:34,909 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$47edda79] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:59:34,975 - Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$7a1a80ba] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:59:34,981 - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$6407dd76] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:59:35,285 - Starting service [Tomcat]
+2017-12-18 13:59:35,286 - Starting Servlet Engine: Apache Tomcat/8.5.23
+2017-12-18 13:59:35,376 - Initializing Spring embedded WebApplicationContext
+2017-12-18 13:59:36,150 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:59:36,158 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-18 13:59:36,206 - HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-18 13:59:36,208 - HHH000206: hibernate.properties not found
+2017-12-18 13:59:36,208 - HHH000021: Bytecode provider name : javassist
+2017-12-18 13:59:36,241 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-18 13:59:36,328 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-18 13:59:36,701 - HHH000397: Using ASTQueryTranslatorFactory
+2017-12-18 13:59:36,785 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-18 13:59:37,189 - Cluster created with settings {hosts=[192.168.0.109:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2017-12-18 13:59:37,291 - Opened connection [connectionId{localValue:1, serverValue:5271}] to 192.168.0.109:27017
+2017-12-18 13:59:37,293 - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.109:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 10]}, minWireVersion=0, maxWireVersion=5, maxDocumentSize=16777216, roundTripTimeNanos=1084872}
+2017-12-18 13:59:37,413 - Opened connection [connectionId{localValue:2, serverValue:5272}] to 192.168.0.109:27017
+2017-12-18 13:59:38,939 - Cannot determine local hostname
+2017-12-18 13:59:39,313 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:59:39,314 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:59:39,318 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 13:59:39,319 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 13:59:40,621 - SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@13105e7: startup date [Mon Dec 18 13:59:33 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@728752dd] and template loader path [classpath:/templates/]
+2017-12-18 13:59:40,819 - Shutting down DiscoveryClient ...
+2017-12-18 13:59:40,825 - Completed shut down of DiscoveryClient
+2017-12-18 13:59:40,980 - Registering beans for JMX exposure on startup
+2017-12-18 13:59:40,987 - Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-12-18 13:59:40,991 - Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-12-18 13:59:40,991 - Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:59:40,992 - Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:59:40,992 - Bean with name 'serviceRegistryEndpoint' has been autodetected for JMX exposure
+2017-12-18 13:59:40,993 - Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-12-18 13:59:40,995 - Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-12-18 13:59:41,006 - Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-12-18 13:59:41,013 - Located managed bean 'serviceRegistryEndpoint': registering with JMX server as MBean [org.springframework.cloud.client.serviceregistry.endpoint:name=serviceRegistryEndpoint,type=ServiceRegistryEndpoint]
+2017-12-18 13:59:41,017 - Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-12-18 13:59:41,026 - Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=13105e7,type=ConfigurationPropertiesRebinder]
+2017-12-18 13:59:41,030 - Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-12-18 13:59:41,400 - Starting beans in phase 0
+2017-12-18 13:59:41,403 - Setting initial instance status as: STARTING
+2017-12-18 13:59:41,409 - Initializing Eureka in region us-east-1
+2017-12-18 13:59:41,411 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 13:59:41,411 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 13:59:41,411 - Using XML encoding codec XStreamXml
+2017-12-18 13:59:41,411 - Using XML decoding codec XStreamXml
+2017-12-18 13:59:41,482 - Resolving eureka endpoints via configuration
+2017-12-18 13:59:41,483 - Disable delta property : false
+2017-12-18 13:59:41,483 - Single vip registry refresh property : null
+2017-12-18 13:59:41,483 - Force full registry fetch : false
+2017-12-18 13:59:41,483 - Application is null : false
+2017-12-18 13:59:41,483 - Registered Applications size is zero : true
+2017-12-18 13:59:41,483 - Application version is -1: true
+2017-12-18 13:59:41,483 - Getting all instance registry info from the eureka server
+2017-12-18 13:59:41,489 - The response status is 200
+2017-12-18 13:59:41,490 - Starting heartbeat executor: renew interval is: 30
+2017-12-18 13:59:41,492 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2017-12-18 13:59:41,493 - Discovery Client initialized at timestamp 1513576781493 with initial instances count: 5
+2017-12-18 13:59:41,505 - Registering application service-api-zb-impl with eureka with status UP
+2017-12-18 13:59:41,506 - Saw local status change event StatusChangeEvent [timestamp=1513576781505, current=UP, previous=STARTING]
+2017-12-18 13:59:41,507 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762: registering service...
+2017-12-18 13:59:41,530 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762 - registration status: 204
+2017-12-18 13:59:41,587 - Updating port to 8762
+2017-12-18 13:59:42,098 - Fetching config from server at: http://localhost:8760/
+2017-12-18 13:59:43,709 - Located environment: name=service-api-zb-impl, profiles=[test], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 13:59:57,190 - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@54591efd: startup date [Mon Dec 18 13:59:57 CST 2017]; root of context hierarchy
+2017-12-18 13:59:57,477 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 13:59:57,516 - Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$b9a36ee1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 13:59:58,729 - Cannot determine local hostname
+2017-12-18 13:59:58,836 - Setting initial instance status as: STARTING
+2017-12-18 13:59:58,907 - Initializing Eureka in region us-east-1
+2017-12-18 13:59:59,078 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 13:59:59,078 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 13:59:59,146 - Using XML encoding codec XStreamXml
+2017-12-18 13:59:59,147 - Using XML decoding codec XStreamXml
+2017-12-18 13:59:59,312 - Resolving eureka endpoints via configuration
+2017-12-18 13:59:59,346 - Disable delta property : false
+2017-12-18 13:59:59,347 - Single vip registry refresh property : null
+2017-12-18 13:59:59,347 - Force full registry fetch : false
+2017-12-18 13:59:59,347 - Application is null : false
+2017-12-18 13:59:59,347 - Registered Applications size is zero : true
+2017-12-18 13:59:59,348 - Application version is -1: true
+2017-12-18 13:59:59,348 - Getting all instance registry info from the eureka server
+2017-12-18 13:59:59,475 - The response status is 200
+2017-12-18 13:59:59,476 - Not registering with Eureka server per configuration
+2017-12-18 13:59:59,479 - Discovery Client initialized at timestamp 1513576799478 with initial instances count: 4
+2017-12-18 14:00:00,797 - Fetching config from server at: http://localhost:8760/
+2017-12-18 14:00:02,503 - Located environment: name=service-api-zb-impl, profiles=[dev], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 14:00:02,504 - Located property source: CompositePropertySource [name='configService', propertySources=[MapPropertySource {name='configClient'}, MapPropertySource {name='http://118.193.190.240/qvodgitadmin/zb_api_server.git/parent/config-service/zb/service-api-zb-impl-dev.yml'}]]
+2017-12-18 14:00:03,786 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 14:00:03,838 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 14:00:03,839 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 14:00:03,842 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 14:00:03,843 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 14:00:03,844 - Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 14:00:03,869 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 14:00:03,907 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 14:00:03,909 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 14:00:03,909 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 14:00:03,909 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 14:00:03,910 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 14:00:03,910 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 14:00:03,910 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 14:00:03,910 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 14:00:03,911 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 14:00:03,912 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 14:00:03,912 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 14:00:03,912 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 14:00:03,912 - Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 14:00:03,924 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-12-18 14:00:03,962 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomCronDao.
+2017-12-18 14:00:03,963 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomConfDao.
+2017-12-18 14:00:03,963 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.MsgNotificationDao.
+2017-12-18 14:00:03,963 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserAttentionDao.
+2017-12-18 14:00:03,963 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserPersonalDao.
+2017-12-18 14:00:03,963 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserTicketDao.
+2017-12-18 14:00:03,964 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanDao.
+2017-12-18 14:00:03,964 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomRecrecordDao.
+2017-12-18 14:00:03,964 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDao.
+2017-12-18 14:00:03,966 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.GiftListDao.
+2017-12-18 14:00:03,966 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomAttributeDao.
+2017-12-18 14:00:03,967 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.ZhuboDao.
+2017-12-18 14:00:03,968 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UserBlackDao.
+2017-12-18 14:00:03,968 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.IndexBannerDao.
+2017-12-18 14:00:03,968 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomDeleteLogDao.
+2017-12-18 14:00:03,968 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomTypeSetDao.
+2017-12-18 14:00:03,968 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.UcUserDao.
+2017-12-18 14:00:03,969 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.eason.api.zb.dao.RoomPlanStatDao.
+2017-12-18 14:00:04,178 - BeanFactory id=068d2bd6-7f6c-3134-b338-fa863a07bbfe
+2017-12-18 14:00:04,202 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-12-18 14:00:04,301 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9d896be4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 14:00:04,365 - Bean 'org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration' of type [org.springframework.cloud.netflix.metrics.MetricsInterceptorConfiguration$MetricsRestTemplateConfiguration$$EnhancerBySpringCGLIB$$cfb61225] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 14:00:04,371 - Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$b9a36ee1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-12-18 14:00:04,686 - Starting service [Tomcat]
+2017-12-18 14:00:04,686 - Starting Servlet Engine: Apache Tomcat/8.5.23
+2017-12-18 14:00:04,782 - Initializing Spring embedded WebApplicationContext
+2017-12-18 14:00:05,587 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-12-18 14:00:05,595 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-12-18 14:00:05,641 - HHH000412: Hibernate Core {5.0.12.Final}
+2017-12-18 14:00:05,642 - HHH000206: hibernate.properties not found
+2017-12-18 14:00:05,643 - HHH000021: Bytecode provider name : javassist
+2017-12-18 14:00:05,674 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-12-18 14:00:05,775 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-12-18 14:00:06,133 - HHH000397: Using ASTQueryTranslatorFactory
+2017-12-18 14:00:06,217 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-12-18 14:00:06,593 - Cluster created with settings {hosts=[192.168.0.109:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2017-12-18 14:00:06,691 - Opened connection [connectionId{localValue:1, serverValue:5273}] to 192.168.0.109:27017
+2017-12-18 14:00:06,693 - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.109:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 10]}, minWireVersion=0, maxWireVersion=5, maxDocumentSize=16777216, roundTripTimeNanos=940943}
+2017-12-18 14:00:06,795 - Opened connection [connectionId{localValue:2, serverValue:5274}] to 192.168.0.109:27017
+2017-12-18 14:00:08,266 - Cannot determine local hostname
+2017-12-18 14:00:08,493 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 14:00:08,494 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 14:00:08,498 - No URLs will be polled as dynamic configuration sources.
+2017-12-18 14:00:08,499 - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2017-12-18 14:00:09,838 - SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7c007b62: startup date [Mon Dec 18 14:00:02 CST 2017]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@54591efd] and template loader path [classpath:/templates/]
+2017-12-18 14:00:10,041 - Shutting down DiscoveryClient ...
+2017-12-18 14:00:10,048 - Completed shut down of DiscoveryClient
+2017-12-18 14:00:10,200 - Registering beans for JMX exposure on startup
+2017-12-18 14:00:10,208 - Bean with name 'environmentManager' has been autodetected for JMX exposure
+2017-12-18 14:00:10,212 - Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2017-12-18 14:00:10,212 - Bean with name 'refreshEndpoint' has been autodetected for JMX exposure
+2017-12-18 14:00:10,213 - Bean with name 'restartEndpoint' has been autodetected for JMX exposure
+2017-12-18 14:00:10,213 - Bean with name 'serviceRegistryEndpoint' has been autodetected for JMX exposure
+2017-12-18 14:00:10,214 - Bean with name 'refreshScope' has been autodetected for JMX exposure
+2017-12-18 14:00:10,216 - Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2017-12-18 14:00:10,227 - Located managed bean 'restartEndpoint': registering with JMX server as MBean [org.springframework.cloud.context.restart:name=restartEndpoint,type=RestartEndpoint]
+2017-12-18 14:00:10,234 - Located managed bean 'serviceRegistryEndpoint': registering with JMX server as MBean [org.springframework.cloud.client.serviceregistry.endpoint:name=serviceRegistryEndpoint,type=ServiceRegistryEndpoint]
+2017-12-18 14:00:10,239 - Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2017-12-18 14:00:10,248 - Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=7c007b62,type=ConfigurationPropertiesRebinder]
+2017-12-18 14:00:10,252 - Located managed bean 'refreshEndpoint': registering with JMX server as MBean [org.springframework.cloud.endpoint:name=refreshEndpoint,type=RefreshEndpoint]
+2017-12-18 14:00:10,638 - Starting beans in phase 0
+2017-12-18 14:00:10,641 - Setting initial instance status as: STARTING
+2017-12-18 14:00:10,648 - Initializing Eureka in region us-east-1
+2017-12-18 14:00:10,649 - Using JSON encoding codec LegacyJacksonJson
+2017-12-18 14:00:10,649 - Using JSON decoding codec LegacyJacksonJson
+2017-12-18 14:00:10,649 - Using XML encoding codec XStreamXml
+2017-12-18 14:00:10,649 - Using XML decoding codec XStreamXml
+2017-12-18 14:00:10,721 - Resolving eureka endpoints via configuration
+2017-12-18 14:00:10,721 - Disable delta property : false
+2017-12-18 14:00:10,721 - Single vip registry refresh property : null
+2017-12-18 14:00:10,722 - Force full registry fetch : false
+2017-12-18 14:00:10,722 - Application is null : false
+2017-12-18 14:00:10,722 - Registered Applications size is zero : true
+2017-12-18 14:00:10,722 - Application version is -1: true
+2017-12-18 14:00:10,722 - Getting all instance registry info from the eureka server
+2017-12-18 14:00:10,726 - The response status is 200
+2017-12-18 14:00:10,727 - Starting heartbeat executor: renew interval is: 30
+2017-12-18 14:00:10,728 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2017-12-18 14:00:10,729 - Discovery Client initialized at timestamp 1513576810729 with initial instances count: 4
+2017-12-18 14:00:10,742 - Registering application service-api-zb-impl with eureka with status UP
+2017-12-18 14:00:10,742 - Saw local status change event StatusChangeEvent [timestamp=1513576810742, current=UP, previous=STARTING]
+2017-12-18 14:00:10,744 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762: registering service...
+2017-12-18 14:00:10,768 - DiscoveryClient_SERVICE-API-ZB-IMPL/localhost:service-api-zb-impl:8762 - registration status: 204
+2017-12-18 14:00:10,822 - Updating port to 8762
+2017-12-18 14:00:11,300 - Fetching config from server at: http://localhost:8760/
+2017-12-18 14:00:12,851 - Located environment: name=service-api-zb-impl, profiles=[dev], label=null, version=d2147ed732fcb531c40ef4ba96648b6a0d7adc9b, state=null
+2017-12-18 14:00:41,421 - Initializing Spring FrameworkServlet 'dispatcherServlet'

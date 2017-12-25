@@ -10,6 +10,7 @@
         <module name="config-server" />
         <module name="eureka-server" />
         <module name="service-api-common" />
+        <module name="service-api-wx-impl" />
         <module name="service-api-zb" />
         <module name="service-api-zb-impl" />
         <module name="service-feign" />
@@ -24,6 +25,7 @@
       <module name="eureka-server" target="1.8" />
       <module name="parent" target="1.5" />
       <module name="service-api-common" target="1.5" />
+      <module name="service-api-wx-impl" target="1.8" />
       <module name="service-api-zb" target="1.8" />
       <module name="service-api-zb-impl" target="1.8" />
       <module name="service-feign" target="1.8" />

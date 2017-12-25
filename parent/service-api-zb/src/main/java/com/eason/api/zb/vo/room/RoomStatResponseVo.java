@@ -8,7 +8,10 @@ public class RoomStatResponseVo implements Serializable {
     private Long activityTime;
     private Integer incomeAmount;
     private Integer attentionCount;
+    private Integer onlineUser;  //房间当前在线用户
+    private Integer machineUser;  //房间用户
     private Integer viewCount;
+    private Integer watchCount;
     private Integer giftCount;
     private Integer bombScreenCount;
     private String roomTitle;
@@ -92,5 +95,29 @@ public class RoomStatResponseVo implements Serializable {
 
     public void setRoomBgPic(String roomBgPic) {
         this.roomBgPic = roomBgPic;
+    }
+
+    public Integer getOnlineUser() {
+        return onlineUser;
+    }
+
+    public void setOnlineUser(Integer onlineUser) {
+        this.onlineUser = onlineUser;
+    }
+
+    public Integer getMachineUser() {
+        return machineUser;
+    }
+
+    public void setMachineUser(Integer machineUser) {
+        this.machineUser = machineUser;
+    }
+
+    public Integer getWatchCount() {
+        return watchCount;
+    }
+
+    public void setWatchCount(Integer watchCount) {
+        this.watchCount = watchCount;
     }
 }

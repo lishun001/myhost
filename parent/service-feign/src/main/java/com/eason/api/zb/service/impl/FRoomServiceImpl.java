@@ -16,31 +16,31 @@ import org.springframework.stereotype.Component;
 public class FRoomServiceImpl implements FRoomService {
     @Override
     public RoomResponseVo enterRoom(Integer userId, Integer roomId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public RoomStatResponseVo backRoom(Integer userId, Integer roomId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public IsChargedResponseVo isCharged(Integer userId, Integer roomId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public RoomSetResponseVo getRoomSet(String roomType) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public String setRoomBackgroundImg(Integer userId, Integer roomId, FileItemModel fileImg) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public String getRoomWaterMarkImg(Integer userId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }

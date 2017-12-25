@@ -2,6 +2,7 @@ package com.eason.api.zb.vo.index;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class IndexResponseVo implements Serializable {
 
@@ -155,5 +156,33 @@ public class IndexResponseVo implements Serializable {
 
     public void setIsCharge(Integer isCharge) {
         this.isCharge = isCharge;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IndexResponseVo that = (IndexResponseVo) o;
+        return Objects.equals(roomId, that.roomId) &&
+                Objects.equals(roomPlanId, that.roomPlanId) &&
+                Objects.equals(zbId, that.zbId) &&
+                Objects.equals(zbNickName, that.zbNickName) &&
+                Objects.equals(zbHeadImg, that.zbHeadImg) &&
+                Objects.equals(zbLevel, that.zbLevel) &&
+                Objects.equals(roomTitle, that.roomTitle) &&
+                Objects.equals(roomType, that.roomType) &&
+                Objects.equals(onlineUser, that.onlineUser) &&
+                Objects.equals(machineUser, that.machineUser) &&
+                Objects.equals(roomBackgroundImg, that.roomBackgroundImg) &&
+                Objects.equals(roomStatus, that.roomStatus) &&
+                Objects.equals(startTime, that.startTime) &&
+                Objects.equals(playUrl, that.playUrl) &&
+                Objects.equals(isCharge, that.isCharge);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(roomId, roomPlanId, zbId, zbNickName, zbHeadImg, zbLevel, roomTitle, roomType, onlineUser, machineUser, roomBackgroundImg, roomStatus, startTime, playUrl, isCharge);
     }
 }

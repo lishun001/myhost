@@ -4,6 +4,7 @@ import com.eason.api.base.vo.response.ResponseVo;
 import com.eason.api.zb.IIndexService;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.service.FIndexService;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
@@ -45,6 +46,10 @@ public class IndexControler  {
             ResponseVo responseVo=new ResponseVo(0,"操作成功");
             responseVo.setData(indexServiceImpl.getIndexList(userId,category,position,pageSize));
             return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo=new ResponseVo(500,e.getMessage());
             responseVo.setData(new HashMap<>());
@@ -58,6 +63,10 @@ public class IndexControler  {
             ResponseVo responseVo=new ResponseVo(0,"操作成功");
             responseVo.setData(indexServiceImpl.getMsgNotification(category));
             return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo=new ResponseVo(500,e.getMessage());
             responseVo.setData(new ArrayList<>());
@@ -70,6 +79,10 @@ public class IndexControler  {
         try {
             ResponseVo responseVo=new ResponseVo(0,"操作成功");
             responseVo.setData(indexServiceImpl.getBannerList(category));
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo=new ResponseVo(500,e.getMessage());

@@ -2,24 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/service-api-zb-impl/src/main/main.iml" filepath="$PROJECT_DIR$/service-api-zb-impl/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-zuul/src/main/main1.iml" filepath="$PROJECT_DIR$/service-zuul/src/main/main1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-api-common/src/main/main2.iml" filepath="$PROJECT_DIR$/service-api-common/src/main/main2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-ribbon/src/main/main3.iml" filepath="$PROJECT_DIR$/service-ribbon/src/main/main3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-client/src/main/main4.iml" filepath="$PROJECT_DIR$/config-client/src/main/main4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/eureka-server/src/main/main5.iml" filepath="$PROJECT_DIR$/eureka-server/src/main/main5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-feign/src/main/main6.iml" filepath="$PROJECT_DIR$/service-feign/src/main/main6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-server/src/main/main7.iml" filepath="$PROJECT_DIR$/config-server/src/main/main7.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-api-zb/src/main/main8.iml" filepath="$PROJECT_DIR$/service-api-zb/src/main/main8.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-scheduler/src/main/main9.iml" filepath="$PROJECT_DIR$/service-scheduler/src/main/main9.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-ribbon/src/test/test.iml" filepath="$PROJECT_DIR$/service-ribbon/src/test/test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-server/src/test/test1.iml" filepath="$PROJECT_DIR$/config-server/src/test/test1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-feign/src/test/test2.iml" filepath="$PROJECT_DIR$/service-feign/src/test/test2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-api-zb-impl/src/test/test3.iml" filepath="$PROJECT_DIR$/service-api-zb-impl/src/test/test3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/eureka-server/src/test/test4.iml" filepath="$PROJECT_DIR$/eureka-server/src/test/test4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-zuul/src/test/test5.iml" filepath="$PROJECT_DIR$/service-zuul/src/test/test5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/config-client/src/test/test6.iml" filepath="$PROJECT_DIR$/config-client/src/test/test6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-scheduler/src/test/test7.iml" filepath="$PROJECT_DIR$/service-scheduler/src/test/test7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-client/config-client.iml" filepath="$PROJECT_DIR$/config-client/config-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-api-common/service-api-common.iml" filepath="$PROJECT_DIR$/service-api-common/service-api-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-api-wx-impl/service-api-wx-impl.iml" filepath="$PROJECT_DIR$/service-api-wx-impl/service-api-wx-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-api-zb/service-api-zb.iml" filepath="$PROJECT_DIR$/service-api-zb/service-api-zb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-api-zb-impl/service-api-zb-impl.iml" filepath="$PROJECT_DIR$/service-api-zb-impl/service-api-zb-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-feign/service-feign.iml" filepath="$PROJECT_DIR$/service-feign/service-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-ribbon/service-ribbon.iml" filepath="$PROJECT_DIR$/service-ribbon/service-ribbon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-scheduler/service-scheduler.iml" filepath="$PROJECT_DIR$/service-scheduler/service-scheduler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-zuul/service-zuul.iml" filepath="$PROJECT_DIR$/service-zuul/service-zuul.iml" />
     </modules>
   </component>
 </project>

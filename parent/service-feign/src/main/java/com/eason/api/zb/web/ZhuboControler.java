@@ -5,6 +5,7 @@ import com.eason.api.zb.IZhuboService;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.service.FZhuboService;
 import com.eason.api.zb.vo.zhubo.StartPlayRequestVo;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,15 +40,23 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.apply(userId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -74,6 +83,10 @@ public class ZhuboControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getZhuboList(userId,num));
             return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new ArrayList<>());
@@ -88,6 +101,10 @@ public class ZhuboControler {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getGiftUserList(zbId, category));
             return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new ArrayList<>());
@@ -100,6 +117,10 @@ public class ZhuboControler {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getAttentionUserList(zbId));
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -120,16 +141,24 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getZbDetail(userId, zbId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -150,16 +179,24 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.startPlay(userId, startPlayRequestVo));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -180,16 +217,24 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.overPlay(userId,planId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -210,18 +255,26 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.saveVideo(userId,planId));
             return responseVo;
-        } catch (Exception e) {
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        }catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -240,17 +293,25 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getReadyPlayInfo(userId,api_token));
             return responseVo;
-        } catch (Exception e) {
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        }catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
             return responseVo;
@@ -269,15 +330,23 @@ public class ZhuboControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token=" + api_token + " is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(zhuboServiceImpl.getStat(userId, planId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        }  catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());

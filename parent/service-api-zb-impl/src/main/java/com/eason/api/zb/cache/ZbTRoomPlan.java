@@ -51,6 +51,8 @@ public class ZbTRoomPlan implements Serializable {
 
     private Integer viewCount;
 
+    private Integer watchCount;
+
     @Indexed(unique = true)
     private Integer zbId;                   //主播ID
 
@@ -257,5 +259,13 @@ public class ZbTRoomPlan implements Serializable {
 
     public void setRoomSet(Map<String, Object> roomSet) {
         this.roomSet = roomSet;
+    }
+
+    public Integer getWatchCount() {
+        return watchCount;
+    }
+
+    public void setWatchCount(Integer watchCount) {
+        this.watchCount = watchCount;
     }
 }

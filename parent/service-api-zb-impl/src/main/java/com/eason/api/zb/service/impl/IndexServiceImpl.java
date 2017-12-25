@@ -119,8 +119,11 @@ public class IndexServiceImpl implements IIndexService {
                         indexResponseVo.setIsCharge(1);  //1=收费
                     }
                 }
-
                 list.add(indexResponseVo);
+                if ("4".equals(category) && indexResponseVo.getIsCharge()==0){
+                    list.remove(indexResponseVo);
+                }
+
             });
             if ("2".equals(category) && !logList.isEmpty()){
                 logList.forEach(zbTRecrecordsLog -> {
@@ -146,7 +149,7 @@ public class IndexServiceImpl implements IIndexService {
             return pageModel;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -162,7 +165,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -178,7 +181,7 @@ public class IndexServiceImpl implements IIndexService {
             return list;
         } catch (Exception e) {
             logger.error("index",e.getMessage());
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 }

@@ -17,16 +17,16 @@ import java.util.List;
 public class FIndexServiceImpl implements FIndexService {
     @Override
     public PageModel<IndexResponseVo> getIndexList(Integer userId, String category, Integer position, Integer pageSize) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public List<BannerResponseVo> getBannerList(String category) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public List<MsgNotificationResponseVo> getMsgNotification(String category) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }

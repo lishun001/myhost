@@ -8,6 +8,7 @@ import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.po.ZbTUserAttention;
 import com.eason.api.zb.po.ZbTUserBlacklist;
 import com.eason.api.zb.po.ZbTZhubo;
+import com.eason.api.zb.po.ZbUcUser;
 import com.eason.api.zb.vo.user.TrySeeResponseVo;
 import com.eason.api.zb.vo.user.UserResponseVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,6 +35,8 @@ public class UserServiceImpl implements IUserService {
     private UserAttentionDao userAttentionDao;
     @Autowired
     private ZhuboDao zhuboDao;
+    @Autowired
+    private UcUserDao ucUserDao;
     @Autowired
     private RoomPlanDao roomPlanDao;
     @Autowired
@@ -66,8 +69,16 @@ public class UserServiceImpl implements IUserService {
         try {
             ZbTRoomPlan zbTRoomPlan = this.roomPlanDao.findByRoomId(roomId);
             if (zbTRoomPlan == null) {
-                throw new ServiceException("当前房间(roomId=" + roomId + ")还未开播");
+                throw new ServiceException("当前房间还未开播");
             }
+            ZbUcUser zbUcUser=ucUserDao.findOne(userId);
+            if (zbUcUser.getVip()==0){
+                throw new ServiceException("您不是VIP用户");
+            }
+            if (new Date().compareTo(zbUcUser.getExVipTime())>=0){
+                throw new ServiceException("您的试看时间过期");
+            }
+
             ObjectMapper objectMapper = new ObjectMapper();
             String trySeeUser = (String) stringRedisTemplate.boundHashOps("user_isTrySee").get(String.valueOf(userId));
             if (isTrySee) {
@@ -181,12 +192,12 @@ public class UserServiceImpl implements IUserService {
                     ud = Integer.parseInt(id);
                     int count = this.userAttentionDao.findUserById(ud);
                     if (count == 0) {
-                        throw new ServiceException("用户id(userId=" + ud + ")不存在");
+                        throw new ServiceException("用户不存在");
                     } else {
                         userIdList.add(ud);
                     }
                 } catch (Exception e) {
-                    throw new ServiceException("用户id(userId=" + id + ")不存在");
+                    throw new ServiceException("用户不存在");
                 }
             }
 
@@ -209,7 +220,7 @@ public class UserServiceImpl implements IUserService {
                         stringRedisTemplate10.opsForSet().add(key, String.valueOf(userId));
                     }
                 });
-                return "用户userIds=" + userIds + "关注成功";
+                return "用户关注成功";
             } else {
                 userIdList.forEach(ud -> {
                     userAttentionDao.deleteByAIdAndFId(userId, ud);
@@ -219,7 +230,7 @@ public class UserServiceImpl implements IUserService {
                     String key = "user_attention_" + ud;
                     stringRedisTemplate10.opsForSet().remove(key, String.valueOf(userId));
                 });
-                return "用户userIds=" + userIds + "取消成功";
+                return "用户取消关注";
             }
 
         } catch (ServiceException e) {
@@ -244,10 +255,10 @@ public class UserServiceImpl implements IUserService {
         //（1）主播参数验证
         ZbTZhubo zbTZhubo = this.zhuboDao.getOne(zbId);
         if (zbTZhubo == null) {
-            throw new ServiceException("主播id(zbId=" + zbId + ")不存在");
+            throw new ServiceException("主播不存在");
         }
         if (zbTZhubo.getUserId().equals(userId)) {
-            throw new ServiceException("主播id(zbId=" + zbId + ")不能自己预约自己");
+            throw new ServiceException("不能自己预约自己");
         }
         //（2）isBook=true，预约，插入缓存记录
         if (isBook) {
@@ -258,9 +269,9 @@ public class UserServiceImpl implements IUserService {
                 zbTUserPersonal.setZbId(zbId);
                 zbTUserPersonal.setBookTime(new Date());
                 this.userPersonalDao.save(zbTUserPersonal);
-                return "userId=" + userId + "预约zbId=" + zbId + "成功";
+                return  "预约成功";
             } else {
-                return "userId=" + userId + "预约zbId=" + zbId + "已经预约过了";
+                return "已经预约过了";
             }
 
 
@@ -268,9 +279,9 @@ public class UserServiceImpl implements IUserService {
             ZbTUserPersonal zbTUserPersonal = this.userPersonalDao.findByUserIdAndZbId(userId, zbId);
             if (zbTUserPersonal != null) {
                 this.userPersonalDao.delete(zbTUserPersonal);
-                return "userId=" + userId + "取消预约zbId=" + zbId + "成功";
+                return "取消预约";
             } else {
-                return "userId=" + userId + "预约zbId=" + zbId + "并未预约";
+                return "并未预约";
             }
         }
     }
@@ -301,12 +312,12 @@ public class UserServiceImpl implements IUserService {
                     ud = Integer.parseInt(id);
                     int count = this.userAttentionDao.findUserById(ud);
                     if (count == 0) {
-                        throw new ServiceException("用户id(userId=" + ud + ")不存在");
+                        throw new ServiceException("用户不存在");
                     } else {
                         userIdList.add(ud);
                     }
                 } catch (Exception e) {
-                    throw new ServiceException("用户id(userId=" + id + ")不存在");
+                    throw new ServiceException("用户不存在");
                 }
             }
 
@@ -322,12 +333,12 @@ public class UserServiceImpl implements IUserService {
                         this.userBlackDao.saveAndFlush(zbTUserBlacklist);
                     }
                 });
-                return "用户userIds=" + userIds + "拉黑成功";
+                return "用户拉黑成功";
             } else {
                 userIdList.forEach(ud -> {
                     userBlackDao.deleteByUserIdAndBlacklistUserId(userId,ud);
                 });
-                return "用户userIds=" + userIds + "取消拉黑成功";
+                return "用户取消拉黑";
             }
 
         } catch (ServiceException e) {

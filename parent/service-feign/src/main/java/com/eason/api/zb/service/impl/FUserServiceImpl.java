@@ -18,26 +18,26 @@ import java.util.List;
 public class FUserServiceImpl implements FUserService {
     @Override
     public TrySeeResponseVo isTrySee(Integer userId, Integer roomId, Boolean isTrySee) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public String isAttention(Integer userId, Integer channel, String userIds, Boolean isAttention) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public String isBook(Integer userId, Integer zbId, Boolean isBook) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public String isBlack(Integer userId, Integer channel, String userIds, Boolean isBlack) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public UserResponseVo getDetail(Integer userId) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }

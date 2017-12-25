@@ -5,6 +5,7 @@ import com.eason.api.zb.IRoomService;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.model.FileItemModel;
 import com.eason.api.zb.service.FRoomService;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
@@ -35,15 +36,23 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token=" + api_token + " is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.isCharged(userId, roomId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -57,6 +66,10 @@ public class RoomControler {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.getRoomSet(roomType));
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -78,12 +91,12 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token="+api_token+" is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 }else{
                     userId=Integer.parseInt(id);
                 }
             }else{
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
             responseVo = new ResponseVo(0, "操作成功");
             FileItemModel fileImg = new FileItemModel();
@@ -91,6 +104,14 @@ public class RoomControler {
             fileImg.setContent(img.getBytes());
             fileImg.setMimeType(img.getContentType());
             responseVo.setData(roomServiceImpl.setRoomBackgroundImg(userId,roomId, fileImg));
+        } catch (ServiceException e) {
+            responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
+            return responseVo;
         } catch (Exception e) {
             responseVo = new ResponseVo(500, e.getMessage());
             responseVo.setData(new HashMap<>());
@@ -110,16 +131,24 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token=" + api_token + " is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.enterRoom(userId, roomId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -133,6 +162,10 @@ public class RoomControler {
         try {
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.backRoom(userId, roomId));
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());
@@ -153,16 +186,24 @@ public class RoomControler {
                 BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
                 String id = ops.get(api_token);
                 if (id == null) {
-                    throw new ServiceException("token=" + api_token + " is error");
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
                 } else {
                     userId = Integer.parseInt(id);
                 }
             } else {
-                throw new ServiceException("token is empty");
+                throw new ServiceException("您未登陆");
             }
 
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
             responseVo.setData(roomServiceImpl.getRoomWaterMarkImg(userId));
+            return responseVo;
+        } catch (ServiceException e) {
+            ResponseVo responseVo = new ResponseVo(401, e.getMessage());
+            responseVo.setData(new HashMap<>());
+            return responseVo;
+        } catch (HystrixRuntimeException e) {
+            ResponseVo responseVo = new ResponseVo(500, "服务器忙，请重试！");
+            responseVo.setData(new HashMap<>());
             return responseVo;
         } catch (Exception e) {
             ResponseVo responseVo = new ResponseVo(500, e.getMessage());

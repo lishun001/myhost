@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class FTaskServiceImpl implements FTaskService {
     @Override
     public String resetTrySee() throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }

@@ -1,0 +1,29 @@
+endpoints.shutdown.enabled: true
+endpoints.shutdown.sensitive: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+server:
+  port: 8763
+spring:
+  application:
+    name: service-scheduler
+  datasource:
+    url: jdbc:mysql://45.61.238.153:3306/zb_task?useUnicode=true
+    username: qvod
+    password: fe624bdc97a31
+    driver-class-name: com.mysql.jdbc.Driver
+    
+mybatis: 
+  mapper-locations: classpath:com/eason/task/scheduler/mapper/*.xml
+  type-aliases-package: com.eason.task.scheduler.entity
+
+zb:
+  host: 127.0.0.1
+  port: 80
+  api:
+    resetTrySee: http://${zb.host}:${zb.port}/api/task/resetTrySee?token=eason
+
+quartz.config:  quartz-zb.properties

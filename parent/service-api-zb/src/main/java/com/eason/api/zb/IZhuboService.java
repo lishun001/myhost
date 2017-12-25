@@ -297,6 +297,8 @@ public interface IZhuboService {
 	 * @apiSuccess {Integer} statId  记录统计ID
 	 * @apiSuccess {Integer} planId  本场次ID
 	 * @apiSuccess {Long} activityTime  直播时长
+	 * @apiSuccess {Integer} onlineUser  房间当前在线用户
+	 * @apiSuccess {Integer} machineUser 房间机器人用户
 	 * @apiSuccess {Integer} incomeAmount  累计收益
 	 * @apiSuccess {Integer} attentionCount  累计粉丝
 	 * @apiSuccess {Integer} viewCount  累计观看次数

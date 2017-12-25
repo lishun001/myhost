@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 public class FPlatformServiceImpl implements FPlatformService {
     @Override
     public MediaResponseVo getMedia(Integer zbId, String token) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 
     @Override
     public IMResponseVo getIM(Integer zbId, String token) throws ServiceException {
-        return null;
+       throw new ServiceException();
     }
 }
