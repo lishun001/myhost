@@ -14,8 +14,10 @@ public class IndexResponseVo implements Serializable {
     private Integer zbLevel;            //主播等级
     private String roomTitle;     // 房间标题
     private String roomType;     // 房间类型：'normal=普通房间','ticket=门票房间','time=时常房间','personal=私密房间','game=游戏房间'
-     private Integer onlineUser ;   //真实在线用户
+    private Integer onlineUser ;   //真实在线用户
     private Integer machineUser;     //机器用户
+    private Integer viewCount;          //浏览次数
+    private Integer watchCount;          //观看次数
     private String roomBackgroundImg;     // 房间背景图片
     private Integer roomStatus;     // 直播状态： 1=直播中，2=未开播，3=回放中
     private Timestamp startTime;     //房间开播时间
@@ -158,6 +160,22 @@ public class IndexResponseVo implements Serializable {
         this.isCharge = isCharge;
     }
 
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public Integer getWatchCount() {
+        return watchCount;
+    }
+
+    public void setWatchCount(Integer watchCount) {
+        this.watchCount = watchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -173,6 +191,8 @@ public class IndexResponseVo implements Serializable {
                 Objects.equals(roomType, that.roomType) &&
                 Objects.equals(onlineUser, that.onlineUser) &&
                 Objects.equals(machineUser, that.machineUser) &&
+                Objects.equals(viewCount, that.viewCount) &&
+                Objects.equals(watchCount, that.watchCount) &&
                 Objects.equals(roomBackgroundImg, that.roomBackgroundImg) &&
                 Objects.equals(roomStatus, that.roomStatus) &&
                 Objects.equals(startTime, that.startTime) &&
@@ -183,6 +203,6 @@ public class IndexResponseVo implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(roomId, roomPlanId, zbId, zbNickName, zbHeadImg, zbLevel, roomTitle, roomType, onlineUser, machineUser, roomBackgroundImg, roomStatus, startTime, playUrl, isCharge);
+        return Objects.hash(roomId, roomPlanId, zbId, zbNickName, zbHeadImg, zbLevel, roomTitle, roomType, onlineUser, machineUser, viewCount, watchCount, roomBackgroundImg, roomStatus, startTime, playUrl, isCharge);
     }
 }

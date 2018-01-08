@@ -1,6 +1,10 @@
 endpoints.shutdown.enabled: true
 endpoints.shutdown.sensitive: false
 
+logging.level.root: ERROR
+logging.level.org.springframework: INFO
+logging.level.com.eason: ERROR
+
 eureka:
   client:
     serviceUrl:

@@ -59,7 +59,7 @@ public class PlatformServiceImpl implements IPlatformService {
             String media_access_token=platformManager.getMediaAccessToken();
             Map<String,Object> rtmpMap=platformManager.getRtmpUrl(zbId,media_access_token,token);
             if (rtmpMap!=null){
-                MediaResponseVo mediaResponseVo=new MediaResponseVo((String) rtmpMap.get("type"), (String) rtmpMap.get("url"), media_access_token);
+                MediaResponseVo mediaResponseVo=new MediaResponseVo((String) rtmpMap.get("type"), (String) rtmpMap.get("url"), (String) rtmpMap.get("play_url"),media_access_token);
                 zbTRoomConf.setMediaInfo(mediaResponseVo);
                 this.roomConfDao.save(zbTRoomConf);
                 return mediaResponseVo;

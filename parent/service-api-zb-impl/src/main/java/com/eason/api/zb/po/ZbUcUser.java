@@ -119,7 +119,7 @@ public class ZbUcUser  implements Serializable {
     @Basic
     @Column(name = "avatar")
     public String getAvatar() {
-        return avatar;
+        return (avatar==null || "".equals(avatar))?"http://img.qstuanwei.com/baner/mrtx-1.jpg":avatar;
     }
 
     public void setAvatar(String avatar) {

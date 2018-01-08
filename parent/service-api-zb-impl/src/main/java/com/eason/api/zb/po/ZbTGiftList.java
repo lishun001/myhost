@@ -39,6 +39,9 @@ public class ZbTGiftList implements Serializable {
 	@Column(name="order_field")
 	private Integer orderField;
 
+	@Column(name="category")
+	private Integer category;
+
 	@Column(name="special_style")
 	private String specialStyle;
 
@@ -47,6 +50,9 @@ public class ZbTGiftList implements Serializable {
 
 	@Column(name="update_user")
 	private String updateUser;
+
+	@Column(name="status")
+	private Integer status;
 
 	public ZbTGiftList() {
 	}
@@ -131,4 +137,19 @@ public class ZbTGiftList implements Serializable {
 		this.updateUser = updateUser;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getCategory() {
+		return category;
+	}
+
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
 }

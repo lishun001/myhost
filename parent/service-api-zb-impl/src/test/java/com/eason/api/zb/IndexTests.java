@@ -36,7 +36,7 @@ public class IndexTests {
 		indexBanner.setThumbImgUrl("http://indexBanner-iimg-url.png");
 		indexBanner.setCreateUser("admin");
 		indexBanner.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		indexBannerDao.save(indexBanner);
+//		indexBannerDao.save(indexBanner);
 	}
 
 	@Test

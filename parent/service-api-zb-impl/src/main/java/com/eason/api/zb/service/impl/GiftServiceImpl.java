@@ -32,7 +32,9 @@ public class GiftServiceImpl implements IGiftService {
         List<ZbTGiftList> list= giftListDao.findAll(sort);
         List<GiftResponseVo> responseVoList=new ArrayList<>();
         list.forEach(ZbTGiftList->{
-            responseVoList.add(new GiftResponseVo(ZbTGiftList.getGiftId(), ZbTGiftList.getGiftName(), ZbTGiftList.getGiftImg(), ZbTGiftList.getGiftPrice(), ZbTGiftList.getSpecialStyle()));
+            if (ZbTGiftList.getStatus()==8 && ZbTGiftList.getCategory()==1){
+                responseVoList.add(new GiftResponseVo(ZbTGiftList.getGiftId(), ZbTGiftList.getGiftName(), ZbTGiftList.getGiftImg(), ZbTGiftList.getGiftPrice(), ZbTGiftList.getSpecialStyle()));
+            }
         });
         return responseVoList;
     }

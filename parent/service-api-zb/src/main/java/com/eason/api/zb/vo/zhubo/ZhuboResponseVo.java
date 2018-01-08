@@ -9,6 +9,8 @@ public class ZhuboResponseVo implements Serializable {
     private String zbNickname;  //主播昵称
     private Integer zbLevel;            //主播等级
     private String zbHeadImg;    //主播头像
+    private Integer zbUserLevel;    //主播用户等级
+    private Integer zbUserVIP;    //主播用户VIP
     private Integer isAttention;    //用户是否关注
     private Integer isBook;
     private String zbSignature;
@@ -55,6 +57,22 @@ public class ZhuboResponseVo implements Serializable {
 
     public void setZbLevel(Integer zbLevel) {
         this.zbLevel = zbLevel;
+    }
+
+    public Integer getZbUserLevel() {
+        return zbUserLevel;
+    }
+
+    public void setZbUserLevel(Integer zbUserLevel) {
+        this.zbUserLevel = zbUserLevel;
+    }
+
+    public Integer getZbUserVIP() {
+        return zbUserVIP;
+    }
+
+    public void setZbUserVIP(Integer zbUserVIP) {
+        this.zbUserVIP = zbUserVIP;
     }
 
     public String getZbHeadImg() {

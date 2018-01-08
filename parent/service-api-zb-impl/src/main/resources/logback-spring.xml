@@ -15,7 +15,7 @@
 
 
     <!-- 生产环境. -->
-    <springProfile name="prod">
+    <springProfile name="prod,zb">
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springframework.boot" level="ERROR" />
         <logger name="org.springframework.cloud" level="ERROR" />

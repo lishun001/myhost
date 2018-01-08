@@ -25,6 +25,6 @@ public interface FUserService extends IUserService {
     @RequestMapping(value = "/user/{channel}/isBlack/{userIds}/{isBlack}", method = RequestMethod.GET)
     String isBlack(@RequestParam(value = "userId") Integer userId, @PathVariable(value = "channel") Integer channel, @PathVariable(value = "userIds") String userIds, @PathVariable(value = "isBlack") Boolean isBlack) throws ServiceException;
 
-    @RequestMapping(value = "/user/getDetail", method = RequestMethod.GET)
-    UserResponseVo getDetail(@RequestParam(value = "userId") Integer userId) throws ServiceException;
+    @RequestMapping(value = "/user/getDetail/{userId}", method = RequestMethod.GET)
+    UserResponseVo getDetail(@RequestParam(value = "tokenUserId") Integer tokenUserId,@PathVariable(value = "userId") Integer userId) throws ServiceException;
 }

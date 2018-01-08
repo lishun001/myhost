@@ -15,6 +15,9 @@ public class IsChargedResponseVo implements Serializable {
     private Integer selectPrice;
     private Integer timeInterval;
 
+    private Long usedTime;  //已播时长
+    private Long remainTime;    //剩余时长
+
     private Integer personalStatus;
 
 
@@ -104,5 +107,21 @@ public class IsChargedResponseVo implements Serializable {
 
     public void setIsCharge(Integer isCharge) {
         this.isCharge = isCharge;
+    }
+
+    public Long getUsedTime() {
+        return usedTime;
+    }
+
+    public void setUsedTime(Long usedTime) {
+        this.usedTime = usedTime;
+    }
+
+    public Long getRemainTime() {
+        return remainTime;
+    }
+
+    public void setRemainTime(Long remainTime) {
+        this.remainTime = remainTime;
     }
 }

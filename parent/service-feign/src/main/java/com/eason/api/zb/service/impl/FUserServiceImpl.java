@@ -37,7 +37,7 @@ public class FUserServiceImpl implements FUserService {
     }
 
     @Override
-    public UserResponseVo getDetail(Integer userId) throws ServiceException {
+    public UserResponseVo getDetail(Integer tokenUserId, Integer userId) throws ServiceException {
        throw new ServiceException();
     }
 }

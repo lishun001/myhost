@@ -62,19 +62,18 @@ public interface IZhuboService {
 	 * @apiDescription
 	 * > 点击主播头像，进入主播迷你卡，获取主播详情</br>
 	 *
-	 *
-	 * @apiSuccess {Integer} zbId	主播ID
-	 * @apiSuccess {Integer} userId	主播的用户ID
-	 * @apiSuccess {String} zbNickname	主播昵称
+	 * @apiSuccess {Integer} userId	用户ID
+	 * @apiSuccess {String} zbNickname		主播昵称
+	 * @apiSuccess {String} signature		用户签名
+	 * @apiSuccess {Integer} sex		用户性别
+	 * @apiSuccess {String} userHeadImg 	主播头像
 	 * @apiSuccess {Integer} zbLevel		主播等级
-	 * @apiSuccess {String} zbHeadImg 	主播头像
-	 * @apiSuccess {String} zbSignature 主播个性签名
-	 * @apiSuccess {String} zbBackgroundImg  直播背景图片
+	 * @apiSuccess {Integer} userLevel		用户等级
+	 * @apiSuccess {Integer} vipLevel		用户VIP等级
+	 *
 	 * @apiSuccess {Integer} isAttention 用户是否关注（0=未关注，1=已关注）
-	 * @apiSuccess {Integer} isBook 用户是否预约（0=未预约，1=已预约）
-	 * @apiSuccess {Integer} attentionUserTotal 		粉丝：已关注主播的人数
-	 * @apiSuccess {Integer} diamondGiftZBTotal   收礼：主播累计收礼统计
-	 * @apiSuccess {Integer} costTotal	消费
+	 * @apiSuccess {Integer} attentionUserTotal 		粉丝
+	 * @apiSuccess {Integer} diamondGiftZBTotal   收礼
 	 *
 	 */
 	public ZhuboResponseVo getZbDetail(Integer userId,Integer zbId) throws ServiceException;
@@ -165,6 +164,7 @@ public interface IZhuboService {
 	 * @apiSuccess {String="normal","ticket","time","personal","game"} roomType 	房间类型
 	 * @apiSuccess {String} roomTitle  房间标题=直播标题
 	 * @apiSuccess {String} roomBackgroundImg  房间背景图
+	 * @apiSuccess {String} download_url  下载地址
 	 * @apiSuccess {String} result  返回信息
 	 * @apiSuccess {Object} media
 	 * @apiSuccess {Integer} media.type 视频流类型

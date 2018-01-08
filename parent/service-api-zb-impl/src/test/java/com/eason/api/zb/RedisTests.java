@@ -4,6 +4,7 @@ import com.eason.api.zb.cache.ZbTRoomCron;
 import com.eason.api.zb.cache.ZbTRoomPlan;
 import com.eason.api.zb.dao.RoomCronDao;
 import com.eason.api.zb.dao.RoomPlanDao;
+import com.eason.api.zb.model.RedisFactory;
 import com.eason.api.zb.model.ZbConstant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,10 +95,7 @@ public class RedisTests {
     @Test
     public void testGetMap2() {
 //        this.stringRedisTemplate.delete("test");
-        ZbTRoomCron zbTRoomCron=new ZbTRoomCron();
-        zbTRoomCron.setZbId(2);
-        zbTRoomCron.setCron("0/6 * * * * ?");
-        this.roomCronDao.save(zbTRoomCron);
+        stringRedisTemplate.convertAndSend(RedisFactory.redisChat, "333333");
     }
 
 
@@ -128,8 +126,12 @@ public class RedisTests {
         }
         System.out.println(flag);
         System.out.println(now.compareTo(startTime));
+        System.out.println(formatTime(23645789321L));
     }
 
+    public static void main(String[] s) {
+        System.out.println(formatTime(9439166604L));
+    }
     /*
      * 毫秒转化时分秒毫秒
      */

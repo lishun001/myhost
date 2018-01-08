@@ -16,6 +16,7 @@ public class ReadyPlayResponseVo implements Serializable {
     private String roomType;            //房间类型
     private String roomBackgroundImg;      //房间背景图
     private Timestamp openTime;         //开播时间（如果有）
+    private String download_url;    //下载地址
     private String result;
     private MediaResponseVo media=new MediaResponseVo();
     private IMResponseVo im=new IMResponseVo();
@@ -128,5 +129,13 @@ public class ReadyPlayResponseVo implements Serializable {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public String getDownload_url() {
+        return download_url;
+    }
+
+    public void setDownload_url(String download_url) {
+        this.download_url = download_url;
     }
 }
