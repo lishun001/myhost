@@ -13,6 +13,8 @@
         <option value="$PROJECT_DIR$/service-api-zb/pom.xml" />
         <option value="$PROJECT_DIR$/service-api-zb-impl/pom.xml" />
         <option value="$PROJECT_DIR$/service-api-wx-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/socket-server/pom.xml" />
+        <option value="$PROJECT_DIR$/service-admin/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

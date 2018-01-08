@@ -54,6 +54,8 @@ public class ZhuboServiceImpl implements IZhuboService {
     @Autowired
     private UcUserDao ucUserDao;
     @Autowired
+    private QconfigDao qconfigDao;
+    @Autowired
     private UserAttentionDao userAttentionDao;
     @Autowired
     private UserPersonalDao userPersonalDao;
@@ -149,10 +151,13 @@ public class ZhuboServiceImpl implements IZhuboService {
         responseVo.setUserId(zbTRoomPlan.getUserId());
         responseVo.setZbNickname(zbTRoomPlan.getZbNickname());
         responseVo.setZbLevel(zbTRoomPlan.getZbLevel());
+        ZbUcUser zbUcUser=ucUserDao.findOne(userId);
+        responseVo.setZbUserLevel(zbUcUser.getLevel()*1);
+        responseVo.setZbUserVIP(zbUcUser.getVip()*1);
         responseVo.setZbHeadImg(zbTRoomPlan.getZbHeadImg());
         ZbTUserAttention zbTUserAttention = userAttentionDao.findByAIdAndFId(userId, zbTRoomPlan.getUserId());
         if (zbTUserAttention == null) {
-            responseVo.setIsAttention(0);   //0=已关注
+            responseVo.setIsAttention(0);   //0=未关注
         } else {
             responseVo.setIsAttention(1);   //1=已关注
         }
@@ -196,8 +201,8 @@ public class ZhuboServiceImpl implements IZhuboService {
         userResponseVo.setSex(1);
         userResponseVo.setUserHeadImg("http://userHeadImg");
         userResponseVo.setUserLevel(3);
-        userResponseVo.setDiamondBalance(200.2);
-        userResponseVo.setGiftRankNo1(2);
+//        userResponseVo.setDiamondBalance(200.2);
+//        userResponseVo.setGiftRankNo1(2);
         userResponseVo.setDiamondGiftUserTotal(1333);
         diamondRankList.add(userResponseVo);
         return diamondRankList;
@@ -214,10 +219,10 @@ public class ZhuboServiceImpl implements IZhuboService {
      * A.未开播（=2）继续（3-7）
      * B.直播中（=1）直接进入直播间，返回上一次的房间配置信息
      * //C.回访中（=3）UI弹出对话框是否结束回放？？？如果是结束回放，更新房间状态3（回访中）-2（未开播）重新设置房间，UI重启API，继续（1-7）？？？待确定？？？
-     * （4）获取主播权限：TODO 还未设计表
+     * （4）获取主播权限：
      * A.判断主播是否被禁播；UI弹出提示框
      * B.判断是否拥有 时常房间、门票房间、私密房间、游戏房间的开播权限
-     * （5）获取房间属性：TODO 重做设计表
+     * （5）获取房间属性：
      * A.查库—动态配置开播时间、持续时间、门票价格数据等
      * B.配置UI—根据允许的类型从后台拉对应的房间配置数据，动态配置开播时间、持续时间、门票价格UI显示
      * （6）维护表：qvod_zb_t_room
@@ -244,6 +249,12 @@ public class ZhuboServiceImpl implements IZhuboService {
         }
         Integer zbId = zbTZhubo.getZbId();
         ReadyPlayResponseVo responseVo = new ReadyPlayResponseVo();
+        ZbTQvodConfigs config=this.qconfigDao.findByConfig("download_url");
+        if (config==null){
+            responseVo.setDownload_url("无法获取download_url地址");
+        }else{
+            responseVo.setDownload_url(config.getDescription());
+        }
         //（2）获取IM与Madia地址：
         ZbTRoomConf zbTRoomConf = this.roomConfDao.findByZbId(zbId);
 
@@ -359,7 +370,7 @@ public class ZhuboServiceImpl implements IZhuboService {
             responseVo.setResult("房间正在回放中，待UI是否结束回放");
             return responseVo;
         }
-        //（4）获取主播权限：TODO 还未设计表
+        //（4）获取主播权限：
         Integer status = zbTZhubo.getZbStatus();
         if (ZbConstant.ZB.status.disable == status) {
             throw new ServiceException("直播已经被禁播，请联系房管");
@@ -368,7 +379,7 @@ public class ZhuboServiceImpl implements IZhuboService {
         Integer isTime=zbTZhubo.getTimeState();
         Integer isPersonal=zbTZhubo.getPersonalState();
         Integer isGame=zbTZhubo.getGameState();
-        //（5）获取房间属性：TODO 重做设计表
+        //（5）获取房间属性：
         ZbTRoomTypeSet zbTRoomTypeSet = roomTypeSetDao.findByRoomType(ZbConstant.Room.Type.ticket.name());
         Set<Integer> ticketAT = new TreeSet<>();
         ticketAT.add(zbTRoomTypeSet.getTime01());

@@ -77,19 +77,23 @@ public interface IUserService {
      * @apiVersion 1.0.0
      * @apiGroup user
      * @apiPermission Android/IOS
-     * @api {GET} /user/getDetail 用户详情
+     * @api {GET} /user/getDetail/{userId} 用户详情
      * @apiName getDetail
-     * @apiDescription > 用户详情</br>
-     * @apiSuccess {Integer} userId		用户ID
-     * @apiSuccess {String} nickName	用户昵称
-     * @apiSuccess {Integer} sex	用户性别
-     * @apiSuccess {String} userHeadImg 用户头像
-     * @apiSuccess {String} userLevel 用户等级
-     * @apiSuccess {Double} diamondBalance 用户钻石余额
-     * @apiSuccess {String} diamondGiftUserTotal 当前用户在当前房间累计送礼总数
-     * @apiSuccess {String} [giftRankNo1]	 当前送礼排行
+     * @apiDescription > 用户迷你卡~用户详情</br>
+     *
+     * @apiSuccess {Integer} userId	用户ID
+     * @apiSuccess {String} nickName		用户昵称
+     * @apiSuccess {String} signature		用户签名
+     * @apiSuccess {Integer} sex		用户性别
+     * @apiSuccess {String} userHeadImg 	主播头像
+     * @apiSuccess {Integer} userLevel		用户等级
+     * @apiSuccess {Integer} vipLevel		用户VIP等级
+     *
+     * @apiSuccess {Integer} isAttention 用户是否关注（0=未关注，1=已关注）
+     * @apiSuccess {Integer} attentionUserTotal 		粉丝
+     * @apiSuccess {Integer} diamondGiftZBTotal   收礼
      */
-    public UserResponseVo getDetail(Integer userId) throws ServiceException;
+    public UserResponseVo getDetail(Integer tokenUserId,Integer userId) throws ServiceException;
 
 
 }

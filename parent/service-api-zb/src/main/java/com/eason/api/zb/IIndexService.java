@@ -42,10 +42,14 @@ public interface IIndexService {
 	 * @apiSuccess {String} row.roomType   	房间类型：'normal=普通房间','ticket=门票房间','time=时常房间','personal=私密房间','game=游戏房间'
 	 * @apiSuccess {Integer} row.onlineUser  真实在线用户
 	 * @apiSuccess {Integer} row.machineUser 机器用户
+	 * @apiSuccess {Integer} row.viewCount 	总浏览次数
+	 * @apiSuccess {Integer} row.watchCount 	总观看次数
 	 * @apiSuccess {String} row.roomBackgroundImg  房间背景图片
 	 * @apiSuccess {Integer} row.roomStatus  	直播状态： 1=直播中，2=未开播，3=回放中
 	 * @apiSuccess {Timestamp} row.startTime  	房间开播时间
 	 * @apiSuccess {String} [row.gameIcon]  	游戏图标
+	 * @apiSuccess {String} row.playUrl 	录像回放地址
+	 * @apiSuccess {Integer} row.isCharge 	是否收费   0=不收费，1=收费
 	 */
 	public PageModel<IndexResponseVo> getIndexList(Integer userId,String category, Integer position, Integer pageSize) throws ServiceException;
 

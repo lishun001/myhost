@@ -4,14 +4,17 @@ import java.io.Serializable;
 
 public class UserResponseVo implements Serializable {
 
-     private Integer userId;		//用户ID
-	 private String nickName	;   //用户昵称
-	 private Integer sex;    //用户性别
-	 private String userHeadImg;    // 用户头像
-	 private Integer userLevel;  //用户等级
-	 private Double diamondBalance;     //用户钻石余额
-	 private Integer giftRankNo1;    //当前房间送礼排行
-	 private Integer diamondGiftUserTotal;   // 当前用户在当前房间累计送礼总数
+    private Integer userId;        //用户ID
+    private String nickName;   //用户昵称
+    private String signature;     // 用户签名
+    private Integer sex;    //用户性别
+    private String userHeadImg;    // 用户头像
+    private Integer userLevel;  //用户等级
+    private Integer vipLevel;  //用户VIP等级
+
+    private Integer isAttention;    //用户是否关注
+    private Integer attentionUserTotal;         //粉丝
+    private Integer diamondGiftUserTotal;   // 用户在当前房间累计收礼总数
 
     public Integer getUserId() {
         return userId;
@@ -27,6 +30,14 @@ public class UserResponseVo implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public Integer getSex() {
@@ -53,20 +64,28 @@ public class UserResponseVo implements Serializable {
         this.userLevel = userLevel;
     }
 
-    public Double getDiamondBalance() {
-        return diamondBalance;
+    public Integer getVipLevel() {
+        return vipLevel;
     }
 
-    public void setDiamondBalance(Double diamondBalance) {
-        this.diamondBalance = diamondBalance;
+    public void setVipLevel(Integer vipLevel) {
+        this.vipLevel = vipLevel;
     }
 
-    public Integer getGiftRankNo1() {
-        return giftRankNo1;
+    public Integer getIsAttention() {
+        return isAttention;
     }
 
-    public void setGiftRankNo1(Integer giftRankNo1) {
-        this.giftRankNo1 = giftRankNo1;
+    public void setIsAttention(Integer isAttention) {
+        this.isAttention = isAttention;
+    }
+
+    public Integer getAttentionUserTotal() {
+        return attentionUserTotal;
+    }
+
+    public void setAttentionUserTotal(Integer attentionUserTotal) {
+        this.attentionUserTotal = attentionUserTotal;
     }
 
     public Integer getDiamondGiftUserTotal() {

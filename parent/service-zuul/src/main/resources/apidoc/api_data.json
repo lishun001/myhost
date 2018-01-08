@@ -344,6 +344,20 @@
           },
           {
             "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "row.viewCount",
+            "description": "<p>总浏览次数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "row.watchCount",
+            "description": "<p>总观看次数</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "row.roomBackgroundImg",
@@ -369,6 +383,20 @@
             "optional": true,
             "field": "row.gameIcon",
             "description": "<p>游戏图标</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "row.playUrl",
+            "description": "<p>录像回放地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "row.isCharge",
+            "description": "<p>是否收费   0=不收费，1=收费</p>"
           }
         ]
       }
@@ -765,6 +793,13 @@
             "optional": false,
             "field": "userLevel",
             "description": "<p>用户等级息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "download_url",
+            "description": "<p>下载地址</p>"
           },
           {
             "group": "Success 200",
@@ -1179,6 +1214,20 @@
             "optional": false,
             "field": "allowTime",
             "description": "<p>允许试看时间</p>"
+          },
+          {
+            "group": "ticket Success 200",
+            "type": "Long",
+            "optional": false,
+            "field": "usedTime",
+            "description": "<p>已播时长</p>"
+          },
+          {
+            "group": "ticket Success 200",
+            "type": "Long",
+            "optional": false,
+            "field": "remainTime",
+            "description": "<p>剩余时长</p>"
           }
         ],
         "time Success 200": [
@@ -1244,6 +1293,20 @@
             "optional": false,
             "field": "allowTime",
             "description": "<p>允许试看时间</p>"
+          },
+          {
+            "group": "time Success 200",
+            "type": "Long",
+            "optional": false,
+            "field": "usedTime",
+            "description": "<p>已播时长</p>"
+          },
+          {
+            "group": "time Success 200",
+            "type": "Long",
+            "optional": false,
+            "field": "remainTime",
+            "description": "<p>剩余时长</p>"
           }
         ],
         "personal Success 200": [
@@ -1390,10 +1453,10 @@
       }
     ],
     "type": "GET",
-    "url": "/user/getDetail",
+    "url": "/user/getDetail/{userId}",
     "title": "用户详情",
     "name": "getDetail",
-    "description": "<blockquote> <p>用户详情</br></p> </blockquote>",
+    "description": "<blockquote> <p>用户迷你卡~用户详情</br></p> </blockquote>",
     "success": {
       "fields": {
         "Success 200": [
@@ -1413,6 +1476,13 @@
           },
           {
             "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "signature",
+            "description": "<p>用户签名</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Integer",
             "optional": false,
             "field": "sex",
@@ -1423,35 +1493,42 @@
             "type": "String",
             "optional": false,
             "field": "userHeadImg",
-            "description": "<p>用户头像</p>"
+            "description": "<p>主播头像</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Integer",
             "optional": false,
             "field": "userLevel",
             "description": "<p>用户等级</p>"
           },
           {
             "group": "Success 200",
-            "type": "Double",
+            "type": "Integer",
             "optional": false,
-            "field": "diamondBalance",
-            "description": "<p>用户钻石余额</p>"
+            "field": "vipLevel",
+            "description": "<p>用户VIP等级</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Integer",
             "optional": false,
-            "field": "diamondGiftUserTotal",
-            "description": "<p>当前用户在当前房间累计送礼总数</p>"
+            "field": "isAttention",
+            "description": "<p>用户是否关注（0=未关注，1=已关注）</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": true,
-            "field": "giftRankNo1",
-            "description": "<p>当前送礼排行</p>"
+            "type": "Integer",
+            "optional": false,
+            "field": "attentionUserTotal",
+            "description": "<p>粉丝</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "diamondGiftZBTotal",
+            "description": "<p>收礼</p>"
           }
         ]
       }
@@ -1460,7 +1537,7 @@
     "groupTitle": "用户API",
     "sampleRequest": [
       {
-        "url": "http://192.168.0.138:8769/api/user/getDetail"
+        "url": "http://192.168.0.138:8769/api/user/getDetail/{userId}"
       }
     ]
   },
@@ -1882,6 +1959,13 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
+            "field": "download_url",
+            "description": "<p>下载地址</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
             "field": "result",
             "description": "<p>返回信息</p>"
           },
@@ -2222,15 +2306,8 @@
             "group": "Success 200",
             "type": "Integer",
             "optional": false,
-            "field": "zbId",
-            "description": "<p>主播ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Integer",
-            "optional": false,
             "field": "userId",
-            "description": "<p>主播的用户ID</p>"
+            "description": "<p>用户ID</p>"
           },
           {
             "group": "Success 200",
@@ -2241,6 +2318,27 @@
           },
           {
             "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "signature",
+            "description": "<p>用户签名</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>用户性别</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "userHeadImg",
+            "description": "<p>主播头像</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Integer",
             "optional": false,
             "field": "zbLevel",
@@ -2248,24 +2346,17 @@
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Integer",
             "optional": false,
-            "field": "zbHeadImg",
-            "description": "<p>主播头像</p>"
+            "field": "userLevel",
+            "description": "<p>用户等级</p>"
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Integer",
             "optional": false,
-            "field": "zbSignature",
-            "description": "<p>主播个性签名</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "zbBackgroundImg",
-            "description": "<p>直播背景图片</p>"
+            "field": "vipLevel",
+            "description": "<p>用户VIP等级</p>"
           },
           {
             "group": "Success 200",
@@ -2278,29 +2369,15 @@
             "group": "Success 200",
             "type": "Integer",
             "optional": false,
-            "field": "isBook",
-            "description": "<p>用户是否预约（0=未预约，1=已预约）</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Integer",
-            "optional": false,
             "field": "attentionUserTotal",
-            "description": "<p>粉丝：已关注主播的人数</p>"
+            "description": "<p>粉丝</p>"
           },
           {
             "group": "Success 200",
             "type": "Integer",
             "optional": false,
             "field": "diamondGiftZBTotal",
-            "description": "<p>收礼：主播累计收礼统计</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Integer",
-            "optional": false,
-            "field": "costTotal",
-            "description": "<p>消费</p>"
+            "description": "<p>收礼</p>"
           }
         ]
       }

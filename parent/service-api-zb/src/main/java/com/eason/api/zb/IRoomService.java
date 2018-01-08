@@ -41,6 +41,7 @@ public interface IRoomService {
      * @apiSuccess {String} zbSignature 主播个性签名
      * @apiSuccess {Integer} isAttention 用户是否关注
      * @apiSuccess {String}  userLevel 用户等级息
+     * @apiSuccess {String} download_url  下载地址
      * @apiSuccess {Double} diamondBalance  用户钻石余额（星钻）
      * @apiSuccess {Object[]} diamondRankList		diamondRankList->user（送礼钻石排行）
      * @apiSuccess {Integer} diamondRankList.user.userId		用户ID
@@ -111,18 +112,21 @@ public interface IRoomService {
      * @apiSuccess (ticket Success 200) {Integer} ticketStatus 0=未购买，1=购买
      * @apiSuccess (ticket Success 200) {Integer} selectPrice   门票单价
      * @apiSuccess (ticket Success 200)  {Integer} userId	试看用户ID
-     * @apiSuccess  (ticket Success 200) {Integer} isTrySee 0=未试看，1=已试看
+     * @apiSuccess (ticket Success 200) {Integer} isTrySee 0=未试看，1=已试看
      * @apiSuccess (ticket Success 200) {String} allowTime  允许试看时间
+     * @apiSuccess (ticket Success 200) {Long} usedTime  已播时长
+     * @apiSuccess (ticket Success 200) {Long} remainTime  剩余时长
      *
      * @apiSuccess (time Success 200) {Integer} roomId 		房间ID
      * @apiSuccess (time Success 200) {Integer} zbId 		主播ID
      * @apiSuccess (time Success 200) {String="normal","ticket","time","personal","game"} roomType 		房间类型
      * @apiSuccess (time Success 200) {Integer} selectPrice 时长单价
      * @apiSuccess (time Success 200) {Integer} timeInterval  时常间隔（收费间隔）
-     *
      * @apiSuccess (time Success 200)  {Integer} userId	试看用户ID
-     * @apiSuccess  (time Success 200) {Integer} isTrySee 0=未试看，1=已试看
+     * @apiSuccess (time Success 200) {Integer} isTrySee 0=未试看，1=已试看
      * @apiSuccess (time Success 200) {String} allowTime  允许试看时间
+     * @apiSuccess (time Success 200) {Long} usedTime  已播时长
+     * @apiSuccess (time Success 200) {Long} remainTime  剩余时长
      *
      * @apiSuccess (personal Success 200) {Integer} roomId 		房间ID
      * @apiSuccess (personal Success 200) {Integer} zbId 		主播ID

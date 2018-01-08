@@ -8,6 +8,7 @@ import com.eason.api.zb.cache.ZbTUserTicket;
 import com.eason.api.zb.dao.*;
 import com.eason.api.zb.exception.ServiceException;
 import com.eason.api.zb.model.FileItemModel;
+import com.eason.api.zb.model.TreeSeeConfig;
 import com.eason.api.zb.model.ZbConstant;
 import com.eason.api.zb.po.*;
 import com.eason.api.zb.vo.platform.IMResponseVo;
@@ -56,6 +57,8 @@ public class RoomServiceImpl implements IRoomService {
     @Autowired
     private UcUserDao ucUserDao;
     @Autowired
+    private QconfigDao qconfigDao;
+    @Autowired
     private UserAttentionDao userAttentionDao;
     @Autowired
     private RoomAttributeDao roomAttributeDao;
@@ -99,7 +102,7 @@ public class RoomServiceImpl implements IRoomService {
 //            if (userDetail == null) {
 //                throw new ServiceException("房间ID(userId=" + userId + ")缓存中没有该用户信息");
 //            }
-                ZbUcUser ucUser=this.ucUserDao.findOne(userId);
+            ZbUcUser ucUser=this.ucUserDao.findOne(userId);
             //（2）验证房间状态：
             ZbTRoomPlan zbTRoomPlan = roomPlanDao.findByRoomId(roomId);
             if (zbTRoomPlan == null) {
@@ -121,6 +124,12 @@ public class RoomServiceImpl implements IRoomService {
             responseVo.setZbLevel(zbTRoomPlan.getZbLevel());
             responseVo.setZbHeadImg(zbTRoomPlan.getZbHeadImg());
             responseVo.setZbSignature(zbTRoomPlan.getZbSignature());
+            ZbTQvodConfigs config=this.qconfigDao.findByConfig("download_url");
+            if (config==null){
+                responseVo.setDownload_url("无法获取download_url地址");
+            }else{
+                responseVo.setDownload_url(config.getDescription());
+            }
 
             //（4）获取当前用户关注信息：排除主播不能关注自己
             ZbTUserAttention zbTUserAttention = userAttentionDao.findByAIdAndFId(userId, zbTRoomPlan.getUserId());
@@ -291,6 +300,7 @@ public class RoomServiceImpl implements IRoomService {
 
     /**
      * 2017/12/2 讨论，新增收费房间是否收费字段
+     * 2017/1/6讨论，付费房间：提示修改（增加已播时长&剩余时长）
      * @param userId
      * @param roomId
      * @return
@@ -324,7 +334,7 @@ public class RoomServiceImpl implements IRoomService {
                     responseVo.setIsTrySee(1);
                 }
                 //TODO 会员试看时间，随等级的变化而变化
-                responseVo.setAllowTime(30);
+                responseVo.setAllowTime(TreeSeeConfig.getTreeTime(zbUcUser.getVip()));
             } else {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Map<String, Object> trySeeMap = objectMapper.readValue(userTrySee, Map.class);
@@ -340,6 +350,7 @@ public class RoomServiceImpl implements IRoomService {
                     responseVo.setTicketStatus(1);
                 }
                 responseVo.setSelectPrice((Integer) zbTRoomPlan.getRoomSet().get("selectPrice"));
+
             }
 
             if (ZbConstant.Room.Type.time.name().equals(zbTRoomPlan.getRoomType())) {
@@ -364,8 +375,20 @@ public class RoomServiceImpl implements IRoomService {
                 Date startTime=(Date) map.get("startTime");
                 Date overTime=(Date) map.get("overTime");
                 Date now=new Date();
+                Integer selectActivityTime = (Integer) map.get("selectActivityTime");
                 if (now.compareTo(startTime)>=0 && now.compareTo(overTime)<=0){
                     responseVo.setIsCharge(1);  //1=收费
+                    long t = overTime.getTime() - now.getTime();
+                    long remainTime = 0;
+                    long activityTime = selectActivityTime* 60000;
+                    if (t > 0) {
+                        remainTime = t;  //1分钟=60000
+                        if (t > activityTime) {
+                            remainTime = activityTime;
+                        }
+                    }
+                    responseVo.setUsedTime(activityTime-remainTime);
+                    responseVo.setRemainTime(remainTime);
                 }
             }
             return responseVo;

@@ -16,8 +16,10 @@
         <module>service-feign</module>
         <module>service-ribbon</module>
         <module>service-zuul</module>
+        <module>service-admin</module>
         <module>config-server</module>
         <module>config-client</module>
         <module>eureka-server</module>
+        <module>socket-server</module>
     </modules>
 </project>

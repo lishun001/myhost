@@ -102,13 +102,15 @@ public class IndexServiceImpl implements IIndexService {
                 Integer level=zbUcUser.getLevel()*1;
 
                 IndexResponseVo indexResponseVo=new IndexResponseVo(zbTRoomPlan.getRoomId(),zbTRoomPlan.getZbId(),nickName,zbTRoomPlan.getRoomTitle(),
-                        zbTRoomPlan.getRoomType(),zbTRoomPlan.getOnlineUser(),zbTRoomPlan.getMachineUser(),zbTRoomPlan.getRoomBgPic(),
+                        zbTRoomPlan.getRoomType(),zbTRoomPlan.getOnlineUser(),zbTRoomPlan.getMachineUser(),zbTRoomPlan.getRoomBgPic()!=null?zbTRoomPlan.getRoomBgPic():zbUcUser.getAvatar(),
                         zbTRoomPlan.getRoomStatus(),new Timestamp(zbTRoomPlan.getOpenTime().getTime()));
                 indexResponseVo.setRoomPlanId(zbTRoomPlan.getPlanId());
                 indexResponseVo.setZbHeadImg(avatar);
                 indexResponseVo.setZbLevel(level);//需要Qvod系统拿用户等级
 
                 indexResponseVo.setIsCharge(0);  //0=不收费
+                indexResponseVo.setViewCount(zbTRoomPlan.getViewCount()!=null?zbTRoomPlan.getViewCount():0);
+                indexResponseVo.setWatchCount(zbTRoomPlan.getWatchCount()!=null?zbTRoomPlan.getWatchCount():0);
                 //新增收费房间是否收费字段
                 Map<String,Object> map=zbTRoomPlan.getRoomSet();
                 if (map!=null && !map.isEmpty()){
@@ -132,11 +134,13 @@ public class IndexServiceImpl implements IIndexService {
                     ZbTRoom zbTRoom=this.roomDao.findByZbId(zbTRoomPlanStat.getZbId());
                     ZbUcUser zbUcUser=this.ucUserDao.findByZbId(zbTRoomPlanStat.getZbId());
                     IndexResponseVo indexResponseVo=new IndexResponseVo(zbTRoomPlanStat.getRoomId(),zbTRoomPlanStat.getZbId(),zbUcUser.getNickname(),zbTRoomPlanStat.getRoomTitle(),
-                            zbTRoomPlanStat.getRoomType(),0,0,zbTRoom.getRoomBgPic(),
+                            zbTRoomPlanStat.getRoomType(),0,0,zbTRoom.getRoomBgPic()!=null?zbTRoom.getRoomBgPic():zbUcUser.getAvatar(),
                             ZbConstant.Room.status.room_redio,new Timestamp(zbTRoomPlanStat.getOpenTime().getTime()));
                     indexResponseVo.setRoomPlanId(zbTRoomPlanStat.getPlanId());
                     indexResponseVo.setZbHeadImg(zbUcUser.getAvatar());
                     indexResponseVo.setZbLevel(zbUcUser.getLevel()*1);//需要Qvod系统拿用户等级
+                    indexResponseVo.setViewCount(0);
+                    indexResponseVo.setWatchCount(0);   //TODO 回放录像，观看次数跟浏览次数暂时为0
                     indexResponseVo.setRoomStatus(ZbConstant.Room.status.room_redio); //回放中的状态
                     indexResponseVo.setPlayUrl(zbTRecrecordsLog.getPlayUrl());
                     indexResponseVo.setIsCharge(0);  //0=不收费
@@ -158,9 +162,12 @@ public class IndexServiceImpl implements IIndexService {
     public List<BannerResponseVo> getBannerList( @PathVariable(value = "category") String category)  throws ServiceException{
         try {
             List<BannerResponseVo> list = new ArrayList<BannerResponseVo>();
-            List<ZbTIndexBanner> bannerList=indexBannerDao.findAll();
+            if (!("1".equals(category) || "2".equals(category) || "3".equals(category) || "4".equals(category) || "5".equals(category))){
+                throw new ServiceException("首页列表只支持category=1，2，3，4，5类型");
+            }
+            List<ZbTQvodBanners> bannerList=indexBannerDao.getByType(Integer.parseInt(category)+1);
             bannerList.forEach(indexBanner->{
-                list.add(new BannerResponseVo(indexBanner.getId(), indexBanner.getTitle(), indexBanner.getThumbImgUrl(), indexBanner.getType(), indexBanner.getUrl()));
+                list.add(new BannerResponseVo(indexBanner.getId(), category, indexBanner.getThumbImgUrl(), indexBanner.getType()+"", indexBanner.getUrl()));
             });
             return list;
         } catch (Exception e) {
@@ -173,6 +180,9 @@ public class IndexServiceImpl implements IIndexService {
     @Override
     public List<MsgNotificationResponseVo> getMsgNotification( @PathVariable(value = "category") String category) throws ServiceException{
         try {
+            if (!("1".equals(category) || "2".equals(category) || "3".equals(category) || "4".equals(category) || "5".equals(category))){
+                throw new ServiceException("首页列表只支持category=1，2，3，4，5类型");
+            }
             List<MsgNotificationResponseVo> list = new ArrayList<MsgNotificationResponseVo>();
             List<ZbTMsgNotification> msgNotificationList=msgNotificationDao.findAll();
             msgNotificationList.forEach(zbTMsgNotification -> {

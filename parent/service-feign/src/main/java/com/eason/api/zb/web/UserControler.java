@@ -10,10 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -101,11 +98,27 @@ public class UserControler {
         }
     }
 
-    @RequestMapping(value = "/user/{userId}/getDetail", method = RequestMethod.GET)
-    public ResponseVo getDetail(@PathVariable Integer userId) {
+    @RequestMapping(value = "/getDetail/{userId}", method = RequestMethod.GET)
+    public ResponseVo getDetail(HttpServletRequest request, @PathVariable(value = "userId") Integer userId) {
         try {
+            Integer tokenUserId=null;
+            String api_token=request.getHeader("api_token");
+            if (StringUtils.isEmpty(api_token)){
+                api_token = request.getParameter("token");
+            }
+            if (StringUtils.isNotEmpty(api_token)){
+                BoundHashOperations<String, String, String> ops = stringRedisTemplate.boundHashOps("user_api_token");
+                String id = ops.get(api_token);
+                if (id == null) {
+                    throw new ServiceException("您的账号已在异地登陆，请您重新登陆");
+                }else{
+                    tokenUserId=Integer.parseInt(id);
+                }
+            }else{
+                throw new ServiceException("您未登陆");
+            }
             ResponseVo responseVo = new ResponseVo(0, "操作成功");
-            responseVo.setData(userServiceImpl.getDetail(userId));
+            responseVo.setData(userServiceImpl.getDetail(tokenUserId,userId));
             return responseVo;
         } catch (ServiceException e) {
             ResponseVo responseVo = new ResponseVo(401, e.getMessage());

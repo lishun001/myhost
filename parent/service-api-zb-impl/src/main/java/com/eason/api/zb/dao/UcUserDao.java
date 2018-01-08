@@ -1,5 +1,6 @@
 package com.eason.api.zb.dao;
 
+import com.eason.api.zb.po.ZbTQvodConfigs;
 import com.eason.api.zb.po.ZbUcUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

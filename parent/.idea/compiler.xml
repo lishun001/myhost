@@ -9,6 +9,7 @@
         <module name="config-client" />
         <module name="config-server" />
         <module name="eureka-server" />
+        <module name="service-admin" />
         <module name="service-api-common" />
         <module name="service-api-wx-impl" />
         <module name="service-api-zb" />
@@ -17,6 +18,7 @@
         <module name="service-ribbon" />
         <module name="service-scheduler" />
         <module name="service-zuul" />
+        <module name="socket-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +26,7 @@
       <module name="config-server" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="parent" target="1.5" />
+      <module name="service-admin" target="1.8" />
       <module name="service-api-common" target="1.5" />
       <module name="service-api-wx-impl" target="1.8" />
       <module name="service-api-zb" target="1.8" />
@@ -32,6 +35,7 @@
       <module name="service-ribbon" target="1.8" />
       <module name="service-scheduler" target="1.8" />
       <module name="service-zuul" target="1.8" />
+      <module name="socket-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

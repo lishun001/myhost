@@ -29,6 +29,7 @@ public class RoomResponseVo implements Serializable {
     private Integer userLevel;    // 用户等级息
     private Double diamondBalance;    //  用户钻石余额
     private Integer isCharge;           //是否收费
+    private String download_url;    //下载地址
 //    private List<UserResponseVo> diamondRankList;
 //    private List<UserLevelRankResponseVo> userLevelRankList;
 
@@ -179,21 +180,13 @@ public class RoomResponseVo implements Serializable {
         this.diamondBalance = diamondBalance;
     }
 
-//    public List<UserResponseVo> getDiamondRankList() {
-//        return diamondRankList;
-//    }
-//
-//    public void setDiamondRankList(List<UserResponseVo> diamondRankList) {
-//        this.diamondRankList = diamondRankList;
-//    }
-//
-//    public List<UserLevelRankResponseVo> getUserLevelRankList() {
-//        return userLevelRankList;
-//    }
-//
-//    public void setUserLevelRankList(List<UserLevelRankResponseVo> userLevelRankList) {
-//        this.userLevelRankList = userLevelRankList;
-//    }
+    public String getDownload_url() {
+        return download_url;
+    }
+
+    public void setDownload_url(String download_url) {
+        this.download_url = download_url;
+    }
 
     public MediaResponseVo getMedia() {
         return media;
