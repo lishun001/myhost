@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="de2134be-04e2-4697-8588-92d678511d8f" name="Default" comment="Signed-off-by: eason &lt;myeasonhost@gmail.com&gt;&#10;微配置部署">
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/error.2018-01-05.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/error.2018-01-06.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/error.2018-01-08.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/info.2018-01-05.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/info.2018-01-06.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/logs/info.2018-01-08.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/service-api-zb-impl/logs/error.2018-01-06.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/service-api-zb-impl/logs/info.2018-01-06.log" />
-      <change beforePath="$PROJECT_DIR$/config-server/pom.xml" afterPath="$PROJECT_DIR$/config-server/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -81,7 +73,7 @@
       <file leaf-file-name="RequestFilter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service-zuul/src/main/java/com/eason/zb/servicezuul/filter/RequestFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
+            <state relative-caret-position="81">
               <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -109,8 +101,8 @@
       <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config-server/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="14" column="45" lean-forward="false" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+            <state relative-caret-position="216">
+              <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -129,7 +121,7 @@
       <file leaf-file-name="ServiceZuulApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/service-zuul/src/main/java/com/eason/zb/servicezuul/ServiceZuulApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
+            <state relative-caret-position="108">
               <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -153,7 +145,7 @@
       <file leaf-file-name="SocketServerApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/socket-server/src/main/java/com/eason/socket/SocketServerApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1134">
+            <state relative-caret-position="1161">
               <caret line="57" column="5" lean-forward="false" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
               <folding>
                 <element signature="e#2017#2018#0" expanded="true" />
@@ -344,22 +336,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="parent" type="58d84e3e:PackageViewProjectNode" />
-              <item name="service-api-zb-impl" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="parent" type="58d84e3e:PackageViewProjectNode" />
-              <item name="socket-server" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -417,6 +393,22 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="parent" type="58d84e3e:PackageViewProjectNode" />
+              <item name="service-api-zb-impl" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="parent" type="58d84e3e:PackageViewProjectNode" />
+              <item name="socket-server" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -807,7 +799,8 @@
       <workItem from="1517388284723" duration="3392000" />
       <workItem from="1517454500187" duration="16941000" />
       <workItem from="1517620351825" duration="30910000" />
-      <workItem from="1518060620057" duration="220000" />
+      <workItem from="1518060620057" duration="354000" />
+      <workItem from="1530771263613" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="Signed-off-by: eason &lt;myeasonhost@gmail.com&gt;&#10;版本号修正">
       <created>1512638353211</created>
@@ -1047,7 +1040,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517816825638</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Signed-off-by: eason &lt;myeasonhost@gmail.com&gt;&#10;微配置部署">
+      <created>1518060884696</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1518060884696</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1083,7 +1083,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="638023000" />
+    <option name="totallyTimeSpent" value="638192000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1116,10 +1116,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40587595" sideWeight="0.48827294" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264418" sideWeight="0.48773986" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32752994" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32752994" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861805" sideWeight="0.4978678" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.4936034" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29957357" sideWeight="0.47986943" order="7" side_tool="false" content_ui="combo" x="782" y="230" width="356" height="579" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30277187" sideWeight="0.47986943" order="7" side_tool="false" content_ui="combo" x="782" y="230" width="356" height="579" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18923241" sideWeight="0.5201306" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1493,7 +1493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
           <caret line="136" column="72" lean-forward="false" selection-start-line="136" selection-start-column="72" selection-end-line="136" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1527,7 +1526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/socket-server/src/main/java/com/eason/socket/SocketServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
+        <state relative-caret-position="1161">
           <caret line="57" column="5" lean-forward="false" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="e#2017#2018#0" expanded="true" />
@@ -1570,7 +1569,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service-zuul/src/main/java/com/eason/zb/servicezuul/ServiceZuulApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
+        <state relative-caret-position="108">
           <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1605,7 +1604,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service-zuul/src/main/java/com/eason/zb/servicezuul/filter/RequestFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
+        <state relative-caret-position="81">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1621,8 +1620,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config-server/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="45" lean-forward="false" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+        <state relative-caret-position="216">
+          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
           <folding />
         </state>
       </provider>
